@@ -167,262 +167,208 @@
             color: var(--dark-gray);
         }
         
-        /* Auth Section */
-        .auth-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 70vh;
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(to right, rgba(255, 77, 136, 0.1), rgba(255, 102, 153, 0.1));
+            border-radius: 20px;
+            margin-bottom: 40px;
         }
         
-        .auth-container {
+        .welcome-section h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+        
+        .welcome-section p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--dark-gray);
+        }
+        
+        /* Profile Cards */
+        .profiles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .profile-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .profile-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .profile-info {
+            padding: 20px;
+        }
+        
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background-color: var(--blue-tick);
+            border-radius: 50%;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .profile-details {
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .profile-interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .interest-tag {
+            background-color: var(--light-gray);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .profile-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Single Profile View (Swipe Interface) */
+        .single-profile-view {
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .single-profile-card {
             background-color: var(--white);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .single-profile-image {
             width: 100%;
-            max-width: 900px;
-            display: flex;
+            height: 500px;
+            object-fit: cover;
         }
         
-        .auth-welcome {
-            flex: 1;
-            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
-            color: var(--white);
-            padding: 60px 40px;
+        .single-profile-info {
+            padding: 25px;
+        }
+        
+        .swipe-actions {
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .auth-welcome h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        
-        .auth-welcome p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            max-width: 300px;
-        }
-        
-        .auth-welcome-features {
-            text-align: left;
+            gap: 30px;
             margin-top: 30px;
         }
         
-        .auth-welcome-features li {
-            margin-bottom: 15px;
+        .swipe-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .auth-welcome-features i {
-            color: var(--white);
-            font-size: 18px;
-        }
-        
-        .auth-forms {
-            flex: 1;
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
-        }
-        
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .auth-tab {
-            flex: 1;
-            text-align: center;
-            padding: 15px;
-            font-weight: 600;
+            font-size: 28px;
             cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s;
-            border-bottom: 3px solid transparent;
+            border: none;
         }
         
-        .auth-tab.active {
-            color: var(--primary-pink);
-            border-bottom: 3px solid var(--primary-pink);
-        }
-        
-        .auth-form {
-            display: none;
-        }
-        
-        .auth-form.active {
-            display: block;
-        }
-        
-        .auth-form h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
+        .swipe-dislike {
+            background-color: var(--white);
             color: var(--dark-gray);
+            border: 2px solid var(--dark-gray);
         }
         
-        .auth-form p {
-            margin-bottom: 30px;
-            color: var(--dark-gray);
+        .swipe-like {
+            background-color: var(--primary-pink);
+            color: var(--white);
         }
         
-        .form-group {
-            margin-bottom: 20px;
+        .swipe-btn:hover {
+            transform: scale(1.1);
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark-gray);
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-        
-        .form-group input:focus {
-            border-color: var(--primary-pink);
-            box-shadow: 0 0 0 2px rgba(255, 77, 136, 0.2);
-            outline: none;
-        }
-        
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .forgot-password {
-            color: var(--primary-pink);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-        
-        .auth-divider {
-            display: flex;
-            align-items: center;
-            margin: 30px 0;
-        }
-        
-        .auth-divider::before,
-        .auth-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: #e0e0e0;
-        }
-        
-        .auth-divider span {
-            padding: 0 15px;
-            color: var(--dark-gray);
-            font-size: 14px;
-        }
-        
-        .social-auth {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .terms {
-            font-size: 14px;
-            color: var(--dark-gray);
+        .daily-limit {
             text-align: center;
             margin-top: 20px;
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
         }
         
-        .terms a {
-            color: var(--primary-pink);
-            text-decoration: none;
-        }
-        
-        .terms a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Login Animation */
-        .login-overlay {
+        /* Modal */
+        .modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
             align-items: center;
-            z-index: 2000;
+            justify-content: center;
         }
         
-        .spinner {
-            width: 80px;
-            height: 80px;
-            border: 8px solid rgba(255, 77, 136, 0.3);
-            border-top: 8px solid var(--primary-pink);
-            border-radius: 50%;
-            animation: spin 1.5s linear infinite;
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+        
+        .modal p {
             margin-bottom: 20px;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .heart-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            font-size: 200px;
-            color: var(--primary-pink);
-            z-index: 2001;
-            animation: pop 0.8s forwards;
-        }
-        
-        .heart-popup:nth-child(2) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes pop {
-            0% { transform: translate(-50%, -50%) scale(0); }
-            70% { transform: translate(-50%, -50%) scale(1.2); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
-        
-        /* Hidden Sections */
-        .section {
-            display: none;
-        }
-        
-        .section.active {
-            display: block;
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
         }
         
         /* Footer */
@@ -478,25 +424,36 @@
                 justify-content: center;
             }
             
-            .auth-container {
-                flex-direction: column;
+            .profiles-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
-            .auth-welcome {
-                padding: 40px 20px;
+            .single-profile-image {
+                height: 400px;
             }
-            
-            .auth-forms {
-                padding: 40px 20px;
-            }
+        }
+        
+        /* Hidden Sections */
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <!-- Login Animation Overlay -->
-    <div id="login-overlay" class="login-overlay" style="display: none;">
-        <div class="spinner"></div>
-        <p>Signing in...</p>
+    <!-- Daily Limit Modal -->
+    <div id="daily-limit-modal" class="modal">
+        <div class="modal-content">
+            <h2>Daily Limit Reached</h2>
+            <p>You've viewed all <span id="limit-count">10</span> profiles available for today. Come back tomorrow to see more potential matches or upgrade to premium for more access.</p>
+            <div class="modal-buttons">
+                <button class="btn btn-outline" id="close-modal">OK</button>
+                <button class="btn btn-pink" id="upgrade-now">Upgrade Now</button>
+            </div>
+        </div>
     </div>
 
     <header>
@@ -508,9 +465,7 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#" class="nav-link active" data-section="auth">Sign In</a></li>
-                        <li><a href="#" class="nav-link" data-section="home">Browse</a></li>
-                        <li><a href="#" class="nav-link" data-section="chat">Messages</a></li>
+                        <li><a href="#" class="nav-link active" data-section="home">Browse</a></li>
                         <li><a href="#" class="nav-link" data-section="profile">My Profile</a></li>
                         <li><a href="#" class="nav-link" data-section="payment">Upgrade</a></li>
                     </ul>
@@ -524,150 +479,35 @@
 
     <main>
         <div class="container">
-            <!-- Auth Section -->
-            <section id="auth" class="section active">
-                <div class="auth-section">
-                    <div class="auth-container">
-                        <div class="auth-welcome">
-                            <h2>Welcome to KE MATCH</h2>
-                            <p>Find your perfect match in Kenya. Connect with amazing people near you.</p>
-                            <div class="auth-welcome-features">
-                                <ul>
-                                    <li><i class="fas fa-check"></i> <span>Smart matching algorithm</span></li>
-                                    <li><i class="fas fa-check"></i> <span>Secure & verified profiles</span></li>
-                                    <li><i class="fas fa-check"></i> <span>Chat with your matches</span></li>
-                                    <li><i class="fas fa-check"></i> <span>Find people in your area</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="auth-forms">
-                            <div class="auth-tabs">
-                                <div class="auth-tab active" data-tab="login">Log In</div>
-                                <div class="auth-tab" data-tab="signup">Sign Up</div>
-                            </div>
-                            
-                            <!-- Login Form -->
-                            <div class="auth-form active" id="login-form">
-                                <h3>Welcome Back</h3>
-                                <p>Log in to your KE MATCH account</p>
-                                
-                                <form id="loginForm">
-                                    <div class="form-group">
-                                        <label for="login-email">Email Address</label>
-                                        <input type="email" id="login-email" placeholder="Enter your email" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="login-password">Password</label>
-                                        <input type="password" id="login-password" placeholder="Enter your password" required>
-                                    </div>
-                                    
-                                    <div class="form-options">
-                                        <div class="remember-me">
-                                            <input type="checkbox" id="remember-me">
-                                            <label for="remember-me">Remember me</label>
-                                        </div>
-                                        <a href="#" class="forgot-password">Forgot password?</a>
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-pink" style="width: 100%; margin-bottom: 20px;">Log In</button>
-                                </form>
-                                
-                                <div class="auth-divider">
-                                    <span>Or continue with</span>
-                                </div>
-                                
-                                <div class="social-auth">
-                                    <button class="btn btn-facebook" id="facebook-login">
-                                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Continue with Facebook
-                                    </button>
-                                    <button class="btn btn-google" id="google-login">
-                                        <i class="fab fa-google" style="margin-right: 10px;"></i> Continue with Google
-                                    </button>
-                                </div>
-                                
-                                <p class="terms">By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
-                            </div>
-                            
-                            <!-- Sign Up Form -->
-                            <div class="auth-form" id="signup-form">
-                                <h3>Create Account</h3>
-                                <p>Join KE MATCH to find your perfect match</p>
-                                
-                                <form id="signupForm">
-                                    <div class="form-group">
-                                        <label for="signup-name">Full Name</label>
-                                        <input type="text" id="signup-name" placeholder="Enter your full name" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="signup-email">Email Address</label>
-                                        <input type="email" id="signup-email" placeholder="Enter your email" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="signup-password">Password</label>
-                                        <input type="password" id="signup-password" placeholder="Create a password" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="signup-confirm-password">Confirm Password</label>
-                                        <input type="password" id="signup-confirm-password" placeholder="Confirm your password" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="signup-gender">Gender</label>
-                                        <select id="signup-gender" style="width: 100%; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
-                                            <option value="">Select your gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="signup-age">Age</label>
-                                        <input type="number" id="signup-age" placeholder="Enter your age" min="18" max="100" required>
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-pink" style="width: 100%; margin-bottom: 20px;">Create Account</button>
-                                </form>
-                                
-                                <div class="auth-divider">
-                                    <span>Or sign up with</span>
-                                </div>
-                                
-                                <div class="social-auth">
-                                    <button class="btn btn-facebook" id="facebook-signup">
-                                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Sign up with Facebook
-                                    </button>
-                                    <button class="btn btn-google" id="google-signup">
-                                        <i class="fab fa-google" style="margin-right: 10px;"></i> Sign up with Google
-                                    </button>
-                                </div>
-                                
-                                <p class="terms">By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <!-- Home/Browse Section -->
-            <section id="home" class="section">
+            <section id="home" class="section active">
                 <div class="welcome-section">
                     <h1>Find Your Perfect Match in Kenya</h1>
                     <p>Connect with amazing people near you. Like, chat, and build meaningful relationships.</p>
                     <button class="btn btn-pink" id="start-matching">Start Matching</button>
                 </div>
-            </section>
-
-            <!-- Chat Section -->
-            <section id="chat" class="section">
-                <h2 class="section-title">Messages</h2>
-                <div class="login-required">
-                    <h2>Sign In Required</h2>
-                    <p>You need to sign in to access messages.</p>
-                    <button class="btn btn-pink" id="chat-signin-btn">Sign In Now</button>
+                
+                <!-- Single Profile View (Hidden initially) -->
+                <div id="single-view" style="display: none;">
+                    <div class="single-profile-view">
+                        <div class="single-profile-card">
+                            <img id="current-profile-image" src="" alt="Profile" class="single-profile-image">
+                            <div class="single-profile-info">
+                                <h2 class="profile-name" id="current-profile-name"></h2>
+                                <p id="current-profile-details" class="profile-details"></p>
+                                <div class="profile-interests" id="current-profile-interests">
+                                    <!-- Interests will be dynamically generated here -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swipe-actions">
+                            <button class="swipe-btn swipe-dislike" id="dislike-btn">✕</button>
+                            <button class="swipe-btn swipe-like" id="like-btn">♥</button>
+                        </div>
+                        <div class="daily-limit">
+                            <p>Profiles viewed today: <span id="profiles-viewed">0</span>/<span id="daily-limit">10</span></p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -684,10 +524,43 @@
             <!-- Payment Section -->
             <section id="payment" class="section">
                 <h2 class="section-title">Upgrade Your Experience</h2>
-                <div class="login-required">
-                    <h2>Sign In Required</h2>
-                    <p>You need to sign in to upgrade your account.</p>
-                    <button class="btn btn-pink" id="payment-signin-btn">Sign In Now</button>
+                <div class="payment-section">
+                    <h2 class="payment-title">Unlock More Matches on KE MATCH</h2>
+                    <p>Upgrade now to connect with more potential matches every day!</p>
+                    
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <h3>Free Plan</h3>
+                            <div class="payment-details">
+                                <p><strong>Price:</strong> Free</p>
+                                <p><strong>Daily Matches:</strong> 10</p>
+                                <p><strong>Features:</strong> Basic matching</p>
+                            </div>
+                            <button class="btn btn-outline" disabled>Current Plan</button>
+                        </div>
+                        
+                        <div class="payment-option">
+                            <h3>Standard Plan</h3>
+                            <div class="payment-details">
+                                <p><strong>Price:</strong> Ksh 150</p>
+                                <p><strong>Extra Matches:</strong> +20 matches</p>
+                                <p><strong>Total Matches:</strong> 30 (10 free + 20 premium)</p>
+                                <p><strong>Features:</strong> Blue tick verification</p>
+                            </div>
+                            <button class="btn btn-pink" id="standard-pay">Upgrade to Standard</button>
+                        </div>
+                        
+                        <div class="payment-option">
+                            <h3>Premium Plan</h3>
+                            <div class="payment-details">
+                                <p><strong>Price:</strong> Ksh 300</p>
+                                <p><strong>Extra Matches:</strong> +40 matches</p>
+                                <p><strong>Total Matches:</strong> 50 (10 free + 40 premium)</p>
+                                <p><strong>Features:</strong> Blue tick + Priority matching</p>
+                            </div>
+                            <button class="btn btn-gold" id="premium-pay">Upgrade to Premium</button>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -703,7 +576,7 @@
                     </div>
                 </div>
                 <div class="footer-links">
-                    <a href="#" class="footer-link" data-section="about">About</a>
+                    <a href="#" class="footer-link">About</a>
                     <a href="#">Privacy</a>
                     <a href="#">Terms</a>
                     <a href="#">Help</a>
@@ -715,368 +588,439 @@
     </footer>
 
     <script>
+        // Sample data for profiles
+        const femaleProfiles = [
+            {
+                id: 1,
+                name: "Sarah M.",
+                age: 25,
+                location: "Nairobi",
+                image: "https://files.catbox.moe/gefnh3.jpeg",
+                hobbies: ["Travel", "Music"],
+                likes: ["Movies", "Art"],
+                dislikes: ["Smoking", "Lateness"],
+                premium: true,
+                verified: true
+            },
+            {
+                id: 2,
+                name: "Grace W.",
+                age: 27,
+                location: "Kisumu",
+                image: "https://files.catbox.moe/ayz7eb.jpeg",
+                hobbies: ["Cooking", "Music"],
+                likes: ["Food", "Fitness"],
+                dislikes: ["Arrogance", "Lateness"],
+                premium: false,
+                verified: false
+            },
+            {
+                id: 3,
+                name: "Lilian K.",
+                age: 24,
+                location: "Mombasa",
+                image: "https://files.catbox.moe/by8fa3.jpeg",
+                hobbies: ["Dancing", "Photography"],
+                likes: ["Beach", "Coffee"],
+                dislikes: ["Rudeness", "Lies"],
+                premium: true,
+                verified: true
+            },
+            {
+                id: 4,
+                name: "Esther N.",
+                age: 26,
+                location: "Nakuru",
+                image: "https://files.catbox.moe/75urqe.jpeg",
+                hobbies: ["Reading", "Hiking"],
+                likes: ["Outdoors", "Animals"],
+                dislikes: ["Noise", "Messy"],
+                premium: false,
+                verified: false
+            },
+            {
+                id: 5,
+                name: "Mary A.",
+                age: 23,
+                location: "Eldoret",
+                image: "https://files.catbox.moe/3nqkcq.jpeg",
+                hobbies: ["Sports", "Travel"],
+                likes: ["Fitness", "Movies"],
+                dislikes: ["Smoking", "Laziness"],
+                premium: true,
+                verified: true
+            },
+            {
+                id: 6,
+                name: "Joyce T.",
+                age: 28,
+                location: "Kakamega",
+                image: "https://files.catbox.moe/75yl23.jpeg",
+                hobbies: ["Cooking", "Reading"],
+                likes: ["Food", "Art"],
+                dislikes: ["Lateness", "Arrogance"],
+                premium: false,
+                verified: false
+            },
+            {
+                id: 7,
+                name: "Rebecca J.",
+                age: 29,
+                location: "Kisii",
+                image: "https://files.catbox.moe/b3cdqy.jpeg",
+                hobbies: ["Music", "Dancing"],
+                likes: ["Coffee", "Movies"],
+                dislikes: ["Rudeness", "Lies"],
+                premium: true,
+                verified: true
+            },
+            {
+                id: 8,
+                name: "Patience O.",
+                age: 26,
+                location: "Meru",
+                image: "https://files.catbox.moe/nnl07r.jpeg",
+                hobbies: ["Photography", "Hiking"],
+                likes: ["Outdoors", "Animals"],
+                dislikes: ["Noise", "Messy"],
+                premium: false,
+                verified: false
+            },
+            {
+                id: 9,
+                name: "Faith M.",
+                age: 24,
+                location: "Nyeri",
+                image: "https://files.catbox.moe/511rhc.jpeg",
+                hobbies: ["Travel", "Sports"],
+                likes: ["Beach", "Fitness"],
+                dislikes: ["Smoking", "Laziness"],
+                premium: true,
+                verified: true
+            },
+            {
+                id: 10,
+                name: "Hope K.",
+                age: 27,
+                location: "Thika",
+                image: "https://files.catbox.moe/7ts6fo.jpeg",
+                hobbies: ["Reading", "Cooking"],
+                likes: ["Food", "Coffee"],
+                dislikes: ["Arrogance", "Rudeness"],
+                premium: false,
+                verified: false
+            },
+            {
+                id: 11,
+                name: "Mercy W.",
+                age: 25,
+                location: "Nairobi",
+                image: "https://files.catbox.moe/gefnh3.jpeg",
+                hobbies: ["Art", "Photography"],
+                likes: ["Music", "Travel"],
+                dislikes: ["Lies", "Rudeness"],
+                premium: true,
+                verified: true
+            },
+            {
+                id: 12,
+                name: "Cynthia A.",
+                age: 26,
+                location: "Mombasa",
+                image: "https://files.catbox.moe/ayz7eb.jpeg",
+                hobbies: ["Dancing", "Cooking"],
+                likes: ["Movies", "Beach"],
+                dislikes: ["Smoking", "Noise"],
+                premium: false,
+                verified: false
+            }
+        ];
+
         // App state
         let currentUser = JSON.parse(localStorage.getItem('kematch_user')) || {
-            loggedIn: false
+            name: "",
+            age: 28,
+            gender: "male",
+            location: "nairobi",
+            premium: false,
+            verified: false,
+            plan: "free",
+            loggedIn: true, // Set to true for demo
+            photos: [],
+            dailyMatches: 10,
+            profilesViewedToday: 0,
+            lastResetDate: new Date().toDateString()
         };
 
-        // Navigation functionality
-        document.querySelectorAll('.nav-link, .footer-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove active class from all links
-                document.querySelectorAll('.nav-link').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Add active class to clicked link
-                if (this.classList.contains('nav-link')) {
-                    this.classList.add('active');
-                }
-                
-                // Hide all sections
-                document.querySelectorAll('.section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Show the selected section
-                const sectionId = this.getAttribute('data-section');
-                document.getElementById(sectionId).classList.add('active');
-                
-                // Check if user needs to be logged in for certain sections
-                checkLoginRequirement(sectionId);
-            });
-        });
-
-        // Check if user needs to be logged in for certain sections
-        function checkLoginRequirement(sectionId) {
-            if (!currentUser.loggedIn && sectionId !== 'auth') {
-                // Redirect to auth section if not logged in
-                document.querySelectorAll('.section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                document.getElementById('auth').classList.add('active');
-                
-                // Update nav links
-                document.querySelectorAll('.nav-link').forEach(item => {
-                    item.classList.remove('active');
-                });
-                document.querySelector('[data-section="auth"]').classList.add('active');
-            }
-        }
-
-        // Auth tabs functionality
-        document.querySelectorAll('.auth-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from all tabs
-                document.querySelectorAll('.auth-tab').forEach(t => {
-                    t.classList.remove('active');
-                });
-                
-                // Add active class to clicked tab
-                this.classList.add('active');
-                
-                // Hide all forms
-                document.querySelectorAll('.auth-form').forEach(form => {
-                    form.classList.remove('active');
-                });
-                
-                // Show corresponding form
-                const tabId = this.getAttribute('data-tab');
-                document.getElementById(`${tabId}-form`).classList.add('active');
-            });
-        });
-
-        // Login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            
-            // Simple validation
-            if (!email || !password) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            // Show loading animation
-            const loginOverlay = document.getElementById('login-overlay');
-            loginOverlay.style.display = 'flex';
-            
-            // Simulate login process
-            setTimeout(function() {
-                // Hide spinner
-                loginOverlay.style.display = 'none';
-                
-                // Show first heart
-                const heart1 = document.createElement('div');
-                heart1.className = 'heart-popup';
-                heart1.innerHTML = '♥';
-                document.body.appendChild(heart1);
-                
-                // Show second heart after delay
-                setTimeout(function() {
-                    const heart2 = document.createElement('div');
-                    heart2.className = 'heart-popup';
-                    heart2.innerHTML = '♥';
-                    document.body.appendChild(heart2);
-                    
-                    // Remove hearts after animation
-                    setTimeout(function() {
-                        heart1.remove();
-                        heart2.remove();
-                        
-                        // Update user state
-                        currentUser.loggedIn = true;
-                        currentUser.email = email;
-                        localStorage.setItem('kematch_user', JSON.stringify(currentUser));
-                        
-                        // Update UI
-                        document.getElementById('login-btn').style.display = 'none';
-                        
-                        // Redirect to home section
-                        document.querySelectorAll('.section').forEach(section => {
-                            section.classList.remove('active');
-                        });
-                        document.getElementById('home').classList.add('active');
-                        
-                        // Update nav links
-                        document.querySelectorAll('.nav-link').forEach(item => {
-                            item.classList.remove('active');
-                        });
-                        document.querySelector('[data-section="home"]').classList.add('active');
-                        
-                        alert('Successfully logged in!');
-                    }, 1000);
-                }, 400);
-            }, 2000);
-        });
-
-        // Sign up form submission
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('signup-name').value;
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('signup-confirm-password').value;
-            const gender = document.getElementById('signup-gender').value;
-            const age = document.getElementById('signup-age').value;
-            
-            // Validation
-            if (!name || !email || !password || !confirmPassword || !gender || !age) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
-                return;
-            }
-            
-            if (parseInt(age) < 18) {
-                alert('You must be at least 18 years old to join KE MATCH');
-                return;
-            }
-            
-            // Show loading animation
-            const loginOverlay = document.getElementById('login-overlay');
-            loginOverlay.style.display = 'flex';
-            
-            // Simulate sign up process
-            setTimeout(function() {
-                // Hide spinner
-                loginOverlay.style.display = 'none';
-                
-                // Show first heart
-                const heart1 = document.createElement('div');
-                heart1.className = 'heart-popup';
-                heart1.innerHTML = '♥';
-                document.body.appendChild(heart1);
-                
-                // Show second heart after delay
-                setTimeout(function() {
-                    const heart2 = document.createElement('div');
-                    heart2.className = 'heart-popup';
-                    heart2.innerHTML = '♥';
-                    document.body.appendChild(heart2);
-                    
-                    // Remove hearts after animation
-                    setTimeout(function() {
-                        heart1.remove();
-                        heart2.remove();
-                        
-                        // Update user state
-                        currentUser.loggedIn = true;
-                        currentUser.name = name;
-                        currentUser.email = email;
-                        currentUser.gender = gender;
-                        currentUser.age = age;
-                        localStorage.setItem('kematch_user', JSON.stringify(currentUser));
-                        
-                        // Update UI
-                        document.getElementById('login-btn').style.display = 'none';
-                        
-                        // Redirect to home section
-                        document.querySelectorAll('.section').forEach(section => {
-                            section.classList.remove('active');
-                        });
-                        document.getElementById('home').classList.add('active');
-                        
-                        // Update nav links
-                        document.querySelectorAll('.nav-link').forEach(item => {
-                            item.classList.remove('active');
-                        });
-                        document.querySelector('[data-section="home"]').classList.add('active');
-                        
-                        alert('Account created successfully! Welcome to KE MATCH.');
-                    }, 1000);
-                }, 400);
-            }, 2000);
-        });
-
-        // Social login functionality
-        document.getElementById('facebook-login').addEventListener('click', function() {
-            startSocialLogin('Facebook');
-        });
-
-        document.getElementById('google-login').addEventListener('click', function() {
-            startSocialLogin('Google');
-        });
-
-        document.getElementById('facebook-signup').addEventListener('click', function() {
-            startSocialLogin('Facebook');
-        });
-
-        document.getElementById('google-signup').addEventListener('click', function() {
-            startSocialLogin('Google');
-        });
-
-        function startSocialLogin(provider) {
-            // Show loading animation
-            const loginOverlay = document.getElementById('login-overlay');
-            loginOverlay.style.display = 'flex';
-            
-            // Simulate social login process
-            setTimeout(function() {
-                // Hide spinner
-                loginOverlay.style.display = 'none';
-                
-                // Show first heart
-                const heart1 = document.createElement('div');
-                heart1.className = 'heart-popup';
-                heart1.innerHTML = '♥';
-                document.body.appendChild(heart1);
-                
-                // Show second heart after delay
-                setTimeout(function() {
-                    const heart2 = document.createElement('div');
-                    heart2.className = 'heart-popup';
-                    heart2.innerHTML = '♥';
-                    document.body.appendChild(heart2);
-                    
-                    // Remove hearts after animation
-                    setTimeout(function() {
-                        heart1.remove();
-                        heart2.remove();
-                        
-                        // Update user state
-                        currentUser.loggedIn = true;
-                        currentUser.socialProvider = provider;
-                        localStorage.setItem('kematch_user', JSON.stringify(currentUser));
-                        
-                        // Update UI
-                        document.getElementById('login-btn').style.display = 'none';
-                        
-                        // Redirect to home section
-                        document.querySelectorAll('.section').forEach(section => {
-                            section.classList.remove('active');
-                        });
-                        document.getElementById('home').classList.add('active');
-                        
-                        // Update nav links
-                        document.querySelectorAll('.nav-link').forEach(item => {
-                            item.classList.remove('active');
-                        });
-                        document.querySelector('[data-section="home"]').classList.add('active');
-                        
-                        alert(`Successfully logged in with ${provider}!`);
-                    }, 1000);
-                }, 400);
-            }, 2000);
-        }
-
-        // Sign in buttons from other sections
-        document.getElementById('chat-signin-btn').addEventListener('click', function() {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById('auth').classList.add('active');
-            
-            document.querySelectorAll('.nav-link').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector('[data-section="auth"]').classList.add('active');
-        });
-
-        document.getElementById('profile-signin-btn').addEventListener('click', function() {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById('auth').classList.add('active');
-            
-            document.querySelectorAll('.nav-link').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector('[data-section="auth"]').classList.add('active');
-        });
-
-        document.getElementById('payment-signin-btn').addEventListener('click', function() {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById('auth').classList.add('active');
-            
-            document.querySelectorAll('.nav-link').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector('[data-section="auth"]').classList.add('active');
-        });
-
-        // Header login button
-        document.getElementById('login-btn').addEventListener('click', function() {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById('auth').classList.add('active');
-            
-            document.querySelectorAll('.nav-link').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector('[data-section="auth"]').classList.add('active');
-        });
+        let currentUserGender = "male";
+        let currentProfileIndex = 0;
+        let currentProfiles = [];
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
-            // Check if user is already logged in
-            if (currentUser.loggedIn) {
-                document.getElementById('login-btn').style.display = 'none';
-                
-                // Redirect to home section
-                document.querySelectorAll('.section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                document.getElementById('home').classList.add('active');
-                
-                // Update nav links
-                document.querySelectorAll('.nav-link').forEach(item => {
-                    item.classList.remove('active');
-                });
-                document.querySelector('[data-section="home"]').classList.add('active');
-            }
+            // Check if we need to reset daily views
+            checkDailyReset();
+            
+            // Update the display
+            updateDailyLimitDisplay();
+            
+            // Set up event listeners
+            setupEventListeners();
         });
+
+        // Check if we need to reset daily view count
+        function checkDailyReset() {
+            const today = new Date().toDateString();
+            if (currentUser.lastResetDate !== today) {
+                currentUser.profilesViewedToday = 0;
+                currentUser.lastResetDate = today;
+                saveUserState();
+            }
+        }
+
+        // Save user state to localStorage
+        function saveUserState() {
+            localStorage.setItem('kematch_user', JSON.stringify(currentUser));
+        }
+
+        // Update daily matches based on plan
+        function updateDailyMatches() {
+            if (currentUser.plan === "free") {
+                currentUser.dailyMatches = 10;
+            } else if (currentUser.plan === "standard") {
+                currentUser.dailyMatches = 30; // 10 free + 20 premium
+            } else if (currentUser.plan === "premium") {
+                currentUser.dailyMatches = 50; // 10 free + 40 premium
+            }
+            saveUserState();
+        }
+
+        // Update the daily limit display
+        function updateDailyLimitDisplay() {
+            document.getElementById('profiles-viewed').textContent = currentUser.profilesViewedToday;
+            document.getElementById('daily-limit').textContent = currentUser.dailyMatches;
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Start matching functionality
+            document.getElementById('start-matching').addEventListener('click', startMatching);
+            
+            // Like button functionality
+            document.getElementById('like-btn').addEventListener('click', handleLike);
+            
+            // Dislike button functionality
+            document.getElementById('dislike-btn').addEventListener('click', handleDislike);
+            
+            // Modal functionality
+            document.getElementById('close-modal').addEventListener('click', closeModal);
+            document.getElementById('upgrade-now').addEventListener('click', upgradeNow);
+            
+            // Payment functionality
+            document.getElementById('standard-pay').addEventListener('click', function() {
+                handlePayment("standard");
+            });
+            
+            document.getElementById('premium-pay').addEventListener('click', function() {
+                handlePayment("premium");
+            });
+            
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    handleNavigation(this);
+                });
+            });
+        }
+
+        // Start matching functionality
+        function startMatching() {
+            // Set profiles based on user gender
+            currentProfiles = currentUser.gender === "male" ? femaleProfiles : [];
+            
+            // Reset profile index
+            currentProfileIndex = 0;
+            
+            // Hide welcome and show single profile view
+            document.querySelector('.welcome-section').style.display = 'none';
+            document.getElementById('single-view').style.display = 'block';
+            
+            // Load the first profile
+            loadCurrentProfile();
+        }
+
+        // Load current profile for single view
+        function loadCurrentProfile() {
+            // Check if user has reached daily limit
+            if (currentUser.profilesViewedToday >= currentUser.dailyMatches) {
+                showDailyLimitModal();
+                return;
+            }
+            
+            if (currentProfileIndex < currentProfiles.length) {
+                const profile = currentProfiles[currentProfileIndex];
+                
+                document.getElementById('current-profile-image').src = profile.image;
+                
+                // Create name with blue tick if verified
+                const nameElement = document.getElementById('current-profile-name');
+                nameElement.innerHTML = profile.name;
+                if (profile.verified) {
+                    nameElement.innerHTML += ' <span class="verified-badge"><i class="fas fa-check"></i></span>';
+                }
+                
+                document.getElementById('current-profile-details').textContent = `${profile.age} • ${profile.location}`;
+                
+                const interestsContainer = document.getElementById('current-profile-interests');
+                interestsContainer.innerHTML = '';
+                
+                // Add hobbies
+                profile.hobbies.forEach(hobby => {
+                    const tag = document.createElement('span');
+                    tag.className = 'interest-tag';
+                    tag.textContent = hobby;
+                    interestsContainer.appendChild(tag);
+                });
+                
+                // Add likes
+                profile.likes.forEach(like => {
+                    const tag = document.createElement('span');
+                    tag.className = 'interest-tag';
+                    tag.textContent = like;
+                    interestsContainer.appendChild(tag);
+                });
+                
+                // Update profiles viewed display
+                updateDailyLimitDisplay();
+            } else {
+                // No more profiles to show
+                showDailyLimitModal();
+            }
+        }
+
+        // Handle like action
+        function handleLike() {
+            if (currentUser.profilesViewedToday >= currentUser.dailyMatches) {
+                showDailyLimitModal();
+                return;
+            }
+            
+            // Increment profiles viewed
+            currentUser.profilesViewedToday++;
+            saveUserState();
+            
+            // Move to next profile
+            currentProfileIndex++;
+            loadCurrentProfile();
+            
+            // In a real app, this would send a like to the server
+            console.log(`Liked profile ${currentProfiles[currentProfileIndex - 1]?.id}`);
+        }
+
+        // Handle dislike action
+        function handleDislike() {
+            if (currentUser.profilesViewedToday >= currentUser.dailyMatches) {
+                showDailyLimitModal();
+                return;
+            }
+            
+            // Increment profiles viewed
+            currentUser.profilesViewedToday++;
+            saveUserState();
+            
+            // Move to next profile
+            currentProfileIndex++;
+            loadCurrentProfile();
+            
+            // In a real app, this would send a dislike to the server
+            console.log(`Disliked profile ${currentProfiles[currentProfileIndex - 1]?.id}`);
+        }
+
+        // Show daily limit modal
+        function showDailyLimitModal() {
+            document.getElementById('limit-count').textContent = currentUser.dailyMatches;
+            document.getElementById('daily-limit-modal').style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('daily-limit-modal').style.display = 'none';
+            
+            // Return to welcome screen
+            document.querySelector('.welcome-section').style.display = 'block';
+            document.getElementById('single-view').style.display = 'none';
+        }
+
+        // Upgrade now functionality
+        function upgradeNow() {
+            document.getElementById('daily-limit-modal').style.display = 'none';
+            
+            // Navigate to payment section
+            document.querySelectorAll('.nav-link').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[data-section="payment"]').classList.add('active');
+            
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('payment').classList.add('active');
+        }
+
+        // Handle payment
+        function handlePayment(plan) {
+            currentUser.plan = plan;
+            currentUser.premium = true;
+            currentUser.verified = true;
+            
+            // Update daily matches
+            updateDailyMatches();
+            
+            // Show success message
+            alert(`Successfully upgraded to ${plan} plan! You now have ${currentUser.dailyMatches} daily matches.`);
+            
+            // Return to matching with new limit
+            document.querySelectorAll('.nav-link').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[data-section="home"]').classList.add('active');
+            
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('home').classList.add('active');
+            
+            // Reset and show matching interface
+            document.querySelector('.welcome-section').style.display = 'none';
+            document.getElementById('single-view').style.display = 'block';
+            
+            // Update the display
+            updateDailyLimitDisplay();
+            
+            // Continue from where we left off
+            loadCurrentProfile();
+        }
+
+        // Handle navigation
+        function handleNavigation(link) {
+            // Remove active class from all links
+            document.querySelectorAll('.nav-link').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked link
+            link.classList.add('active');
+            
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            const sectionId = link.getAttribute('data-section');
+            document.getElementById(sectionId).classList.add('active');
+        }
     </script>
 </body>
 </html>
