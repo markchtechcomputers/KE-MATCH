@@ -617,6 +617,8 @@
             border-radius: 5px;
             display: inline-block;
             margin-top: 5px;
+            font-family: monospace;
+            letter-spacing: 1px;
         }
         
         /* About Section */
@@ -998,26 +1000,21 @@
                     
                     <div class="payment-options">
                         <div class="payment-option">
-                            <h3>Pay via KCB</h3>
+                            <h3>Payment Instructions</h3>
                             <div class="payment-details">
-                                <p><strong>PayBill:</strong> <span class="payment-code">522522</span></p>
-                                <p><strong>Account:</strong> <span class="payment-code">1336980125</span></p>
+                                <p>To upgrade your account, use the payment code below:</p>
+                                <p><strong>Payment Code:</strong> <span class="payment-code">QTY4GFDYU57DZ</span></p>
+                                <p>Send Ksh 150 to this code via M-Pesa, Airtel Money, or your bank.</p>
+                                <p>After payment, enter the transaction code below to activate your premium account.</p>
                             </div>
-                            <button class="btn btn-pink" id="kcb-pay">Pay Now</button>
-                        </div>
-                        
-                        <div class="payment-option">
-                            <h3>Pay via Family Bank</h3>
-                            <div class="payment-details">
-                                <p><strong>PayBill:</strong> <span class="payment-code">222111</span></p>
-                                <p><strong>Account:</strong> <span class="payment-code">085000113030</span></p>
+                            <div class="transaction-verification" style="margin-top: 20px;">
+                                <input type="text" id="transaction-code" placeholder="Enter transaction code" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #e0e0e0; border-radius: 5px;">
+                                <button class="btn btn-pink" id="verify-payment" style="width: 100%;">Verify Payment</button>
                             </div>
-                            <button class="btn btn-pink" id="family-pay">Pay Now</button>
                         </div>
                     </div>
                     
-                    <p>After payment, send the transaction code to us to activate your account.</p>
-                    <button class="btn btn-black">I've Already Paid</button>
+                    <p>If you encounter any issues, contact our support team.</p>
                 </div>
             </section>
 
@@ -1806,34 +1803,28 @@
                 }
             });
             
-            // Payment functionality
-            document.getElementById('kcb-pay').addEventListener('click', function() {
-                if (confirm('You will be redirected to KCB payment. Continue?')) {
-                    // Simulate payment success
-                    setTimeout(function() {
-                        currentUser.premium = true;
-                        currentUser.verified = true;
-                        
-                        // Update account status
-                        document.getElementById('account-status').textContent = 'Premium User';
-                        
-                        alert('Payment successful! Your account has been upgraded to Premium.');
-                    }, 2000);
-                }
-            });
-            
-            document.getElementById('family-pay').addEventListener('click', function() {
-                if (confirm('You will be redirected to Family Bank payment. Continue?')) {
-                    // Simulate payment success
-                    setTimeout(function() {
-                        currentUser.premium = true;
-                        currentUser.verified = true;
-                        
-                        // Update account status
-                        document.getElementById('account-status').textContent = 'Premium User';
-                        
-                        alert('Payment successful! Your account has been upgraded to Premium.');
-                    }, 2000);
+            // Payment verification functionality
+            document.getElementById('verify-payment').addEventListener('click', function() {
+                const transactionCode = document.getElementById('transaction-code').value.trim();
+                const validPaymentCode = "QTY4GFDYU57DZ";
+                
+                if (transactionCode === validPaymentCode) {
+                    // Payment successful
+                    currentUser.premium = true;
+                    currentUser.verified = true;
+                    
+                    // Update account status
+                    document.getElementById('account-status').textContent = 'Premium User';
+                    
+                    // Update daily limit
+                    profilesRemaining = 20;
+                    
+                    // Clear the input
+                    document.getElementById('transaction-code').value = '';
+                    
+                    alert('Payment verified successfully! Your account has been upgraded to Premium.');
+                } else {
+                    alert('Invalid transaction code. Please check and try again.');
                 }
             });
         });
