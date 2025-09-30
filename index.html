@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KE MATCH - Find Your Perfect Match in Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base Styles */
         * {
@@ -20,6 +21,8 @@
             --black: #000000;
             --light-gray: #f5f5f5;
             --dark-gray: #333333;
+            --google-blue: #4285F4;
+            --facebook-blue: #3b5998;
         }
         
         body {
@@ -127,6 +130,24 @@
             background-color: transparent;
             border: 2px solid var(--primary-pink);
             color: var(--primary-pink);
+        }
+        
+        .btn-google {
+            background-color: var(--google-blue);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-facebook {
+            background-color: var(--facebook-blue);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .btn:hover {
@@ -635,6 +656,26 @@
             max-width: 400px;
         }
         
+        .login-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .login-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .login-tab.active {
+            color: var(--primary-pink);
+            border-bottom: 2px solid var(--primary-pink);
+        }
+        
         .login-step {
             display: none;
         }
@@ -655,6 +696,30 @@
         .login-btn {
             width: 100%;
             margin-top: 15px;
+        }
+        
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background-color: #e0e0e0;
+        }
+        
+        .divider-text {
+            padding: 0 15px;
+            color: var(--dark-gray);
         }
         
         .otp-inputs {
@@ -780,6 +845,22 @@
             border-radius: 50%;
             object-fit: cover;
         }
+        
+        /* Match Notification */
+        .match-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-pink);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
@@ -803,11 +884,17 @@
                         <img src="" alt="User" class="user-avatar" id="user-avatar">
                         <span id="user-name"></span>
                     </div>
-                    <button class="btn btn-pink" id="login-btn">Login with Email</button>
+                    <button class="btn btn-pink" id="login-btn">Login / Sign Up</button>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Match Notification -->
+    <div class="match-notification" id="match-notification">
+        <i class="fas fa-heart"></i>
+        <span>It's a match! You and <span id="match-name"></span> have liked each other.</span>
+    </div>
 
     <main>
         <div class="container">
@@ -1010,7 +1097,7 @@
                         
                         <h3>Why KE MATCH?</h3>
                         <ul>
-                            <li><strong>Simple Login</strong> → Sign up quickly using your Email.</li>
+                            <li><strong>Simple Login</strong> → Sign up quickly using your Email, Google or Facebook.</li>
                             <li><strong>Smart Profiles</strong> → Share who you are, what you love, and what you're looking for.</li>
                             <li><strong>Fair Access</strong> → Everyone gets 10 free profiles to view per day.</li>
                             <li><strong>Affordable Activation</strong> → Unlock unlimited chatting and contact sharing for just Ksh 150.</li>
@@ -1058,25 +1145,63 @@
     <!-- Login Modal -->
     <div id="login-modal" class="modal">
         <div class="modal-content login-modal-content">
-            <div class="login-step active" id="email-step">
-                <h2>Login with Email</h2>
-                <p>Enter your email address to receive a verification code</p>
-                <input type="email" class="login-input" id="login-email" placeholder="Enter your email">
-                <button class="btn btn-pink login-btn" id="send-otp">Send OTP</button>
+            <div class="login-tabs">
+                <div class="login-tab active" data-tab="login">Login</div>
+                <div class="login-tab" data-tab="signup">Sign Up</div>
             </div>
-            <div class="login-step" id="otp-step">
-                <h2>Enter OTP</h2>
-                <p>We've sent a 6-digit code to your email</p>
-                <div class="otp-inputs">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
+            
+            <!-- Login Tab -->
+            <div class="login-step active" id="login-tab">
+                <h2>Welcome Back</h2>
+                
+                <div class="social-login">
+                    <button class="btn btn-google login-btn">
+                        <i class="fab fa-google"></i> Continue with Google
+                    </button>
+                    <button class="btn btn-facebook login-btn">
+                        <i class="fab fa-facebook-f"></i> Continue with Facebook
+                    </button>
                 </div>
-                <button class="btn btn-pink login-btn" id="verify-otp">Verify OTP</button>
-                <div class="resend-otp" id="resend-otp">Resend OTP</div>
+                
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-text">or</div>
+                    <div class="divider-line"></div>
+                </div>
+                
+                <input type="email" class="login-input" id="login-email" placeholder="Email">
+                <input type="password" class="login-input" id="login-password" placeholder="Password">
+                <button class="btn btn-pink login-btn" id="login-email-btn">Login</button>
+                
+                <p style="margin-top: 15px;">
+                    <a href="#" id="forgot-password" style="color: var(--primary-pink);">Forgot your password?</a>
+                </p>
+            </div>
+            
+            <!-- Sign Up Tab -->
+            <div class="login-step" id="signup-tab">
+                <h2>Create Account</h2>
+                
+                <div class="social-login">
+                    <button class="btn btn-google login-btn">
+                        <i class="fab fa-google"></i> Continue with Google
+                    </button>
+                    <button class="btn btn-facebook login-btn">
+                        <i class="fab fa-facebook-f"></i> Continue with Facebook
+                    </button>
+                </div>
+                
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-text">or</div>
+                    <div class="divider-line"></div>
+                </div>
+                
+                <input type="text" class="login-input" id="signup-name" placeholder="Full Name">
+                <input type="email" class="login-input" id="signup-email" placeholder="Email">
+                <input type="password" class="login-input" id="signup-password" placeholder="Password">
+                <input type="password" class="login-input" id="signup-confirm-password" placeholder="Confirm Password">
+                <button class="btn btn-pink login-btn" id="signup-email-btn">Create Account</button>
             </div>
         </div>
     </div>
@@ -1354,6 +1479,7 @@
         let profilesRemaining = 10;
         let currentProfiles = [];
         let activeChatId = null;
+        let likedProfiles = [];
 
         // Navigation functionality
         document.querySelectorAll('.nav-link, .footer-link').forEach(link => {
@@ -1387,105 +1513,132 @@
             });
         });
 
+        // Login modal tabs
+        document.querySelectorAll('.login-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.login-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all login steps
+                document.querySelectorAll('.login-step').forEach(step => {
+                    step.classList.remove('active');
+                });
+                
+                // Show the selected step
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+
         // Login modal functionality
         document.getElementById('login-btn').addEventListener('click', function() {
             document.getElementById('login-modal').style.display = 'flex';
         });
 
-        // Send OTP functionality
-        document.getElementById('send-otp').addEventListener('click', function() {
-            const email = document.getElementById('login-email').value;
-            
-            if (!email) {
-                alert('Please enter your email address');
-                return;
-            }
-            
-            // In a real app, this would send a request to the backend
-            // For demo, we'll simulate sending an OTP
-            const otp = Math.floor(100000 + Math.random() * 900000).toString();
-            sessionStorage.setItem('otp', otp);
-            sessionStorage.setItem('otpEmail', email);
-            
-            // Show OTP step
-            document.getElementById('email-step').classList.remove('active');
-            document.getElementById('otp-step').classList.add('active');
-            
-            // Focus first OTP input
-            document.querySelector('.otp-input').focus();
-            
-            // For demo purposes, show the OTP in an alert
-            alert(`Demo: Your OTP is ${otp}. In a real app, this would be sent to your email.`);
-        });
-
-        // OTP input functionality
-        const otpInputs = document.querySelectorAll('.otp-input');
-        otpInputs.forEach((input, index) => {
-            input.addEventListener('input', function() {
-                if (this.value.length === 1 && index < otpInputs.length - 1) {
-                    otpInputs[index + 1].focus();
-                }
-            });
-            
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
-                    otpInputs[index - 1].focus();
-                }
-            });
-        });
-
-        // Verify OTP functionality
-        document.getElementById('verify-otp').addEventListener('click', function() {
-            const enteredOtp = Array.from(otpInputs).map(input => input.value).join('');
-            const storedOtp = sessionStorage.getItem('otp');
-            const email = sessionStorage.getItem('otpEmail');
-            
-            if (enteredOtp === storedOtp) {
-                // Successful login
+        // Social login buttons
+        document.querySelectorAll('.btn-google, .btn-facebook').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const provider = this.classList.contains('btn-google') ? 'Google' : 'Facebook';
+                
+                // In a real app, this would integrate with Firebase Auth or similar
+                // For demo, we'll simulate a successful login
                 currentUser = {
-                    email: email,
-                    name: email.split('@')[0],
-                    avatar: 'https://via.placeholder.com/150'
+                    name: `User ${Math.floor(1000 + Math.random() * 9000)}`,
+                    email: `user${Math.floor(1000 + Math.random() * 9000)}@example.com`,
+                    avatar: 'https://via.placeholder.com/150',
+                    provider: provider
                 };
                 
                 // Update UI
-                document.getElementById('user-name').textContent = currentUser.name;
-                document.getElementById('user-avatar').src = currentUser.avatar;
-                document.getElementById('user-profile').style.display = 'flex';
-                document.getElementById('login-btn').style.display = 'none';
-                document.getElementById('main-nav').style.display = 'block';
+                updateUIAfterLogin();
                 
                 // Close modal
                 document.getElementById('login-modal').style.display = 'none';
                 
-                // Show home section
-                document.getElementById('home').classList.add('active');
-                
-                // Reset OTP inputs
-                otpInputs.forEach(input => input.value = '');
-                document.getElementById('login-email').value = '';
-                
-                // Reset login steps
-                document.getElementById('email-step').classList.add('active');
-                document.getElementById('otp-step').classList.remove('active');
-                
-                alert('Login successful! Welcome to KE MATCH.');
-            } else {
-                alert('Invalid OTP. Please try again.');
-            }
+                alert(`Successfully logged in with ${provider}!`);
+            });
         });
 
-        // Resend OTP functionality
-        document.getElementById('resend-otp').addEventListener('click', function() {
-            const email = sessionStorage.getItem('otpEmail');
+        // Email login
+        document.getElementById('login-email-btn').addEventListener('click', function() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
             
-            // Generate new OTP
-            const otp = Math.floor(100000 + Math.random() * 900000).toString();
-            sessionStorage.setItem('otp', otp);
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
             
-            // For demo purposes, show the OTP in an alert
-            alert(`Demo: Your new OTP is ${otp}. In a real app, this would be sent to your email.`);
+            // In a real app, this would validate credentials with a backend
+            // For demo, we'll simulate a successful login
+            currentUser = {
+                name: email.split('@')[0],
+                email: email,
+                avatar: 'https://via.placeholder.com/150'
+            };
+            
+            // Update UI
+            updateUIAfterLogin();
+            
+            // Close modal
+            document.getElementById('login-modal').style.display = 'none';
+            
+            alert('Successfully logged in!');
         });
+
+        // Email signup
+        document.getElementById('signup-email-btn').addEventListener('click', function() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            // In a real app, this would create an account with a backend
+            // For demo, we'll simulate account creation and login
+            currentUser = {
+                name: name,
+                email: email,
+                avatar: 'https://via.placeholder.com/150'
+            };
+            
+            // Update UI
+            updateUIAfterLogin();
+            
+            // Close modal
+            document.getElementById('login-modal').style.display = 'none';
+            
+            alert('Account created successfully!');
+        });
+
+        // Update UI after login
+        function updateUIAfterLogin() {
+            document.getElementById('user-name').textContent = currentUser.name;
+            document.getElementById('user-avatar').src = currentUser.avatar;
+            document.getElementById('user-profile').style.display = 'flex';
+            document.getElementById('login-btn').style.display = 'none';
+            document.getElementById('main-nav').style.display = 'block';
+            
+            // Show home section
+            document.getElementById('home').classList.add('active');
+            
+            // Update profile with user info
+            document.getElementById('name').value = currentUser.name;
+        }
 
         // Start matching functionality
         document.getElementById('start-matching').addEventListener('click', function() {
@@ -1549,6 +1702,14 @@
         // Like button functionality
         document.getElementById('like-btn').addEventListener('click', function() {
             if (profilesRemaining > 0) {
+                const profile = currentProfiles[currentProfileIndex];
+                likedProfiles.push(profile);
+                
+                // Show match notification occasionally (20% chance)
+                if (Math.random() < 0.2) {
+                    showMatchNotification(profile.name);
+                }
+                
                 profilesRemaining--;
                 currentProfileIndex++;
                 loadCurrentProfile();
@@ -1565,6 +1726,18 @@
                 // In a real app, this would send a dislike to the server
             }
         });
+
+        // Show match notification
+        function showMatchNotification(name) {
+            document.getElementById('match-name').textContent = name;
+            const notification = document.getElementById('match-notification');
+            notification.style.display = 'flex';
+            
+            // Hide after 5 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
 
         // Modal functionality
         document.getElementById('close-modal').addEventListener('click', function() {
@@ -1599,6 +1772,7 @@
                     // Also update user avatar in header
                     if (currentUser) {
                         document.getElementById('user-avatar').src = event.target.result;
+                        currentUser.avatar = event.target.result;
                     }
                 };
                 reader.readAsDataURL(file);
