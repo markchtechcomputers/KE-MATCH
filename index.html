@@ -951,6 +951,25 @@
         .section.active {
             display: block;
         }
+        
+        /* Login Required Message */
+        .login-required {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--light-gray);
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .login-required h2 {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+        
+        .login-required p {
+            margin-bottom: 30px;
+            color: var(--dark-gray);
+        }
     </style>
 </head>
 <body>
@@ -1060,7 +1079,15 @@
             <!-- Chat Section -->
             <section id="chat" class="section">
                 <h2 class="section-title">Messages</h2>
-                <div class="chat-container">
+                
+                <!-- Login Required Message -->
+                <div id="chat-login-required" class="login-required" style="display: none;">
+                    <h2>Sign In Required</h2>
+                    <p>You need to sign in and upgrade to a premium plan to access messages.</p>
+                    <button class="btn btn-pink" id="chat-signin-btn">Sign In Now</button>
+                </div>
+                
+                <div id="chat-container" class="chat-container" style="display: none;">
                     <div class="chat-sidebar">
                         <div class="chat-list">
                             <!-- Chat items will be dynamically generated here -->
@@ -1090,7 +1117,15 @@
             <!-- Profile Section -->
             <section id="profile" class="section">
                 <h2 class="section-title">My Profile</h2>
-                <div class="profile-section">
+                
+                <!-- Login Required Message -->
+                <div id="profile-login-required" class="login-required" style="display: none;">
+                    <h2>Sign In Required</h2>
+                    <p>You need to sign in to view and edit your profile.</p>
+                    <button class="btn btn-pink" id="profile-signin-btn">Sign In Now</button>
+                </div>
+                
+                <div id="profile-container" class="profile-section" style="display: none;">
                     <div class="profile-picture-section">
                         <img src="https://via.placeholder.com/300" alt="Profile" class="profile-picture" id="main-profile-pic">
                         
@@ -1103,7 +1138,8 @@
                             </div>
                         </div>
                         
-                        <input type="file" id="photo-upload-input" accept="image/*" style="display: none;">
+                        <input type="file" id="photo-upload-input-1" accept="image/*" style="display: none;">
+                        <input type="file" id="photo-upload-input-2" accept="image/*" style="display: none;">
                         
                         <p style="text-align: center; font-size: 14px; color: var(--dark-gray);">You can add up to 2 photos</p>
                     </div>
@@ -1197,7 +1233,15 @@
             <!-- Payment Section -->
             <section id="payment" class="section">
                 <h2 class="section-title">Upgrade Your Experience</h2>
-                <div class="payment-section">
+                
+                <!-- Login Required Message -->
+                <div id="payment-login-required" class="login-required" style="display: none;">
+                    <h2>Sign In Required</h2>
+                    <p>You need to sign in to upgrade your account.</p>
+                    <button class="btn btn-pink" id="payment-signin-btn">Sign In Now</button>
+                </div>
+                
+                <div id="payment-container" class="payment-section" style="display: none;">
                     <h2 class="payment-title">Unlock More Matches on KE MATCH</h2>
                     <p>Upgrade now to connect with more potential matches every day!</p>
                     
@@ -1496,8 +1540,38 @@
                 // Show the selected section
                 const sectionId = this.getAttribute('data-section');
                 document.getElementById(sectionId).classList.add('active');
+                
+                // Check if user needs to be logged in for certain sections
+                checkLoginRequirement(sectionId);
             });
         });
+
+        // Check if user needs to be logged in for certain sections
+        function checkLoginRequirement(sectionId) {
+            if (!currentUser.loggedIn) {
+                if (sectionId === 'chat') {
+                    document.getElementById('chat-login-required').style.display = 'block';
+                    document.getElementById('chat-container').style.display = 'none';
+                } else if (sectionId === 'profile') {
+                    document.getElementById('profile-login-required').style.display = 'block';
+                    document.getElementById('profile-container').style.display = 'none';
+                } else if (sectionId === 'payment') {
+                    document.getElementById('payment-login-required').style.display = 'block';
+                    document.getElementById('payment-container').style.display = 'none';
+                }
+            } else {
+                if (sectionId === 'chat') {
+                    document.getElementById('chat-login-required').style.display = 'none';
+                    document.getElementById('chat-container').style.display = 'flex';
+                } else if (sectionId === 'profile') {
+                    document.getElementById('profile-login-required').style.display = 'none';
+                    document.getElementById('profile-container').style.display = 'flex';
+                } else if (sectionId === 'payment') {
+                    document.getElementById('payment-login-required').style.display = 'none';
+                    document.getElementById('payment-container').style.display = 'block';
+                }
+            }
+        }
 
         // Sign In Modal
         document.getElementById('login-btn').addEventListener('click', function() {
@@ -1554,6 +1628,10 @@
                         // Update profile with user name
                         document.getElementById('user-name').textContent = currentUser.name;
                         document.getElementById('name').value = currentUser.name;
+                        
+                        // Update sections to show content instead of login required
+                        checkLoginRequirement('profile');
+                        checkLoginRequirement('payment');
                         
                         alert(`Successfully logged in with ${provider}! You can now update your profile.`);
                     }, 1000);
@@ -1676,6 +1754,9 @@
                 section.classList.remove('active');
             });
             document.getElementById('payment').classList.add('active');
+            
+            // Check login requirement for payment section
+            checkLoginRequirement('payment');
         });
 
         // Render profiles for grid view
@@ -1893,14 +1974,14 @@
 
         // Photo upload functionality
         document.getElementById('add-photo-1').addEventListener('click', function() {
-            document.getElementById('photo-upload-input').click();
+            document.getElementById('photo-upload-input-1').click();
         });
 
         document.getElementById('add-photo-2').addEventListener('click', function() {
-            document.getElementById('photo-upload-input').click();
+            document.getElementById('photo-upload-input-2').click();
         });
 
-        document.getElementById('photo-upload-input').addEventListener('change', function(e) {
+        document.getElementById('photo-upload-input-1').addEventListener('change', function(e) {
             if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();
                 
@@ -1916,6 +1997,28 @@
                     
                     // Update main profile picture
                     document.getElementById('main-profile-pic').src = e.target.result;
+                    
+                    // Add photo to user's photos array
+                    currentUser.photos.push(e.target.result);
+                }
+                
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        document.getElementById('photo-upload-input-2').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    // Create new image element
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'uploaded-photo';
+                    
+                    // Replace second placeholder with uploaded photo
+                    const placeholder2 = document.getElementById('add-photo-2');
+                    placeholder2.parentNode.replaceChild(img, placeholder2);
                     
                     // Add photo to user's photos array
                     currentUser.photos.push(e.target.result);
@@ -1980,7 +2083,11 @@
                 document.getElementById('transaction-code').value = '';
                 document.getElementById('mpesa-modal').style.display = 'none';
                 
-                alert(`Payment verified successfully! Your account has been upgraded to ${currentPaymentPlan}.`);
+                // Show chat section now that user is upgraded
+                document.getElementById('chat-login-required').style.display = 'none';
+                document.getElementById('chat-container').style.display = 'flex';
+                
+                alert(`Payment verified successfully! Your account has been upgraded to ${currentPaymentPlan}. You can now access messages.`);
             } else {
                 alert('Invalid transaction code. Please check and try again.');
             }
@@ -2006,7 +2113,11 @@
                 // Clear the input
                 document.getElementById('manual-transaction-code').value = '';
                 
-                alert('Payment verified successfully! Your account has been upgraded to Premium.');
+                // Show chat section now that user is upgraded
+                document.getElementById('chat-login-required').style.display = 'none';
+                document.getElementById('chat-container').style.display = 'flex';
+                
+                alert('Payment verified successfully! Your account has been upgraded to Premium. You can now access messages.');
             } else {
                 alert('Invalid transaction code. Please check and try again.');
             }
@@ -2017,8 +2128,27 @@
             if (confirm('Are you sure you want to log out?')) {
                 currentUser.loggedIn = false;
                 document.getElementById('login-btn').style.display = 'block';
+                
+                // Reset sections to show login required
+                checkLoginRequirement('chat');
+                checkLoginRequirement('profile');
+                checkLoginRequirement('payment');
+                
                 alert('You have been logged out successfully');
             }
+        });
+
+        // Sign in buttons from login required sections
+        document.getElementById('chat-signin-btn').addEventListener('click', function() {
+            document.getElementById('signin-modal').style.display = 'flex';
+        });
+
+        document.getElementById('profile-signin-btn').addEventListener('click', function() {
+            document.getElementById('signin-modal').style.display = 'flex';
+        });
+
+        document.getElementById('payment-signin-btn').addEventListener('click', function() {
+            document.getElementById('signin-modal').style.display = 'flex';
         });
 
         // Initialize the app
