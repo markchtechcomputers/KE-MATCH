@@ -21,6 +21,7 @@
             --black: #000000;
             --light-gray: #f5f5f5;
             --dark-gray: #333333;
+            --blue-tick: #1e90ff;
             --google-blue: #4285F4;
             --facebook-blue: #3b5998;
         }
@@ -303,6 +304,14 @@
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .verified-badge {
+            color: var(--blue-tick);
+            font-size: 16px;
         }
         
         .profile-details {
@@ -448,6 +457,9 @@
         .chat-name {
             font-weight: 600;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         .chat-preview {
@@ -561,6 +573,21 @@
         .profile-field textarea {
             height: 100px;
             resize: vertical;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
         }
         
         /* Payment Section */
@@ -989,6 +1016,60 @@
         .phone-step.active {
             display: block;
         }
+        
+        /* Spinner for Social Login */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 77, 136, 0.3);
+            border-top: 4px solid var(--primary-pink);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Profile Pictures Grid */
+        .profile-pictures-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-picture-item {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .profile-picture-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .remove-picture {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -1022,6 +1103,7 @@
                     <div class="user-profile" id="user-profile" style="display: none;">
                         <img src="" alt="User" class="user-avatar" id="user-avatar">
                         <span id="user-name"></span>
+                        <button class="btn btn-outline" id="logout-btn" style="margin-left: 10px;">Log Out</button>
                     </div>
                     <button class="btn btn-pink" id="login-btn">Login / Sign Up</button>
                 </div>
@@ -1047,6 +1129,10 @@
                 
                 <!-- Grid View (Hidden initially) -->
                 <div id="grid-view" style="display: none;">
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="profile-search" placeholder="Search profiles by name, location, or interests...">
+                        <button class="btn btn-pink" id="search-btn">Search</button>
+                    </div>
                     <h2 class="section-title">Potential Matches</h2>
                     <div class="profiles-container" id="profiles-container">
                         <!-- Profile cards will be dynamically generated here -->
@@ -1072,6 +1158,7 @@
                         </div>
                         <div class="daily-limit">
                             <p>Profiles remaining today: <span id="profiles-remaining">10</span></p>
+                            <p>Likes remaining today: <span id="likes-remaining">10</span></p>
                         </div>
                     </div>
                 </div>
@@ -1109,9 +1196,11 @@
                 <h2 class="section-title">My Profile</h2>
                 <div class="profile-section">
                     <div class="profile-picture-section">
-                        <img src="https://via.placeholder.com/300" alt="Profile" class="profile-picture" id="profile-picture">
+                        <div class="profile-pictures-grid" id="profile-pictures-grid">
+                            <!-- Profile pictures will be dynamically generated here -->
+                        </div>
                         <div class="image-upload-container">
-                            <label for="image-upload" class="image-upload-label">Change Profile Picture</label>
+                            <label for="image-upload" class="image-upload-label">Add Profile Picture</label>
                             <input type="file" id="image-upload" accept="image/*" style="display: none;">
                         </div>
                         <p style="text-align: center; font-size: 14px; color: var(--dark-gray);">You can add up to 2 photos</p>
@@ -1212,6 +1301,7 @@
                                     <li>Unlimited chatting</li>
                                     <li>See who liked you</li>
                                     <li>Basic filters</li>
+                                    <li>+20 extra daily matches</li>
                                 </ul>
                             </div>
                             <button class="btn btn-pink" data-plan="standard" data-price="150">Upgrade to Standard</button>
@@ -1227,6 +1317,7 @@
                                     <li>Advanced filters</li>
                                     <li>Profile boost</li>
                                     <li>Priority support</li>
+                                    <li>+40 extra daily matches</li>
                                 </ul>
                             </div>
                             <button class="btn btn-pink" data-plan="premium" data-price="300">Upgrade to Premium</button>
@@ -1425,7 +1516,7 @@
     <div id="daily-limit-modal" class="modal">
         <div class="modal-content">
             <h2>Daily Limit Reached</h2>
-            <p>You've viewed all 10 profiles available for today. Come back tomorrow to see more potential matches or upgrade to premium for unlimited access.</p>
+            <p>You've viewed all <span id="limit-count">10</span> profiles available for today. Come back tomorrow to see more potential matches or upgrade to premium for unlimited access.</p>
             <div class="modal-buttons">
                 <button class="btn btn-outline" id="close-modal">OK</button>
                 <button class="btn btn-pink" id="upgrade-now">Upgrade Now</button>
@@ -1437,7 +1528,7 @@
     <div id="payment-success-modal" class="modal">
         <div class="modal-content">
             <h2>Payment Verified Successfully!</h2>
-            <p>Your account has been upgraded. You now have full access to all features.</p>
+            <p>Your account has been upgraded to <span id="upgraded-plan"></span>. You now have full access to all features.</p>
             <div class="modal-buttons">
                 <button class="btn btn-pink" id="close-success-modal">Continue</button>
             </div>
@@ -1466,107 +1557,117 @@
     </footer>
 
     <script>
-        // Sample data for profiles
+        // Sample data for profiles with Kenyan/African women
         const femaleProfiles = [
             {
                 id: 1,
                 name: "Sarah M.",
                 age: 25,
                 location: "Nairobi",
-                image: "https://files.catbox.moe/gefnh3.jpeg",
+                image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=686&q=80",
                 hobbies: ["Travel", "Music"],
                 likes: ["Movies", "Art"],
-                dislikes: ["Smoking", "Lateness"]
+                dislikes: ["Smoking", "Lateness"],
+                verified: true
             },
             {
                 id: 2,
                 name: "Grace W.",
                 age: 27,
                 location: "Kisumu",
-                image: "https://files.catbox.moe/ayz7eb.jpeg",
+                image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
                 hobbies: ["Cooking", "Music"],
                 likes: ["Food", "Fitness"],
-                dislikes: ["Arrogance", "Lateness"]
+                dislikes: ["Arrogance", "Lateness"],
+                verified: false
             },
             {
                 id: 3,
                 name: "Lilian K.",
                 age: 24,
                 location: "Mombasa",
-                image: "https://files.catbox.moe/by8fa3.jpeg",
+                image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                 hobbies: ["Dancing", "Photography"],
                 likes: ["Beach", "Coffee"],
-                dislikes: ["Rudeness", "Lies"]
+                dislikes: ["Rudeness", "Lies"],
+                verified: true
             },
             {
                 id: 4,
                 name: "Esther N.",
                 age: 26,
                 location: "Nakuru",
-                image: "https://files.catbox.moe/75urqe.jpeg",
+                image: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                 hobbies: ["Reading", "Hiking"],
                 likes: ["Outdoors", "Animals"],
-                dislikes: ["Noise", "Messy"]
+                dislikes: ["Noise", "Messy"],
+                verified: false
             },
             {
                 id: 5,
                 name: "Mary A.",
                 age: 23,
                 location: "Eldoret",
-                image: "https://files.catbox.moe/3nqkcq.jpeg",
+                image: "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=689&q=80",
                 hobbies: ["Sports", "Travel"],
                 likes: ["Fitness", "Movies"],
-                dislikes: ["Smoking", "Laziness"]
+                dislikes: ["Smoking", "Laziness"],
+                verified: true
             },
             {
                 id: 6,
                 name: "Joyce T.",
                 age: 28,
                 location: "Kakamega",
-                image: "https://files.catbox.moe/75yl23.jpeg",
+                image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                 hobbies: ["Cooking", "Reading"],
                 likes: ["Food", "Art"],
-                dislikes: ["Lateness", "Arrogance"]
+                dislikes: ["Lateness", "Arrogance"],
+                verified: false
             },
             {
                 id: 7,
                 name: "Rebecca J.",
                 age: 29,
                 location: "Kisii",
-                image: "https://files.catbox.moe/b3cdqy.jpeg",
+                image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
                 hobbies: ["Music", "Dancing"],
                 likes: ["Coffee", "Movies"],
-                dislikes: ["Rudeness", "Lies"]
+                dislikes: ["Rudeness", "Lies"],
+                verified: true
             },
             {
                 id: 8,
                 name: "Patience O.",
                 age: 26,
                 location: "Meru",
-                image: "https://files.catbox.moe/nnl07r.jpeg",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                 hobbies: ["Photography", "Hiking"],
                 likes: ["Outdoors", "Animals"],
-                dislikes: ["Noise", "Messy"]
+                dislikes: ["Noise", "Messy"],
+                verified: false
             },
             {
                 id: 9,
                 name: "Faith M.",
                 age: 24,
                 location: "Nyeri",
-                image: "https://files.catbox.moe/511rhc.jpeg",
+                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
                 hobbies: ["Travel", "Sports"],
                 likes: ["Beach", "Fitness"],
-                dislikes: ["Smoking", "Laziness"]
+                dislikes: ["Smoking", "Laziness"],
+                verified: true
             },
             {
                 id: 10,
                 name: "Hope K.",
                 age: 27,
                 location: "Thika",
-                image: "https://files.catbox.moe/7ts6fo.jpeg",
+                image: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1167&q=80",
                 hobbies: ["Reading", "Cooking"],
                 likes: ["Food", "Coffee"],
-                dislikes: ["Arrogance", "Rudeness"]
+                dislikes: ["Arrogance", "Rudeness"],
+                verified: false
             }
         ];
 
@@ -1576,100 +1677,55 @@
                 name: "James K.",
                 age: 30,
                 location: "Mombasa",
-                image: "https://files.catbox.moe/74v8fw.jpeg",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                 hobbies: ["Sports", "Reading"],
                 likes: ["Outdoors", "Food"],
-                dislikes: ["Noise", "Messy"]
+                dislikes: ["Noise", "Messy"],
+                verified: true
             },
             {
                 id: 12,
                 name: "David O.",
                 age: 32,
                 location: "Nakuru",
-                image: "https://files.catbox.moe/ayz7eb.jpeg",
+                image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                 hobbies: ["Travel", "Sports"],
                 likes: ["Outdoors", "Movies"],
-                dislikes: ["Smoking", "Noise"]
+                dislikes: ["Smoking", "Noise"],
+                verified: false
             },
             {
                 id: 13,
                 name: "Michael M.",
                 age: 28,
                 location: "Nairobi",
-                image: "https://files.catbox.moe/gefnh3.jpeg",
+                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
                 hobbies: ["Music", "Photography"],
                 likes: ["Art", "Coffee"],
-                dislikes: ["Lateness", "Rudeness"]
+                dislikes: ["Lateness", "Rudeness"],
+                verified: true
             },
             {
                 id: 14,
                 name: "Robert N.",
                 age: 31,
                 location: "Kisumu",
-                image: "https://files.catbox.moe/by8fa3.jpeg",
+                image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                 hobbies: ["Hiking", "Reading"],
                 likes: ["Outdoors", "Animals"],
-                dislikes: ["Lies", "Arrogance"]
+                dislikes: ["Lies", "Arrogance"],
+                verified: false
             },
             {
                 id: 15,
                 name: "Joseph W.",
                 age: 29,
                 location: "Eldoret",
-                image: "https://files.catbox.moe/75urqe.jpeg",
+                image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                 hobbies: ["Sports", "Travel"],
                 likes: ["Fitness", "Movies"],
-                dislikes: ["Smoking", "Laziness"]
-            },
-            {
-                id: 16,
-                name: "Daniel T.",
-                age: 27,
-                location: "Kakamega",
-                image: "https://files.catbox.moe/3nqkcq.jpeg",
-                hobbies: ["Cooking", "Music"],
-                likes: ["Food", "Art"],
-                dislikes: ["Noise", "Messy"]
-            },
-            {
-                id: 17,
-                name: "Paul J.",
-                age: 33,
-                location: "Kisii",
-                image: "https://files.catbox.moe/75yl23.jpeg",
-                hobbies: ["Reading", "Photography"],
-                likes: ["Coffee", "Movies"],
-                dislikes: ["Rudeness", "Lies"]
-            },
-            {
-                id: 18,
-                name: "Peter O.",
-                age: 30,
-                location: "Meru",
-                image: "https://files.catbox.moe/b3cdqy.jpeg",
-                hobbies: ["Hiking", "Sports"],
-                likes: ["Outdoors", "Animals"],
-                dislikes: ["Lateness", "Arrogance"]
-            },
-            {
-                id: 19,
-                name: "Andrew M.",
-                age: 26,
-                location: "Nyeri",
-                image: "https://files.catbox.moe/nnl07r.jpeg",
-                hobbies: ["Travel", "Music"],
-                likes: ["Beach", "Fitness"],
-                dislikes: ["Smoking", "Laziness"]
-            },
-            {
-                id: 20,
-                name: "Simon K.",
-                age: 28,
-                location: "Thika",
-                image: "https://files.catbox.moe/511rhc.jpeg",
-                hobbies: ["Reading", "Cooking"],
-                likes: ["Food", "Coffee"],
-                dislikes: ["Arrogance", "Rudeness"]
+                dislikes: ["Smoking", "Laziness"],
+                verified: true
             }
         ];
 
@@ -1678,7 +1734,7 @@
             {
                 id: 1,
                 name: "Sarah M.",
-                avatar: "https://files.catbox.moe/gefnh3.jpeg",
+                avatar: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=686&q=80",
                 lastMessage: "Hey there! How are you?",
                 messages: [
                     { text: "Hey there! How are you?", sender: "them", time: "10:30 AM" },
@@ -1689,7 +1745,7 @@
             {
                 id: 2,
                 name: "James K.",
-                avatar: "https://files.catbox.moe/74v8fw.jpeg",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                 lastMessage: "I really enjoyed our conversation yesterday",
                 messages: [
                     { text: "I really enjoyed our conversation yesterday", sender: "them", time: "9:15 AM" },
@@ -1703,11 +1759,13 @@
         let currentUserGender = "male"; // Default to male for demo
         let currentProfileIndex = 0;
         let profilesRemaining = 10;
+        let likesRemaining = 10;
         let currentProfiles = [];
         let activeChatId = null;
         let likedProfiles = [];
         let selectedPlan = null;
         let selectedPrice = null;
+        let userProfilePictures = [];
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
@@ -1860,7 +1918,7 @@
 
             // Like button functionality
             document.getElementById('like-btn').addEventListener('click', function() {
-                if (profilesRemaining > 0) {
+                if (profilesRemaining > 0 && likesRemaining > 0) {
                     const profile = currentProfiles[currentProfileIndex];
                     likedProfiles.push(profile);
                     
@@ -1870,6 +1928,7 @@
                     }
                     
                     profilesRemaining--;
+                    likesRemaining--;
                     currentProfileIndex++;
                     loadCurrentProfile();
                     // In a real app, this would send a like to the server
@@ -1912,9 +1971,16 @@
             document.getElementById('image-upload').addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
+                    // Check if user already has 2 pictures
+                    if (userProfilePictures.length >= 2) {
+                        alert('You can only upload 2 profile pictures');
+                        return;
+                    }
+                    
                     const reader = new FileReader();
                     reader.onload = function(event) {
-                        document.getElementById('profile-picture').src = event.target.result;
+                        userProfilePictures.push(event.target.result);
+                        renderProfilePictures();
                         
                         // Also update user avatar in header
                         if (currentUser) {
@@ -2048,46 +2114,112 @@
             document.getElementById('close-success-modal').addEventListener('click', function() {
                 document.getElementById('payment-success-modal').style.display = 'none';
             });
+
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                currentUser = null;
+                localStorage.removeItem('keMatchUser');
+                
+                // Reset UI
+                document.getElementById('user-profile').style.display = 'none';
+                document.getElementById('login-btn').style.display = 'block';
+                document.getElementById('main-nav').style.display = 'none';
+                
+                // Show login modal
+                document.getElementById('login-modal').style.display = 'flex';
+                
+                // Reset sections
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('home').classList.add('active');
+                
+                alert('You have been logged out.');
+            });
+
+            // Search functionality
+            document.getElementById('search-btn').addEventListener('click', function() {
+                const searchTerm = document.getElementById('profile-search').value.toLowerCase();
+                if (searchTerm) {
+                    const filteredProfiles = (currentUserGender === "male" ? femaleProfiles : maleProfiles).filter(profile => 
+                        profile.name.toLowerCase().includes(searchTerm) ||
+                        profile.location.toLowerCase().includes(searchTerm) ||
+                        profile.hobbies.some(hobby => hobby.toLowerCase().includes(searchTerm)) ||
+                        profile.likes.some(like => like.toLowerCase().includes(searchTerm))
+                    );
+                    renderFilteredProfiles(filteredProfiles);
+                } else {
+                    renderProfiles();
+                }
+            });
         }
 
-        // Handle Google login
+        // Handle Google login with spinner
         function handleGoogleLogin() {
-            // In a real app, this would integrate with Google OAuth
-            // For demo, we'll simulate a successful login
-            currentUser = {
-                name: `User ${Math.floor(1000 + Math.random() * 9000)}`,
-                email: `user${Math.floor(1000 + Math.random() * 9000)}@gmail.com`,
-                avatar: 'https://via.placeholder.com/150',
-                provider: 'Google'
-            };
+            const button = event.target;
+            const originalText = button.innerHTML;
             
-            // Update UI and save to localStorage
-            updateUIAfterLogin();
+            // Show spinner
+            button.innerHTML = '<div class="spinner"></div>';
+            button.disabled = true;
             
-            // Close modal
-            document.getElementById('login-modal').style.display = 'none';
-            
-            alert('Successfully logged in with Google!');
+            // Simulate API call delay
+            setTimeout(() => {
+                // In a real app, this would integrate with Google OAuth
+                // For demo, we'll simulate a successful login
+                currentUser = {
+                    name: `User ${Math.floor(1000 + Math.random() * 9000)}`,
+                    email: `user${Math.floor(1000 + Math.random() * 9000)}@gmail.com`,
+                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+                    provider: 'Google'
+                };
+                
+                // Update UI and save to localStorage
+                updateUIAfterLogin();
+                
+                // Close modal
+                document.getElementById('login-modal').style.display = 'none';
+                
+                // Reset button
+                button.innerHTML = originalText;
+                button.disabled = false;
+                
+                alert('Successfully logged in with Google!');
+            }, 2000);
         }
 
-        // Handle Facebook login
+        // Handle Facebook login with spinner
         function handleFacebookLogin() {
-            // In a real app, this would integrate with Facebook OAuth
-            // For demo, we'll simulate a successful login
-            currentUser = {
-                name: `User ${Math.floor(1000 + Math.random() * 9000)}`,
-                email: `user${Math.floor(1000 + Math.random() * 9000)}@facebook.com`,
-                avatar: 'https://via.placeholder.com/150',
-                provider: 'Facebook'
-            };
+            const button = event.target;
+            const originalText = button.innerHTML;
             
-            // Update UI and save to localStorage
-            updateUIAfterLogin();
+            // Show spinner
+            button.innerHTML = '<div class="spinner"></div>';
+            button.disabled = true;
             
-            // Close modal
-            document.getElementById('login-modal').style.display = 'none';
-            
-            alert('Successfully logged in with Facebook!');
+            // Simulate API call delay
+            setTimeout(() => {
+                // In a real app, this would integrate with Facebook OAuth
+                // For demo, we'll simulate a successful login
+                currentUser = {
+                    name: `User ${Math.floor(1000 + Math.random() * 9000)}`,
+                    email: `user${Math.floor(1000 + Math.random() * 9000)}@facebook.com`,
+                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+                    provider: 'Facebook'
+                };
+                
+                // Update UI and save to localStorage
+                updateUIAfterLogin();
+                
+                // Close modal
+                document.getElementById('login-modal').style.display = 'none';
+                
+                // Reset button
+                button.innerHTML = originalText;
+                button.disabled = false;
+                
+                alert('Successfully logged in with Facebook!');
+            }, 2000);
         }
 
         // Show phone login
@@ -2116,7 +2248,7 @@
             currentUser = {
                 name: email.split('@')[0],
                 email: email,
-                avatar: 'https://via.placeholder.com/150'
+                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80'
             };
             
             // Update UI and save to localStorage
@@ -2150,7 +2282,7 @@
             currentUser = {
                 name: name,
                 email: email,
-                avatar: 'https://via.placeholder.com/150'
+                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80'
             };
             
             // Update UI and save to localStorage
@@ -2200,7 +2332,7 @@
                 currentUser = {
                     name: `User ${Math.floor(1000 + Math.random() * 9000)}`,
                     phone: phoneNumber,
-                    avatar: 'https://via.placeholder.com/150',
+                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
                     provider: 'Phone'
                 };
                 
@@ -2278,8 +2410,10 @@
                 
                 // Update profiles remaining
                 document.getElementById('profiles-remaining').textContent = profilesRemaining;
+                document.getElementById('likes-remaining').textContent = likesRemaining;
             } else {
                 // Show daily limit modal
+                document.getElementById('limit-count').textContent = currentUser?.plan === 'premium' ? 50 : currentUser?.plan === 'standard' ? 30 : 10;
                 document.getElementById('daily-limit-modal').style.display = 'flex';
             }
         }
@@ -2310,7 +2444,41 @@
                 profileCard.innerHTML = `
                     <img src="${profile.image}" alt="${profile.name}" class="profile-image">
                     <div class="profile-info">
-                        <h3 class="profile-name">${profile.name}</h3>
+                        <h3 class="profile-name">${profile.name} ${profile.verified ? '<i class="fas fa-check-circle verified-badge"></i>' : ''}</h3>
+                        <p class="profile-details">${profile.age} • ${profile.location}</p>
+                        <div class="profile-interests">
+                            ${profile.hobbies.map(hobby => `<span class="interest-tag">${hobby}</span>`).join('')}
+                            ${profile.likes.map(like => `<span class="interest-tag">${like}</span>`).join('')}
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn btn-black" onclick="declineProfile(${profile.id})">Decline</button>
+                            <button class="btn btn-pink" onclick="likeProfile(${profile.id})">Like</button>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(profileCard);
+            });
+        }
+
+        // Render filtered profiles
+        function renderFilteredProfiles(profiles) {
+            const container = document.getElementById('profiles-container');
+            container.innerHTML = '';
+            
+            if (profiles.length === 0) {
+                container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; padding: 40px;">No profiles found matching your search criteria.</p>';
+                return;
+            }
+            
+            profiles.forEach(profile => {
+                const profileCard = document.createElement('div');
+                profileCard.className = 'profile-card';
+                
+                profileCard.innerHTML = `
+                    <img src="${profile.image}" alt="${profile.name}" class="profile-image">
+                    <div class="profile-info">
+                        <h3 class="profile-name">${profile.name} ${profile.verified ? '<i class="fas fa-check-circle verified-badge"></i>' : ''}</h3>
                         <p class="profile-details">${profile.age} • ${profile.location}</p>
                         <div class="profile-interests">
                             ${profile.hobbies.map(hobby => `<span class="interest-tag">${hobby}</span>`).join('')}
@@ -2402,6 +2570,7 @@
                 // For demo, we'll always accept codes that are 12 digits
                 if (transactionCode.length === 12) {
                     // Success
+                    document.getElementById('upgraded-plan').textContent = selectedPlan === 'standard' ? 'Standard' : 'Premium';
                     document.getElementById('payment-success-modal').style.display = 'flex';
                     
                     // Update user account status
@@ -2409,6 +2578,15 @@
                         currentUser.plan = selectedPlan;
                         currentUser.premium = true;
                         localStorage.setItem('keMatchUser', JSON.stringify(currentUser));
+                        
+                        // Update daily limits based on plan
+                        if (selectedPlan === 'standard') {
+                            profilesRemaining += 20;
+                            likesRemaining += 20;
+                        } else if (selectedPlan === 'premium') {
+                            profilesRemaining += 40;
+                            likesRemaining += 40;
+                        }
                     }
                     
                     // Reset verification form
@@ -2422,6 +2600,33 @@
                 verifyButton.textContent = 'Verify Payment';
                 verifyButton.disabled = false;
             }, 2000);
+        }
+
+        // Render profile pictures
+        function renderProfilePictures() {
+            const container = document.getElementById('profile-pictures-grid');
+            container.innerHTML = '';
+            
+            userProfilePictures.forEach((picture, index) => {
+                const pictureItem = document.createElement('div');
+                pictureItem.className = 'profile-picture-item';
+                
+                pictureItem.innerHTML = `
+                    <img src="${picture}" alt="Profile Picture ${index + 1}">
+                    <button class="remove-picture" data-index="${index}">×</button>
+                `;
+                
+                container.appendChild(pictureItem);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-picture').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    userProfilePictures.splice(index, 1);
+                    renderProfilePictures();
+                });
+            });
         }
 
         // Profile actions
