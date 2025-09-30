@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KE MATCH - Find Your Perfect Match in Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base Styles */
         * {
@@ -22,6 +23,8 @@
             --dark-gray: #333333;
             --blue-tick: #1e90ff;
             --gold: #ffd700;
+            --facebook-blue: #1877f2;
+            --google-red: #ea4335;
         }
         
         body {
@@ -136,6 +139,16 @@
             color: var(--black);
         }
         
+        .btn-facebook {
+            background-color: var(--facebook-blue);
+            color: var(--white);
+        }
+        
+        .btn-google {
+            background-color: var(--google-red);
+            color: var(--white);
+        }
+        
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -227,6 +240,84 @@
             color: var(--dark-gray);
         }
         
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .search-bar {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-bar:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 2px rgba(255, 77, 136, 0.2);
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-top: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .search-result-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .search-result-info {
+            flex: 1;
+        }
+        
+        .search-result-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .search-result-details {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
         /* Profile Cards */
         .profiles-container {
             display: grid;
@@ -266,9 +357,16 @@
             gap: 5px;
         }
         
-        .blue-tick {
-            color: var(--blue-tick);
-            font-size: 16px;
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background-color: var(--blue-tick);
+            border-radius: 50%;
+            color: white;
+            font-size: 12px;
         }
         
         .profile-details {
@@ -533,6 +631,42 @@
             resize: vertical;
         }
         
+        /* Photo Upload */
+        .photo-upload {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .photo-placeholder {
+            width: 100px;
+            height: 100px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .photo-placeholder:hover {
+            border-color: var(--primary-pink);
+            background-color: rgba(255, 77, 136, 0.05);
+        }
+        
+        .photo-placeholder i {
+            font-size: 24px;
+            color: #ccc;
+        }
+        
+        .uploaded-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        
         /* Logout Section */
         .logout-section {
             margin-top: 40px;
@@ -542,84 +676,6 @@
         
         .logout-section p {
             margin-bottom: 15px;
-            color: var(--dark-gray);
-        }
-        
-        /* Search Bar */
-        .search-container {
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        .search-bar {
-            width: 100%;
-            padding: 15px 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 30px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s;
-        }
-        
-        .search-bar:focus {
-            border-color: var(--primary-pink);
-            box-shadow: 0 0 0 2px rgba(255, 77, 136, 0.2);
-        }
-        
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: var(--white);
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            margin-top: 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            max-height: 300px;
-            overflow-y: auto;
-            display: none;
-        }
-        
-        .search-result-item {
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .search-result-item:hover {
-            background-color: var(--light-gray);
-        }
-        
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-        
-        .search-result-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        .search-result-info {
-            flex: 1;
-        }
-        
-        .search-result-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .search-result-details {
-            font-size: 14px;
             color: var(--dark-gray);
         }
         
@@ -677,6 +733,50 @@
             margin-top: 5px;
             font-family: monospace;
             letter-spacing: 1px;
+        }
+        
+        /* M-Pesa Payment Modal */
+        .mpesa-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mpesa-modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .mpesa-modal h2 {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+        
+        .mpesa-modal p {
+            margin-bottom: 20px;
+        }
+        
+        .mpesa-details {
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .mpesa-details p {
+            margin-bottom: 10px;
         }
         
         /* About Section */
@@ -857,7 +957,32 @@
     <!-- Login Animation Overlay -->
     <div id="login-overlay" class="login-overlay" style="display: none;">
         <div class="spinner"></div>
-        <p>Signing in with Google...</p>
+        <p>Signing in...</p>
+    </div>
+
+    <!-- M-Pesa Payment Modal -->
+    <div id="mpesa-modal" class="mpesa-modal">
+        <div class="mpesa-modal-content">
+            <h2>Complete Your Payment</h2>
+            <p>Follow these steps to complete your payment via M-Pesa:</p>
+            
+            <div class="mpesa-details">
+                <p><strong>Step 1:</strong> Go to M-Pesa on your phone</p>
+                <p><strong>Step 2:</strong> Select "Lipa Na M-Pesa"</p>
+                <p><strong>Step 3:</strong> Select "Pay Bill"</p>
+                <p><strong>Step 4:</strong> Enter Business Number: <span class="payment-code" id="paybill-number">522522</span></p>
+                <p><strong>Step 5:</strong> Enter Account Number: <span class="payment-code" id="account-number">1336980125</span></p>
+                <p><strong>Step 6:</strong> Enter Amount: Ksh <span id="payment-amount">150</span></p>
+                <p><strong>Step 7:</strong> Enter your M-Pesa PIN and confirm</p>
+            </div>
+            
+            <p>After payment, enter the transaction code below to activate your account</p>
+            <input type="text" id="transaction-code" placeholder="Enter M-Pesa transaction code" style="width: 100%; padding: 10px; margin: 15px 0; border: 1px solid #e0e0e0; border-radius: 5px;">
+            <div class="modal-buttons">
+                <button class="btn btn-outline" id="cancel-payment">Cancel</button>
+                <button class="btn btn-pink" id="verify-payment">Verify Payment</button>
+            </div>
+        </div>
     </div>
 
     <header>
@@ -876,7 +1001,7 @@
                     </ul>
                 </nav>
                 <div class="user-actions">
-                    <button class="btn btn-pink" id="login-btn">Login with Google</button>
+                    <button class="btn btn-pink" id="login-btn">Sign In</button>
                 </div>
             </div>
         </div>
@@ -886,18 +1011,18 @@
         <div class="container">
             <!-- Home/Browse Section -->
             <section id="home" class="section active">
-                <div class="welcome-section">
-                    <h1>Find Your Perfect Match in Kenya</h1>
-                    <p>Connect with amazing people near you. Like, chat, and build meaningful relationships.</p>
-                    <button class="btn btn-pink" id="start-matching">Start Matching</button>
-                </div>
-                
                 <!-- Search Bar -->
                 <div class="search-container">
                     <input type="text" class="search-bar" placeholder="Search for people by name, location, or interests...">
                     <div class="search-results" id="search-results">
                         <!-- Search results will be dynamically generated here -->
                     </div>
+                </div>
+                
+                <div class="welcome-section">
+                    <h1>Find Your Perfect Match in Kenya</h1>
+                    <p>Connect with amazing people near you. Like, chat, and build meaningful relationships.</p>
+                    <button class="btn btn-pink" id="start-matching">Start Matching</button>
                 </div>
                 
                 <!-- Grid View (Hidden initially) -->
@@ -946,7 +1071,7 @@
                             <div style="display: flex; align-items: center;">
                                 <img src="https://files.catbox.moe/ayz7eb.jpeg" alt="User" class="chat-avatar">
                                 <div class="chat-info">
-                                    <div class="chat-name">Sarah M. <span class="blue-tick">✓</span></div>
+                                    <div class="chat-name">Sarah M. <span class="verified-badge"><i class="fas fa-check"></i></span></div>
                                 </div>
                             </div>
                             <button class="btn btn-outline" id="view-profile-btn">View Profile</button>
@@ -967,8 +1092,19 @@
                 <h2 class="section-title">My Profile</h2>
                 <div class="profile-section">
                     <div class="profile-picture-section">
-                        <img src="https://via.placeholder.com/300" alt="Profile" class="profile-picture">
-                        <button class="btn btn-black" style="width: 100%; margin-bottom: 10px;">Change Photo</button>
+                        <img src="https://via.placeholder.com/300" alt="Profile" class="profile-picture" id="main-profile-pic">
+                        
+                        <div class="photo-upload">
+                            <div class="photo-placeholder" id="add-photo-1">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="photo-placeholder" id="add-photo-2">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                        
+                        <input type="file" id="photo-upload-input" accept="image/*" style="display: none;">
+                        
                         <p style="text-align: center; font-size: 14px; color: var(--dark-gray);">You can add up to 2 photos</p>
                     </div>
                     <div class="profile-details-section">
@@ -1050,7 +1186,7 @@
                         <!-- Logout Section -->
                         <div class="logout-section">
                             <h3>Account Settings</h3>
-                            <p>You are currently logged in as John Doe</p>
+                            <p>You are currently logged in as <span id="user-name">John Doe</span></p>
                             <p>Account Status: <span id="account-status">Free User</span></p>
                             <button class="btn btn-outline" id="logout-btn">Log Out</button>
                         </div>
@@ -1100,8 +1236,8 @@
                     <div class="transaction-verification" style="margin-top: 30px; padding: 20px; background-color: var(--white); border-radius: 10px;">
                         <h3>Already Paid? Verify Your Payment</h3>
                         <p>Enter your transaction code below to activate your premium account</p>
-                        <input type="text" id="transaction-code" placeholder="Enter transaction code" style="width: 100%; max-width: 300px; padding: 10px; margin: 15px 0; border: 1px solid #e0e0e0; border-radius: 5px;">
-                        <button class="btn btn-pink" id="verify-payment" style="width: 100%; max-width: 300px;">Verify Payment</button>
+                        <input type="text" id="manual-transaction-code" placeholder="Enter transaction code" style="width: 100%; max-width: 300px; padding: 10px; margin: 15px 0; border: 1px solid #e0e0e0; border-radius: 5px;">
+                        <button class="btn btn-pink" id="manual-verify-payment" style="width: 100%; max-width: 300px;">Verify Payment</button>
                     </div>
                 </div>
             </section>
@@ -1115,7 +1251,7 @@
                         
                         <h3>Why KE MATCH?</h3>
                         <ul>
-                            <li><strong>Simple Login</strong> → Sign up quickly using your Google account.</li>
+                            <li><strong>Simple Login</strong> → Sign up quickly using your Google or Facebook account.</li>
                             <li><strong>Smart Profiles</strong> → Share who you are, what you love, and what you're looking for.</li>
                             <li><strong>Fair Access</strong> → Everyone gets 10 free profiles to view per day.</li>
                             <li><strong>Affordable Activation</strong> → Unlock unlimited chatting and contact sharing for just Ksh 150.</li>
@@ -1169,6 +1305,23 @@
                 <button class="btn btn-outline" id="close-modal">OK</button>
                 <button class="btn btn-pink" id="upgrade-now">Upgrade Now</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="signin-modal" class="modal">
+        <div class="modal-content">
+            <h2>Sign In to KE MATCH</h2>
+            <p>Connect with amazing people in Kenya</p>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin: 20px 0;">
+                <button class="btn btn-facebook" id="facebook-login">
+                    <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Continue with Facebook
+                </button>
+                <button class="btn btn-google" id="google-login">
+                    <i class="fab fa-google" style="margin-right: 10px;"></i> Continue with Google
+                </button>
+            </div>
+            <p style="font-size: 14px; color: var(--dark-gray);">By continuing, you agree to our Terms and Privacy Policy</p>
         </div>
     </div>
 
@@ -1231,90 +1384,6 @@
                 dislikes: ["Rudeness", "Lies"],
                 premium: true,
                 verified: true
-            },
-            {
-                id: 4,
-                name: "Esther N.",
-                age: 26,
-                location: "Nakuru",
-                image: "https://files.catbox.moe/75urqe.jpeg",
-                hobbies: ["Reading", "Hiking"],
-                likes: ["Outdoors", "Animals"],
-                dislikes: ["Noise", "Messy"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 5,
-                name: "Mary A.",
-                age: 23,
-                location: "Eldoret",
-                image: "https://files.catbox.moe/3nqkcq.jpeg",
-                hobbies: ["Sports", "Travel"],
-                likes: ["Fitness", "Movies"],
-                dislikes: ["Smoking", "Laziness"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 6,
-                name: "Joyce T.",
-                age: 28,
-                location: "Kakamega",
-                image: "https://files.catbox.moe/75yl23.jpeg",
-                hobbies: ["Cooking", "Reading"],
-                likes: ["Food", "Art"],
-                dislikes: ["Lateness", "Arrogance"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 7,
-                name: "Rebecca J.",
-                age: 29,
-                location: "Kisii",
-                image: "https://files.catbox.moe/b3cdqy.jpeg",
-                hobbies: ["Music", "Dancing"],
-                likes: ["Coffee", "Movies"],
-                dislikes: ["Rudeness", "Lies"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 8,
-                name: "Patience O.",
-                age: 26,
-                location: "Meru",
-                image: "https://files.catbox.moe/nnl07r.jpeg",
-                hobbies: ["Photography", "Hiking"],
-                likes: ["Outdoors", "Animals"],
-                dislikes: ["Noise", "Messy"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 9,
-                name: "Faith M.",
-                age: 24,
-                location: "Nyeri",
-                image: "https://files.catbox.moe/511rhc.jpeg",
-                hobbies: ["Travel", "Sports"],
-                likes: ["Beach", "Fitness"],
-                dislikes: ["Smoking", "Laziness"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 10,
-                name: "Hope K.",
-                age: 27,
-                location: "Thika",
-                image: "https://files.catbox.moe/7ts6fo.jpeg",
-                hobbies: ["Reading", "Cooking"],
-                likes: ["Food", "Coffee"],
-                dislikes: ["Arrogance", "Rudeness"],
-                premium: false,
-                verified: false
             }
         ];
 
@@ -1354,90 +1423,6 @@
                 dislikes: ["Lateness", "Rudeness"],
                 premium: true,
                 verified: true
-            },
-            {
-                id: 14,
-                name: "Robert N.",
-                age: 31,
-                location: "Kisumu",
-                image: "https://via.placeholder.com/300",
-                hobbies: ["Hiking", "Reading"],
-                likes: ["Outdoors", "Animals"],
-                dislikes: ["Lies", "Arrogance"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 15,
-                name: "Joseph W.",
-                age: 29,
-                location: "Eldoret",
-                image: "https://via.placeholder.com/300",
-                hobbies: ["Sports", "Travel"],
-                likes: ["Fitness", "Movies"],
-                dislikes: ["Smoking", "Laziness"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 16,
-                name: "Daniel T.",
-                age: 27,
-                location: "Kakamega",
-                image: "https://via.placeholder.com/300",
-                hobbies: ["Cooking", "Music"],
-                likes: ["Food", "Art"],
-                dislikes: ["Noise", "Messy"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 17,
-                name: "Paul J.",
-                age: 33,
-                location: "Kisii",
-                image: "https://via.placeholder.com/300",
-                hobbies: ["Reading", "Photography"],
-                likes: ["Coffee", "Movies"],
-                dislikes: ["Rudeness", "Lies"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 18,
-                name: "Peter O.",
-                age: 30,
-                location: "Meru",
-                image: "https://via.placeholder.com/300",
-                hobbies: ["Hiking", "Sports"],
-                likes: ["Outdoors", "Animals"],
-                dislikes: ["Lateness", "Arrogance"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 19,
-                name: "Andrew M.",
-                age: 26,
-                location: "Nyeri",
-                image: "https://via.placeholder.com/300",
-                hobbies: ["Travel", "Music"],
-                likes: ["Beach", "Fitness"],
-                dislikes: ["Smoking", "Laziness"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 20,
-                name: "Simon K.",
-                age: 28,
-                location: "Thika",
-                image: "https://via.placeholder.com/300",
-                hobbies: ["Reading", "Cooking"],
-                likes: ["Food", "Coffee"],
-                dislikes: ["Arrogance", "Rudeness"],
-                premium: false,
-                verified: false
             }
         ];
 
@@ -1466,47 +1451,27 @@
                     premium: true,
                     verified: true
                 }
-            },
-            {
-                id: 2,
-                name: "James K.",
-                avatar: "https://files.catbox.moe/74v8fw.jpeg",
-                lastMessage: "I really enjoyed our conversation yesterday",
-                messages: [
-                    { text: "I really enjoyed our conversation yesterday", sender: "them", time: "9:15 AM" },
-                    { text: "Me too! We should chat again soon", sender: "me", time: "9:20 AM" }
-                ],
-                verified: true,
-                profile: {
-                    id: 11,
-                    name: "James K.",
-                    age: 30,
-                    location: "Mombasa",
-                    image: "https://files.catbox.moe/74v8fw.jpeg",
-                    hobbies: ["Sports", "Reading"],
-                    likes: ["Outdoors", "Food"],
-                    dislikes: ["Noise", "Messy"],
-                    premium: true,
-                    verified: true
-                }
             }
         ];
 
         // App state
-        let currentUserGender = "male"; // Default to male for demo
+        let currentUserGender = "male";
         let currentProfileIndex = 0;
         let profilesRemaining = 10;
         let currentProfiles = [];
         let currentUser = {
-            name: "John Doe",
+            name: "",
             age: 28,
             gender: "male",
             location: "nairobi",
             premium: false,
             verified: false,
-            plan: "free" // free, standard, premium
+            plan: "free",
+            loggedIn: false,
+            photos: []
         };
         let currentChatProfile = null;
+        let currentPaymentPlan = "";
 
         // Navigation functionality
         document.querySelectorAll('.nav-link, .footer-link').forEach(link => {
@@ -1534,8 +1499,26 @@
             });
         });
 
-        // Login functionality with animation
+        // Sign In Modal
         document.getElementById('login-btn').addEventListener('click', function() {
+            document.getElementById('signin-modal').style.display = 'flex';
+        });
+
+        // Facebook Login
+        document.getElementById('facebook-login').addEventListener('click', function() {
+            startLoginProcess('Facebook');
+        });
+
+        // Google Login
+        document.getElementById('google-login').addEventListener('click', function() {
+            startLoginProcess('Google');
+        });
+
+        // Login functionality with animation
+        function startLoginProcess(provider) {
+            // Close sign in modal
+            document.getElementById('signin-modal').style.display = 'none';
+            
             // Show spinning animation
             const loginOverlay = document.getElementById('login-overlay');
             loginOverlay.style.display = 'flex';
@@ -1564,17 +1547,30 @@
                         heart2.remove();
                         
                         // Update UI to show logged in state
-                        document.getElementById('login-btn').textContent = 'My Account';
-                        alert('Successfully logged in with Google!');
+                        document.getElementById('login-btn').style.display = 'none';
+                        currentUser.loggedIn = true;
+                        currentUser.name = "John Doe";
+                        
+                        // Update profile with user name
+                        document.getElementById('user-name').textContent = currentUser.name;
+                        document.getElementById('name').value = currentUser.name;
+                        
+                        alert(`Successfully logged in with ${provider}! You can now update your profile.`);
                     }, 1000);
                 }, 400);
             }, 2000);
-        });
+        }
 
         // Start matching functionality
         document.getElementById('start-matching').addEventListener('click', function() {
+            if (!currentUser.loggedIn) {
+                alert('Please sign in first to start matching!');
+                document.getElementById('signin-modal').style.display = 'flex';
+                return;
+            }
+            
             // Set profiles based on user gender
-            currentProfiles = currentUserGender === "male" ? femaleProfiles : maleProfiles;
+            currentProfiles = currentUser.gender === "male" ? femaleProfiles : maleProfiles;
             
             // Reset profile index
             currentProfileIndex = 0;
@@ -1608,7 +1604,7 @@
                 const nameElement = document.getElementById('current-profile-name');
                 nameElement.innerHTML = profile.name;
                 if (profile.verified) {
-                    nameElement.innerHTML += ' <span class="blue-tick">✓</span>';
+                    nameElement.innerHTML += ' <span class="verified-badge"><i class="fas fa-check"></i></span>';
                 }
                 
                 document.getElementById('current-profile-details').textContent = `${profile.age} • ${profile.location}`;
@@ -1687,7 +1683,7 @@
             const container = document.getElementById('profiles-container');
             container.innerHTML = '';
             
-            const profilesToShow = currentUserGender === "male" ? femaleProfiles : maleProfiles;
+            const profilesToShow = currentUser.gender === "male" ? femaleProfiles : maleProfiles;
             
             profilesToShow.forEach(profile => {
                 const profileCard = document.createElement('div');
@@ -1696,7 +1692,7 @@
                 // Create name with blue tick if verified
                 let nameHTML = profile.name;
                 if (profile.verified) {
-                    nameHTML += ' <span class="blue-tick">✓</span>';
+                    nameHTML += ' <span class="verified-badge"><i class="fas fa-check"></i></span>';
                 }
                 
                 profileCard.innerHTML = `
@@ -1732,7 +1728,7 @@
                 // Create name with blue tick if verified
                 let nameHTML = chat.name;
                 if (chat.verified) {
-                    nameHTML += ' <span class="blue-tick">✓</span>';
+                    nameHTML += ' <span class="verified-badge"><i class="fas fa-check"></i></span>';
                 }
                 
                 chatItem.innerHTML = `
@@ -1773,7 +1769,7 @@
                 // Create name with blue tick if verified
                 let nameHTML = chat.name;
                 if (chat.verified) {
-                    nameHTML += ' <span class="blue-tick">✓</span>';
+                    nameHTML += ' <span class="verified-badge"><i class="fas fa-check"></i></span>';
                 }
                 
                 chatHeader.innerHTML = nameHTML;
@@ -1801,9 +1797,15 @@
                 modal.className = 'modal';
                 modal.style.display = 'flex';
                 
+                // Create name with blue tick if verified
+                let nameHTML = currentChatProfile.name;
+                if (currentChatProfile.verified) {
+                    nameHTML += ' <span class="verified-badge"><i class="fas fa-check"></i></span>';
+                }
+                
                 modal.innerHTML = `
                     <div class="modal-content" style="max-width: 400px;">
-                        <h2>${currentChatProfile.name} ${currentChatProfile.verified ? '<span class="blue-tick">✓</span>' : ''}</h2>
+                        <h2>${nameHTML}</h2>
                         <img src="${currentChatProfile.image}" alt="${currentChatProfile.name}" style="width: 100%; border-radius: 10px; margin: 15px 0;">
                         <p><strong>Age:</strong> ${currentChatProfile.age}</p>
                         <p><strong>Location:</strong> ${currentChatProfile.location}</p>
@@ -1856,6 +1858,12 @@
 
         // Update user profile
         function updateUserProfile() {
+            if (!currentUser.loggedIn) {
+                alert('Please sign in first to update your profile!');
+                document.getElementById('signin-modal').style.display = 'flex';
+                return;
+            }
+            
             const name = document.getElementById('name').value;
             const age = document.getElementById('age').value;
             const gender = document.getElementById('gender').value;
@@ -1873,6 +1881,9 @@
             const accountStatus = document.getElementById('account-status');
             accountStatus.textContent = currentUser.premium ? 'Premium User' : 'Free User';
             
+            // Update user name display
+            document.getElementById('user-name').textContent = currentUser.name;
+            
             // Update profiles based on new gender
             currentProfiles = currentUser.gender === "male" ? femaleProfiles : maleProfiles;
             renderProfiles();
@@ -1880,15 +1891,68 @@
             alert('Profile updated successfully!');
         }
 
+        // Photo upload functionality
+        document.getElementById('add-photo-1').addEventListener('click', function() {
+            document.getElementById('photo-upload-input').click();
+        });
+
+        document.getElementById('add-photo-2').addEventListener('click', function() {
+            document.getElementById('photo-upload-input').click();
+        });
+
+        document.getElementById('photo-upload-input').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    // Create new image element
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'uploaded-photo';
+                    
+                    // Replace first placeholder with uploaded photo
+                    const placeholder1 = document.getElementById('add-photo-1');
+                    placeholder1.parentNode.replaceChild(img, placeholder1);
+                    
+                    // Update main profile picture
+                    document.getElementById('main-profile-pic').src = e.target.result;
+                    
+                    // Add photo to user's photos array
+                    currentUser.photos.push(e.target.result);
+                }
+                
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
         // Payment functionality
         document.getElementById('standard-pay').addEventListener('click', function() {
-            alert('Redirecting to payment for Standard Plan (Ksh 150)...');
-            // In a real app, this would redirect to payment gateway
+            if (!currentUser.loggedIn) {
+                alert('Please sign in first to upgrade your account!');
+                document.getElementById('signin-modal').style.display = 'flex';
+                return;
+            }
+            
+            currentPaymentPlan = "standard";
+            document.getElementById('payment-amount').textContent = "150";
+            document.getElementById('mpesa-modal').style.display = 'flex';
         });
 
         document.getElementById('premium-pay').addEventListener('click', function() {
-            alert('Redirecting to payment for Premium Plan (Ksh 300)...');
-            // In a real app, this would redirect to payment gateway
+            if (!currentUser.loggedIn) {
+                alert('Please sign in first to upgrade your account!');
+                document.getElementById('signin-modal').style.display = 'flex';
+                return;
+            }
+            
+            currentPaymentPlan = "premium";
+            document.getElementById('payment-amount').textContent = "300";
+            document.getElementById('mpesa-modal').style.display = 'flex';
+        });
+
+        // Cancel payment
+        document.getElementById('cancel-payment').addEventListener('click', function() {
+            document.getElementById('mpesa-modal').style.display = 'none';
         });
 
         // Payment verification functionality
@@ -1900,7 +1964,38 @@
                 // Payment successful
                 currentUser.premium = true;
                 currentUser.verified = true;
-                currentUser.plan = "premium"; // Default to premium for demo
+                currentUser.plan = currentPaymentPlan;
+                
+                // Update account status
+                document.getElementById('account-status').textContent = `${currentPaymentPlan.charAt(0).toUpperCase() + currentPaymentPlan.slice(1)} User`;
+                
+                // Update daily limit
+                if (currentUser.plan === "standard") {
+                    profilesRemaining = 20;
+                } else if (currentUser.plan === "premium") {
+                    profilesRemaining = 40;
+                }
+                
+                // Clear the input and close modal
+                document.getElementById('transaction-code').value = '';
+                document.getElementById('mpesa-modal').style.display = 'none';
+                
+                alert(`Payment verified successfully! Your account has been upgraded to ${currentPaymentPlan}.`);
+            } else {
+                alert('Invalid transaction code. Please check and try again.');
+            }
+        });
+
+        // Manual payment verification
+        document.getElementById('manual-verify-payment').addEventListener('click', function() {
+            const transactionCode = document.getElementById('manual-transaction-code').value.trim();
+            const validPaymentCode = "QTY4GFDYU57DZ";
+            
+            if (transactionCode === validPaymentCode) {
+                // Payment successful
+                currentUser.premium = true;
+                currentUser.verified = true;
+                currentUser.plan = "premium"; // Default to premium for manual verification
                 
                 // Update account status
                 document.getElementById('account-status').textContent = 'Premium User';
@@ -1909,11 +2004,20 @@
                 profilesRemaining = 40;
                 
                 // Clear the input
-                document.getElementById('transaction-code').value = '';
+                document.getElementById('manual-transaction-code').value = '';
                 
                 alert('Payment verified successfully! Your account has been upgraded to Premium.');
             } else {
                 alert('Invalid transaction code. Please check and try again.');
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to log out?')) {
+                currentUser.loggedIn = false;
+                document.getElementById('login-btn').style.display = 'block';
+                alert('You have been logged out successfully');
             }
         });
 
@@ -1970,14 +2074,6 @@
             // Save profile functionality
             document.getElementById('save-profile').addEventListener('click', updateUserProfile);
             
-            // Logout functionality
-            document.getElementById('logout-btn').addEventListener('click', function() {
-                if (confirm('Are you sure you want to log out?')) {
-                    alert('You have been logged out successfully');
-                    // In a real app, this would redirect to login page
-                }
-            });
-            
             // Search functionality
             const searchBar = document.querySelector('.search-bar');
             const searchResults = document.getElementById('search-results');
@@ -1997,7 +2093,7 @@
                             // Create name with blue tick if verified
                             let nameHTML = profile.name;
                             if (profile.verified) {
-                                nameHTML += ' <span class="blue-tick">✓</span>';
+                                nameHTML += ' <span class="verified-badge"><i class="fas fa-check"></i></span>';
                             }
                             
                             resultItem.innerHTML = `
@@ -2032,6 +2128,13 @@
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.search-container')) {
                     searchResults.style.display = 'none';
+                }
+            });
+            
+            // Close modals when clicking outside
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
                 }
             });
         });
