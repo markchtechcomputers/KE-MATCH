@@ -21,6 +21,7 @@
             --light-gray: #f5f5f5;
             --dark-gray: #333333;
             --blue-tick: #1e90ff;
+            --gold: #ffd700;
         }
         
         body {
@@ -130,6 +131,11 @@
             color: var(--primary-pink);
         }
         
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+        
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -146,6 +152,57 @@
             margin-bottom: 30px;
             text-align: center;
             color: var(--dark-gray);
+        }
+        
+        /* Login Animation */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 77, 136, 0.3);
+            border-top: 8px solid var(--primary-pink);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .heart-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 200px;
+            color: var(--primary-pink);
+            z-index: 2001;
+            animation: pop 0.8s forwards;
+        }
+        
+        .heart-popup:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes pop {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            70% { transform: translate(-50%, -50%) scale(1.2); }
+            100% { transform: translate(-50%, -50%) scale(1); }
         }
         
         /* Welcome Section */
@@ -381,6 +438,7 @@
             border-bottom: 1px solid #e0e0e0;
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
         
         .chat-messages {
@@ -796,6 +854,12 @@
     </style>
 </head>
 <body>
+    <!-- Login Animation Overlay -->
+    <div id="login-overlay" class="login-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>Signing in with Google...</p>
+    </div>
+
     <header>
         <div class="container">
             <div class="header-content">
@@ -879,10 +943,13 @@
                     </div>
                     <div class="chat-main">
                         <div class="chat-header">
-                            <img src="https://files.catbox.moe/ayz7eb.jpeg" alt="User" class="chat-avatar">
-                            <div class="chat-info">
-                                <div class="chat-name">Sarah M. <span class="blue-tick">✓</span></div>
+                            <div style="display: flex; align-items: center;">
+                                <img src="https://files.catbox.moe/ayz7eb.jpeg" alt="User" class="chat-avatar">
+                                <div class="chat-info">
+                                    <div class="chat-name">Sarah M. <span class="blue-tick">✓</span></div>
+                                </div>
                             </div>
+                            <button class="btn btn-outline" id="view-profile-btn">View Profile</button>
                         </div>
                         <div class="chat-messages">
                             <!-- Messages will be dynamically generated here -->
@@ -995,26 +1062,47 @@
             <section id="payment" class="section">
                 <h2 class="section-title">Upgrade Your Experience</h2>
                 <div class="payment-section">
-                    <h2 class="payment-title">Unlock Unlimited Chatting on KE MATCH</h2>
-                    <p>Upgrade now to send unlimited messages and connect with all your matches!</p>
+                    <h2 class="payment-title">Unlock More Matches on KE MATCH</h2>
+                    <p>Upgrade now to connect with more potential matches every day!</p>
                     
                     <div class="payment-options">
                         <div class="payment-option">
-                            <h3>Payment Instructions</h3>
+                            <h3>Free Plan</h3>
                             <div class="payment-details">
-                                <p>To upgrade your account, use the payment code below:</p>
-                                <p><strong>Payment Code:</strong> <span class="payment-code">QTY4GFDYU57DZ</span></p>
-                                <p>Send Ksh 150 to this code via M-Pesa, Airtel Money, or your bank.</p>
-                                <p>After payment, enter the transaction code below to activate your premium account.</p>
+                                <p><strong>Price:</strong> Free</p>
+                                <p><strong>Daily Matches:</strong> 10</p>
+                                <p><strong>Features:</strong> Basic matching</p>
                             </div>
-                            <div class="transaction-verification" style="margin-top: 20px;">
-                                <input type="text" id="transaction-code" placeholder="Enter transaction code" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #e0e0e0; border-radius: 5px;">
-                                <button class="btn btn-pink" id="verify-payment" style="width: 100%;">Verify Payment</button>
+                            <button class="btn btn-outline" disabled>Current Plan</button>
+                        </div>
+                        
+                        <div class="payment-option">
+                            <h3>Standard Plan</h3>
+                            <div class="payment-details">
+                                <p><strong>Price:</strong> Ksh 150</p>
+                                <p><strong>Daily Matches:</strong> 20</p>
+                                <p><strong>Features:</strong> Blue tick verification</p>
                             </div>
+                            <button class="btn btn-pink" id="standard-pay">Upgrade to Standard</button>
+                        </div>
+                        
+                        <div class="payment-option">
+                            <h3>Premium Plan</h3>
+                            <div class="payment-details">
+                                <p><strong>Price:</strong> Ksh 300</p>
+                                <p><strong>Daily Matches:</strong> 40</p>
+                                <p><strong>Features:</strong> Blue tick + Priority matching</p>
+                            </div>
+                            <button class="btn btn-gold" id="premium-pay">Upgrade to Premium</button>
                         </div>
                     </div>
                     
-                    <p>If you encounter any issues, contact our support team.</p>
+                    <div class="transaction-verification" style="margin-top: 30px; padding: 20px; background-color: var(--white); border-radius: 10px;">
+                        <h3>Already Paid? Verify Your Payment</h3>
+                        <p>Enter your transaction code below to activate your premium account</p>
+                        <input type="text" id="transaction-code" placeholder="Enter transaction code" style="width: 100%; max-width: 300px; padding: 10px; margin: 15px 0; border: 1px solid #e0e0e0; border-radius: 5px;">
+                        <button class="btn btn-pink" id="verify-payment" style="width: 100%; max-width: 300px;">Verify Payment</button>
+                    </div>
                 </div>
             </section>
 
@@ -1365,7 +1453,19 @@
                     { text: "I'm good, thanks! How about you?", sender: "me", time: "10:32 AM" },
                     { text: "Doing great! Would you like to meet up sometime?", sender: "them", time: "10:35 AM" }
                 ],
-                verified: true
+                verified: true,
+                profile: {
+                    id: 1,
+                    name: "Sarah M.",
+                    age: 25,
+                    location: "Nairobi",
+                    image: "https://files.catbox.moe/gefnh3.jpeg",
+                    hobbies: ["Travel", "Music"],
+                    likes: ["Movies", "Art"],
+                    dislikes: ["Smoking", "Lateness"],
+                    premium: true,
+                    verified: true
+                }
             },
             {
                 id: 2,
@@ -1376,7 +1476,19 @@
                     { text: "I really enjoyed our conversation yesterday", sender: "them", time: "9:15 AM" },
                     { text: "Me too! We should chat again soon", sender: "me", time: "9:20 AM" }
                 ],
-                verified: true
+                verified: true,
+                profile: {
+                    id: 11,
+                    name: "James K.",
+                    age: 30,
+                    location: "Mombasa",
+                    image: "https://files.catbox.moe/74v8fw.jpeg",
+                    hobbies: ["Sports", "Reading"],
+                    likes: ["Outdoors", "Food"],
+                    dislikes: ["Noise", "Messy"],
+                    premium: true,
+                    verified: true
+                }
             }
         ];
 
@@ -1391,8 +1503,10 @@
             gender: "male",
             location: "nairobi",
             premium: false,
-            verified: false
+            verified: false,
+            plan: "free" // free, standard, premium
         };
+        let currentChatProfile = null;
 
         // Navigation functionality
         document.querySelectorAll('.nav-link, .footer-link').forEach(link => {
@@ -1420,6 +1534,43 @@
             });
         });
 
+        // Login functionality with animation
+        document.getElementById('login-btn').addEventListener('click', function() {
+            // Show spinning animation
+            const loginOverlay = document.getElementById('login-overlay');
+            loginOverlay.style.display = 'flex';
+            
+            // Simulate login process
+            setTimeout(function() {
+                // Hide spinner
+                loginOverlay.style.display = 'none';
+                
+                // Show first heart
+                const heart1 = document.createElement('div');
+                heart1.className = 'heart-popup';
+                heart1.innerHTML = '♥';
+                document.body.appendChild(heart1);
+                
+                // Show second heart after delay
+                setTimeout(function() {
+                    const heart2 = document.createElement('div');
+                    heart2.className = 'heart-popup';
+                    heart2.innerHTML = '♥';
+                    document.body.appendChild(heart2);
+                    
+                    // Remove hearts after animation
+                    setTimeout(function() {
+                        heart1.remove();
+                        heart2.remove();
+                        
+                        // Update UI to show logged in state
+                        document.getElementById('login-btn').textContent = 'My Account';
+                        alert('Successfully logged in with Google!');
+                    }, 1000);
+                }, 400);
+            }, 2000);
+        });
+
         // Start matching functionality
         document.getElementById('start-matching').addEventListener('click', function() {
             // Set profiles based on user gender
@@ -1428,8 +1579,14 @@
             // Reset profile index
             currentProfileIndex = 0;
             
-            // Set daily limit based on premium status
-            profilesRemaining = currentUser.premium ? 20 : 10;
+            // Set daily limit based on plan
+            if (currentUser.plan === "free") {
+                profilesRemaining = 10;
+            } else if (currentUser.plan === "standard") {
+                profilesRemaining = 20;
+            } else if (currentUser.plan === "premium") {
+                profilesRemaining = 40;
+            }
             
             // Hide welcome and grid view, show single profile view
             document.querySelector('.welcome-section').style.display = 'none';
@@ -1597,6 +1754,9 @@
                     
                     // Load chat messages
                     loadChatMessages(chat.id);
+                    
+                    // Set current chat profile for viewing
+                    currentChatProfile = chat.profile;
                 });
                 
                 container.appendChild(chatItem);
@@ -1632,6 +1792,45 @@
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             }
         }
+
+        // View profile from chat
+        document.getElementById('view-profile-btn').addEventListener('click', function() {
+            if (currentChatProfile) {
+                // Create a modal to display the profile
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.style.display = 'flex';
+                
+                modal.innerHTML = `
+                    <div class="modal-content" style="max-width: 400px;">
+                        <h2>${currentChatProfile.name} ${currentChatProfile.verified ? '<span class="blue-tick">✓</span>' : ''}</h2>
+                        <img src="${currentChatProfile.image}" alt="${currentChatProfile.name}" style="width: 100%; border-radius: 10px; margin: 15px 0;">
+                        <p><strong>Age:</strong> ${currentChatProfile.age}</p>
+                        <p><strong>Location:</strong> ${currentChatProfile.location}</p>
+                        <p><strong>Hobbies:</strong> ${currentChatProfile.hobbies.join(', ')}</p>
+                        <p><strong>Likes:</strong> ${currentChatProfile.likes.join(', ')}</p>
+                        <p><strong>Dislikes:</strong> ${currentChatProfile.dislikes.join(', ')}</p>
+                        <button class="btn btn-pink" id="close-profile-modal" style="margin-top: 20px;">Close</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Close modal functionality
+                document.getElementById('close-profile-modal').addEventListener('click', function() {
+                    modal.remove();
+                });
+                
+                // Close modal when clicking outside
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.remove();
+                    }
+                });
+            } else {
+                alert('No profile to view');
+            }
+        });
 
         // Profile actions
         function likeProfile(profileId) {
@@ -1681,6 +1880,43 @@
             alert('Profile updated successfully!');
         }
 
+        // Payment functionality
+        document.getElementById('standard-pay').addEventListener('click', function() {
+            alert('Redirecting to payment for Standard Plan (Ksh 150)...');
+            // In a real app, this would redirect to payment gateway
+        });
+
+        document.getElementById('premium-pay').addEventListener('click', function() {
+            alert('Redirecting to payment for Premium Plan (Ksh 300)...');
+            // In a real app, this would redirect to payment gateway
+        });
+
+        // Payment verification functionality
+        document.getElementById('verify-payment').addEventListener('click', function() {
+            const transactionCode = document.getElementById('transaction-code').value.trim();
+            const validPaymentCode = "QTY4GFDYU57DZ";
+            
+            if (transactionCode === validPaymentCode) {
+                // Payment successful
+                currentUser.premium = true;
+                currentUser.verified = true;
+                currentUser.plan = "premium"; // Default to premium for demo
+                
+                // Update account status
+                document.getElementById('account-status').textContent = 'Premium User';
+                
+                // Update daily limit
+                profilesRemaining = 40;
+                
+                // Clear the input
+                document.getElementById('transaction-code').value = '';
+                
+                alert('Payment verified successfully! Your account has been upgraded to Premium.');
+            } else {
+                alert('Invalid transaction code. Please check and try again.');
+            }
+        });
+
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
             renderProfiles();
@@ -1690,12 +1926,8 @@
             if (chats.length > 0) {
                 document.querySelector('.chat-item').classList.add('active');
                 loadChatMessages(chats[0].id);
+                currentChatProfile = chats[0].profile;
             }
-            
-            // Login button functionality
-            document.getElementById('login-btn').addEventListener('click', function() {
-                alert('Google login would be implemented here');
-            });
             
             // Send message functionality
             document.querySelector('.chat-input button').addEventListener('click', function() {
@@ -1800,31 +2032,6 @@
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.search-container')) {
                     searchResults.style.display = 'none';
-                }
-            });
-            
-            // Payment verification functionality
-            document.getElementById('verify-payment').addEventListener('click', function() {
-                const transactionCode = document.getElementById('transaction-code').value.trim();
-                const validPaymentCode = "QTY4GFDYU57DZ";
-                
-                if (transactionCode === validPaymentCode) {
-                    // Payment successful
-                    currentUser.premium = true;
-                    currentUser.verified = true;
-                    
-                    // Update account status
-                    document.getElementById('account-status').textContent = 'Premium User';
-                    
-                    // Update daily limit
-                    profilesRemaining = 20;
-                    
-                    // Clear the input
-                    document.getElementById('transaction-code').value = '';
-                    
-                    alert('Payment verified successfully! Your account has been upgraded to Premium.');
-                } else {
-                    alert('Invalid transaction code. Please check and try again.');
                 }
             });
         });
