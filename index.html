@@ -167,6 +167,204 @@
             color: var(--dark-gray);
         }
         
+        /* Auth Section */
+        .auth-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+        }
+        
+        .auth-container {
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+        }
+        
+        .auth-welcome {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+            color: var(--white);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .auth-welcome h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .auth-welcome p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 300px;
+        }
+        
+        .auth-welcome-features {
+            text-align: left;
+            margin-top: 30px;
+        }
+        
+        .auth-welcome-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .auth-welcome-features i {
+            color: var(--white);
+            font-size: 18px;
+        }
+        
+        .auth-forms {
+            flex: 1;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .auth-tab.active {
+            color: var(--primary-pink);
+            border-bottom: 3px solid var(--primary-pink);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .auth-form h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .auth-form p {
+            margin-bottom: 30px;
+            color: var(--dark-gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 2px rgba(255, 77, 136, 0.2);
+            outline: none;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--primary-pink);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+        }
+        
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #e0e0e0;
+        }
+        
+        .auth-divider span {
+            padding: 0 15px;
+            color: var(--dark-gray);
+            font-size: 14px;
+        }
+        
+        .social-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .terms {
+            font-size: 14px;
+            color: var(--dark-gray);
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .terms a {
+            color: var(--primary-pink);
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
         /* Login Animation */
         .login-overlay {
             position: fixed;
@@ -218,599 +416,13 @@
             100% { transform: translate(-50%, -50%) scale(1); }
         }
         
-        /* Welcome Section */
-        .welcome-section {
-            text-align: center;
-            padding: 60px 0;
-            background: linear-gradient(to right, rgba(255, 77, 136, 0.1), rgba(255, 102, 153, 0.1));
-            border-radius: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .welcome-section h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: var(--dark-gray);
-        }
-        
-        .welcome-section p {
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            color: var(--dark-gray);
-        }
-        
-        /* Search Bar */
-        .search-container {
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        .search-bar {
-            width: 100%;
-            padding: 15px 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 30px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s;
-        }
-        
-        .search-bar:focus {
-            border-color: var(--primary-pink);
-            box-shadow: 0 0 0 2px rgba(255, 77, 136, 0.2);
-        }
-        
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: var(--white);
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            margin-top: 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            max-height: 300px;
-            overflow-y: auto;
+        /* Hidden Sections */
+        .section {
             display: none;
         }
         
-        .search-result-item {
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .search-result-item:hover {
-            background-color: var(--light-gray);
-        }
-        
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-        
-        .search-result-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        .search-result-info {
-            flex: 1;
-        }
-        
-        .search-result-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .search-result-details {
-            font-size: 14px;
-            color: var(--dark-gray);
-        }
-        
-        /* Profile Cards */
-        .profiles-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .profile-card {
-            background-color: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        
-        .profile-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .profile-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        
-        .profile-info {
-            padding: 20px;
-        }
-        
-        .profile-name {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            background-color: var(--blue-tick);
-            border-radius: 50%;
-            color: white;
-            font-size: 12px;
-        }
-        
-        .profile-details {
-            color: var(--dark-gray);
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-        
-        .profile-interests {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .interest-tag {
-            background-color: var(--light-gray);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        
-        .profile-actions {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        /* Single Profile View (Swipe Interface) */
-        .single-profile-view {
-            max-width: 400px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .single-profile-card {
-            background-color: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .single-profile-image {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-        }
-        
-        .single-profile-info {
-            padding: 25px;
-        }
-        
-        .swipe-actions {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        .swipe-btn {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            border: none;
-        }
-        
-        .swipe-dislike {
-            background-color: var(--white);
-            color: var(--dark-gray);
-            border: 2px solid var(--dark-gray);
-        }
-        
-        .swipe-like {
-            background-color: var(--primary-pink);
-            color: var(--white);
-        }
-        
-        .swipe-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .daily-limit {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background-color: var(--light-gray);
-            border-radius: 10px;
-        }
-        
-        /* Chat Section */
-        .chat-container {
-            display: flex;
-            height: 500px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-        }
-        
-        .chat-sidebar {
-            width: 30%;
-            background-color: var(--light-gray);
-            border-right: 1px solid #e0e0e0;
-            overflow-y: auto;
-        }
-        
-        .chat-list {
-            padding: 15px;
-        }
-        
-        .chat-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .chat-item:hover, .chat-item.active {
-            background-color: rgba(255, 77, 136, 0.1);
-        }
-        
-        .chat-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-        
-        .chat-info {
-            flex: 1;
-        }
-        
-        .chat-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .chat-preview {
-            font-size: 14px;
-            color: var(--dark-gray);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .chat-main {
-            width: 70%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .chat-header {
-            padding: 15px 20px;
-            border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background-color: var(--white);
-        }
-        
-        .message {
-            max-width: 70%;
-            padding: 12px 15px;
-            border-radius: 18px;
-            margin-bottom: 15px;
-            position: relative;
-        }
-        
-        .message.sent {
-            background-color: var(--primary-pink);
-            color: var(--white);
-            margin-left: auto;
-            border-bottom-right-radius: 5px;
-        }
-        
-        .message.received {
-            background-color: var(--light-gray);
-            color: var(--dark-gray);
-            border-bottom-left-radius: 5px;
-        }
-        
-        .chat-input {
-            padding: 15px 20px;
-            border-top: 1px solid #e0e0e0;
-            display: flex;
-            align-items: center;
-        }
-        
-        .chat-input input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 30px;
-            outline: none;
-        }
-        
-        .chat-input button {
-            margin-left: 10px;
-        }
-        
-        /* Profile Section */
-        .profile-section {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .profile-picture-section {
-            width: 30%;
-        }
-        
-        .profile-picture {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .profile-details-section {
-            width: 70%;
-        }
-        
-        .profile-field {
-            margin-bottom: 20px;
-        }
-        
-        .profile-field label {
+        .section.active {
             display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .profile-field input, .profile-field select, .profile-field textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            outline: none;
-            font-size: 16px;
-        }
-        
-        .profile-field textarea {
-            height: 100px;
-            resize: vertical;
-        }
-        
-        /* Photo Upload */
-        .photo-upload {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .photo-placeholder {
-            width: 100px;
-            height: 100px;
-            border: 2px dashed #e0e0e0;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .photo-placeholder:hover {
-            border-color: var(--primary-pink);
-            background-color: rgba(255, 77, 136, 0.05);
-        }
-        
-        .photo-placeholder i {
-            font-size: 24px;
-            color: #ccc;
-        }
-        
-        .uploaded-photo {
-            width: 100px;
-            height: 100px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-        
-        /* Logout Section */
-        .logout-section {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid #e0e0e0;
-        }
-        
-        .logout-section p {
-            margin-bottom: 15px;
-            color: var(--dark-gray);
-        }
-        
-        /* Payment Section */
-        .payment-section {
-            background-color: var(--light-gray);
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .payment-title {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: var(--dark-gray);
-        }
-        
-        .payment-options {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 30px 0;
-        }
-        
-        .payment-option {
-            background-color: var(--white);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        
-        .payment-option h3 {
-            margin-bottom: 15px;
-            color: var(--dark-gray);
-        }
-        
-        .payment-details {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-        
-        .payment-details p {
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        
-        .payment-code {
-            font-weight: bold;
-            background-color: var(--light-gray);
-            padding: 8px 12px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 5px;
-            font-family: monospace;
-            letter-spacing: 1px;
-        }
-        
-        /* M-Pesa Payment Modal */
-        .mpesa-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .mpesa-modal-content {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-        
-        .mpesa-modal h2 {
-            margin-bottom: 20px;
-            color: var(--dark-gray);
-        }
-        
-        .mpesa-modal p {
-            margin-bottom: 20px;
-        }
-        
-        .mpesa-details {
-            background-color: var(--light-gray);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: left;
-        }
-        
-        .mpesa-details p {
-            margin-bottom: 10px;
-        }
-        
-        /* About Section */
-        .about-section {
-            background-color: var(--light-gray);
-            padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-        }
-        
-        .about-title {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: var(--dark-gray);
-            text-align: center;
-        }
-        
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .about-section h3 {
-            margin: 25px 0 15px;
-            color: var(--primary-pink);
-        }
-        
-        .about-section ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .about-section li {
-            margin-bottom: 8px;
         }
         
         /* Footer */
@@ -854,44 +466,6 @@
             color: #cccccc;
         }
         
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-        
-        .modal h2 {
-            margin-bottom: 20px;
-            color: var(--dark-gray);
-        }
-        
-        .modal p {
-            margin-bottom: 20px;
-        }
-        
-        .modal-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -904,71 +478,17 @@
                 justify-content: center;
             }
             
-            .profiles-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .chat-container {
-                flex-direction: column;
-                height: 600px;
-            }
-            
-            .chat-sidebar, .chat-main {
-                width: 100%;
-            }
-            
-            .chat-sidebar {
-                height: 40%;
-            }
-            
-            .chat-main {
-                height: 60%;
-            }
-            
-            .profile-section {
+            .auth-container {
                 flex-direction: column;
             }
             
-            .profile-picture-section, .profile-details-section {
-                width: 100%;
+            .auth-welcome {
+                padding: 40px 20px;
             }
             
-            .payment-options {
-                flex-direction: column;
-                align-items: center;
+            .auth-forms {
+                padding: 40px 20px;
             }
-            
-            .single-profile-image {
-                height: 400px;
-            }
-        }
-        
-        /* Hidden Sections */
-        .section {
-            display: none;
-        }
-        
-        .section.active {
-            display: block;
-        }
-        
-        /* Login Required Message */
-        .login-required {
-            text-align: center;
-            padding: 60px 20px;
-            background-color: var(--light-gray);
-            border-radius: 15px;
-            margin-bottom: 40px;
-        }
-        
-        .login-required h2 {
-            margin-bottom: 20px;
-            color: var(--dark-gray);
-        }
-        
-        .login-required p {
-            margin-bottom: 30px;
-            color: var(--dark-gray);
         }
     </style>
 </head>
@@ -977,31 +497,6 @@
     <div id="login-overlay" class="login-overlay" style="display: none;">
         <div class="spinner"></div>
         <p>Signing in...</p>
-    </div>
-
-    <!-- M-Pesa Payment Modal -->
-    <div id="mpesa-modal" class="mpesa-modal">
-        <div class="mpesa-modal-content">
-            <h2>Complete Your Payment</h2>
-            <p>Follow these steps to complete your payment via M-Pesa:</p>
-            
-            <div class="mpesa-details">
-                <p><strong>Step 1:</strong> Go to M-Pesa on your phone</p>
-                <p><strong>Step 2:</strong> Select "Lipa Na M-Pesa"</p>
-                <p><strong>Step 3:</strong> Select "Pay Bill"</p>
-                <p><strong>Step 4:</strong> Enter Business Number: <span class="payment-code" id="paybill-number">522522</span></p>
-                <p><strong>Step 5:</strong> Enter Account Number: <span class="payment-code" id="account-number">1336980125</span></p>
-                <p><strong>Step 6:</strong> Enter Amount: Ksh <span id="payment-amount">150</span></p>
-                <p><strong>Step 7:</strong> Enter your M-Pesa PIN and confirm</p>
-            </div>
-            
-            <p>After payment, enter the transaction code below to activate your account</p>
-            <input type="text" id="transaction-code" placeholder="Enter M-Pesa transaction code" style="width: 100%; padding: 10px; margin: 15px 0; border: 1px solid #e0e0e0; border-radius: 5px;">
-            <div class="modal-buttons">
-                <button class="btn btn-outline" id="cancel-payment">Cancel</button>
-                <button class="btn btn-pink" id="verify-payment">Verify Payment</button>
-            </div>
-        </div>
     </div>
 
     <header>
@@ -1013,7 +508,8 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#" class="nav-link active" data-section="home">Browse</a></li>
+                        <li><a href="#" class="nav-link active" data-section="auth">Sign In</a></li>
+                        <li><a href="#" class="nav-link" data-section="home">Browse</a></li>
                         <li><a href="#" class="nav-link" data-section="chat">Messages</a></li>
                         <li><a href="#" class="nav-link" data-section="profile">My Profile</a></li>
                         <li><a href="#" class="nav-link" data-section="payment">Upgrade</a></li>
@@ -1028,349 +524,174 @@
 
     <main>
         <div class="container">
-            <!-- Home/Browse Section -->
-            <section id="home" class="section active">
-                <!-- Search Bar -->
-                <div class="search-container">
-                    <input type="text" class="search-bar" placeholder="Search for people by name, location, or interests...">
-                    <div class="search-results" id="search-results">
-                        <!-- Search results will be dynamically generated here -->
+            <!-- Auth Section -->
+            <section id="auth" class="section active">
+                <div class="auth-section">
+                    <div class="auth-container">
+                        <div class="auth-welcome">
+                            <h2>Welcome to KE MATCH</h2>
+                            <p>Find your perfect match in Kenya. Connect with amazing people near you.</p>
+                            <div class="auth-welcome-features">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> <span>Smart matching algorithm</span></li>
+                                    <li><i class="fas fa-check"></i> <span>Secure & verified profiles</span></li>
+                                    <li><i class="fas fa-check"></i> <span>Chat with your matches</span></li>
+                                    <li><i class="fas fa-check"></i> <span>Find people in your area</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="auth-forms">
+                            <div class="auth-tabs">
+                                <div class="auth-tab active" data-tab="login">Log In</div>
+                                <div class="auth-tab" data-tab="signup">Sign Up</div>
+                            </div>
+                            
+                            <!-- Login Form -->
+                            <div class="auth-form active" id="login-form">
+                                <h3>Welcome Back</h3>
+                                <p>Log in to your KE MATCH account</p>
+                                
+                                <form id="loginForm">
+                                    <div class="form-group">
+                                        <label for="login-email">Email Address</label>
+                                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="login-password">Password</label>
+                                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                                    </div>
+                                    
+                                    <div class="form-options">
+                                        <div class="remember-me">
+                                            <input type="checkbox" id="remember-me">
+                                            <label for="remember-me">Remember me</label>
+                                        </div>
+                                        <a href="#" class="forgot-password">Forgot password?</a>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-pink" style="width: 100%; margin-bottom: 20px;">Log In</button>
+                                </form>
+                                
+                                <div class="auth-divider">
+                                    <span>Or continue with</span>
+                                </div>
+                                
+                                <div class="social-auth">
+                                    <button class="btn btn-facebook" id="facebook-login">
+                                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Continue with Facebook
+                                    </button>
+                                    <button class="btn btn-google" id="google-login">
+                                        <i class="fab fa-google" style="margin-right: 10px;"></i> Continue with Google
+                                    </button>
+                                </div>
+                                
+                                <p class="terms">By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                            </div>
+                            
+                            <!-- Sign Up Form -->
+                            <div class="auth-form" id="signup-form">
+                                <h3>Create Account</h3>
+                                <p>Join KE MATCH to find your perfect match</p>
+                                
+                                <form id="signupForm">
+                                    <div class="form-group">
+                                        <label for="signup-name">Full Name</label>
+                                        <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-email">Email Address</label>
+                                        <input type="email" id="signup-email" placeholder="Enter your email" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-password">Password</label>
+                                        <input type="password" id="signup-password" placeholder="Create a password" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-confirm-password">Confirm Password</label>
+                                        <input type="password" id="signup-confirm-password" placeholder="Confirm your password" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-gender">Gender</label>
+                                        <select id="signup-gender" style="width: 100%; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
+                                            <option value="">Select your gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-age">Age</label>
+                                        <input type="number" id="signup-age" placeholder="Enter your age" min="18" max="100" required>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-pink" style="width: 100%; margin-bottom: 20px;">Create Account</button>
+                                </form>
+                                
+                                <div class="auth-divider">
+                                    <span>Or sign up with</span>
+                                </div>
+                                
+                                <div class="social-auth">
+                                    <button class="btn btn-facebook" id="facebook-signup">
+                                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Sign up with Facebook
+                                    </button>
+                                    <button class="btn btn-google" id="google-signup">
+                                        <i class="fab fa-google" style="margin-right: 10px;"></i> Sign up with Google
+                                    </button>
+                                </div>
+                                
+                                <p class="terms">By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
+            </section>
+
+            <!-- Home/Browse Section -->
+            <section id="home" class="section">
                 <div class="welcome-section">
                     <h1>Find Your Perfect Match in Kenya</h1>
                     <p>Connect with amazing people near you. Like, chat, and build meaningful relationships.</p>
                     <button class="btn btn-pink" id="start-matching">Start Matching</button>
-                </div>
-                
-                <!-- Grid View (Hidden initially) -->
-                <div id="grid-view" style="display: none;">
-                    <h2 class="section-title">Potential Matches</h2>
-                    <div class="profiles-container" id="profiles-container">
-                        <!-- Profile cards will be dynamically generated here -->
-                    </div>
-                </div>
-                
-                <!-- Single Profile View (Hidden initially) -->
-                <div id="single-view" style="display: none;">
-                    <div class="single-profile-view">
-                        <div class="single-profile-card">
-                            <img id="current-profile-image" src="" alt="Profile" class="single-profile-image">
-                            <div class="single-profile-info">
-                                <h2 class="profile-name" id="current-profile-name"></h2>
-                                <p id="current-profile-details" class="profile-details"></p>
-                                <div class="profile-interests" id="current-profile-interests">
-                                    <!-- Interests will be dynamically generated here -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swipe-actions">
-                            <button class="swipe-btn swipe-dislike" id="dislike-btn">✕</button>
-                            <button class="swipe-btn swipe-like" id="like-btn">♥</button>
-                        </div>
-                        <div class="daily-limit">
-                            <p>Profiles remaining today: <span id="profiles-remaining">10</span></p>
-                        </div>
-                    </div>
                 </div>
             </section>
 
             <!-- Chat Section -->
             <section id="chat" class="section">
                 <h2 class="section-title">Messages</h2>
-                
-                <!-- Login Required Message -->
-                <div id="chat-login-required" class="login-required" style="display: none;">
+                <div class="login-required">
                     <h2>Sign In Required</h2>
-                    <p>You need to sign in and upgrade to a premium plan to access messages.</p>
+                    <p>You need to sign in to access messages.</p>
                     <button class="btn btn-pink" id="chat-signin-btn">Sign In Now</button>
-                </div>
-                
-                <div id="chat-container" class="chat-container" style="display: none;">
-                    <div class="chat-sidebar">
-                        <div class="chat-list">
-                            <!-- Chat items will be dynamically generated here -->
-                        </div>
-                    </div>
-                    <div class="chat-main">
-                        <div class="chat-header">
-                            <div style="display: flex; align-items: center;">
-                                <img src="https://files.catbox.moe/ayz7eb.jpeg" alt="User" class="chat-avatar">
-                                <div class="chat-info">
-                                    <div class="chat-name">Sarah M. <span class="verified-badge"><i class="fas fa-check"></i></span></div>
-                                </div>
-                            </div>
-                            <button class="btn btn-outline" id="view-profile-btn">View Profile</button>
-                        </div>
-                        <div class="chat-messages">
-                            <!-- Messages will be dynamically generated here -->
-                        </div>
-                        <div class="chat-input">
-                            <input type="text" placeholder="Type a message...">
-                            <button class="btn btn-pink">Send</button>
-                        </div>
-                    </div>
                 </div>
             </section>
 
             <!-- Profile Section -->
             <section id="profile" class="section">
                 <h2 class="section-title">My Profile</h2>
-                
-                <!-- Login Required Message -->
-                <div id="profile-login-required" class="login-required" style="display: none;">
+                <div class="login-required">
                     <h2>Sign In Required</h2>
                     <p>You need to sign in to view and edit your profile.</p>
                     <button class="btn btn-pink" id="profile-signin-btn">Sign In Now</button>
-                </div>
-                
-                <div id="profile-container" class="profile-section" style="display: none;">
-                    <div class="profile-picture-section">
-                        <img src="https://via.placeholder.com/300" alt="Profile" class="profile-picture" id="main-profile-pic">
-                        
-                        <div class="photo-upload">
-                            <div class="photo-placeholder" id="add-photo-1">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                            <div class="photo-placeholder" id="add-photo-2">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                        </div>
-                        
-                        <input type="file" id="photo-upload-input-1" accept="image/*" style="display: none;">
-                        <input type="file" id="photo-upload-input-2" accept="image/*" style="display: none;">
-                        
-                        <p style="text-align: center; font-size: 14px; color: var(--dark-gray);">You can add up to 2 photos</p>
-                    </div>
-                    <div class="profile-details-section">
-                        <div class="profile-field">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" value="John Doe">
-                        </div>
-                        <div class="profile-field">
-                            <label for="age">Age</label>
-                            <input type="number" id="age" value="28">
-                        </div>
-                        <div class="profile-field">
-                            <label for="gender">Gender</label>
-                            <select id="gender">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                        </div>
-                        <div class="profile-field">
-                            <label for="location">Location (County)</label>
-                            <select id="location">
-                                <option value="nairobi">Nairobi</option>
-                                <option value="mombasa">Mombasa</option>
-                                <option value="kisumu">Kisumu</option>
-                                <option value="nakuru">Nakuru</option>
-                                <option value="eldoret">Eldoret</option>
-                                <option value="kakamega">Kakamega</option>
-                                <option value="kisii">Kisii</option>
-                                <option value="meru">Meru</option>
-                                <option value="nyeri">Nyeri</option>
-                                <option value="thika">Thika</option>
-                            </select>
-                        </div>
-                        <div class="profile-field">
-                            <label for="hobbies">Hobbies (Select up to 2)</label>
-                            <select id="hobbies" multiple>
-                                <option value="travel">Travel</option>
-                                <option value="music">Music</option>
-                                <option value="sports">Sports</option>
-                                <option value="reading">Reading</option>
-                                <option value="cooking">Cooking</option>
-                                <option value="dancing">Dancing</option>
-                                <option value="hiking">Hiking</option>
-                                <option value="photography">Photography</option>
-                            </select>
-                        </div>
-                        <div class="profile-field">
-                            <label for="likes">Likes (Select up to 2)</label>
-                            <select id="likes" multiple>
-                                <option value="movies">Movies</option>
-                                <option value="outdoors">Outdoors</option>
-                                <option value="art">Art</option>
-                                <option value="food">Food</option>
-                                <option value="fitness">Fitness</option>
-                                <option value="animals">Animals</option>
-                                <option value="beach">Beach</option>
-                                <option value="coffee">Coffee</option>
-                            </select>
-                        </div>
-                        <div class="profile-field">
-                            <label for="dislikes">Dislikes (Select up to 2)</label>
-                            <select id="dislikes" multiple>
-                                <option value="smoking">Smoking</option>
-                                <option value="lateness">Lateness</option>
-                                <option value="noise">Loud Noise</option>
-                                <option value="messy">Messy Places</option>
-                                <option value="arrogance">Arrogance</option>
-                                <option value="lies">Lies</option>
-                                <option value="rudeness">Rudeness</option>
-                                <option value="laziness">Laziness</option>
-                            </select>
-                        </div>
-                        <div class="profile-field">
-                            <label for="bio">Bio</label>
-                            <textarea id="bio">Adventure seeker and coffee lover. Looking for someone to explore Kenya with.</textarea>
-                        </div>
-                        <button class="btn btn-pink" id="save-profile">Save Profile</button>
-                        
-                        <!-- Logout Section -->
-                        <div class="logout-section">
-                            <h3>Account Settings</h3>
-                            <p>You are currently logged in as <span id="user-name">John Doe</span></p>
-                            <p>Account Status: <span id="account-status">Free User</span></p>
-                            <p>Daily Matches: <span id="daily-matches">10</span></p>
-                            <button class="btn btn-outline" id="logout-btn">Log Out</button>
-                        </div>
-                    </div>
                 </div>
             </section>
 
             <!-- Payment Section -->
             <section id="payment" class="section">
                 <h2 class="section-title">Upgrade Your Experience</h2>
-                
-                <!-- Login Required Message -->
-                <div id="payment-login-required" class="login-required" style="display: none;">
+                <div class="login-required">
                     <h2>Sign In Required</h2>
                     <p>You need to sign in to upgrade your account.</p>
                     <button class="btn btn-pink" id="payment-signin-btn">Sign In Now</button>
                 </div>
-                
-                <div id="payment-container" class="payment-section" style="display: none;">
-                    <h2 class="payment-title">Unlock More Matches on KE MATCH</h2>
-                    <p>Upgrade now to connect with more potential matches every day!</p>
-                    
-                    <div class="payment-options">
-                        <div class="payment-option">
-                            <h3>Free Plan</h3>
-                            <div class="payment-details">
-                                <p><strong>Price:</strong> Free</p>
-                                <p><strong>Daily Matches:</strong> 10</p>
-                                <p><strong>Features:</strong> Basic matching</p>
-                            </div>
-                            <button class="btn btn-outline" disabled>Current Plan</button>
-                        </div>
-                        
-                        <div class="payment-option">
-                            <h3>Standard Plan</h3>
-                            <div class="payment-details">
-                                <p><strong>Price:</strong> Ksh 150</p>
-                                <p><strong>Extra Matches:</strong> +20 matches</p>
-                                <p><strong>Total Matches:</strong> 30 (10 free + 20 premium)</p>
-                                <p><strong>Features:</strong> Blue tick verification</p>
-                            </div>
-                            <button class="btn btn-pink" id="standard-pay">Upgrade to Standard</button>
-                        </div>
-                        
-                        <div class="payment-option">
-                            <h3>Premium Plan</h3>
-                            <div class="payment-details">
-                                <p><strong>Price:</strong> Ksh 300</p>
-                                <p><strong>Extra Matches:</strong> +40 matches</p>
-                                <p><strong>Total Matches:</strong> 50 (10 free + 40 premium)</p>
-                                <p><strong>Features:</strong> Blue tick + Priority matching</p>
-                            </div>
-                            <button class="btn btn-gold" id="premium-pay">Upgrade to Premium</button>
-                        </div>
-                    </div>
-                    
-                    <div class="transaction-verification" style="margin-top: 30px; padding: 20px; background-color: var(--white); border-radius: 10px;">
-                        <h3>Already Paid? Verify Your Payment</h3>
-                        <p>Enter your transaction code below to activate your premium account</p>
-                        <input type="text" id="manual-transaction-code" placeholder="Enter transaction code" style="width: 100%; max-width: 300px; padding: 10px; margin: 15px 0; border: 1px solid #e0e0e0; border-radius: 5px;">
-                        <button class="btn btn-pink" id="manual-verify-payment" style="width: 100%; max-width: 300px;">Verify Payment</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- About Section -->
-            <section id="about" class="section">
-                <div class="about-section">
-                    <h2 class="about-title">About KE MATCH</h2>
-                    <div class="about-content">
-                        <p>KE MATCH is a modern dating platform built for genuine connections. Our goal is to bring together people from across Kenya (and beyond) in a safe, fun, and simple way.</p>
-                        
-                        <h3>Why KE MATCH?</h3>
-                        <ul>
-                            <li><strong>Simple Login</strong> → Sign up quickly using your Google or Facebook account.</li>
-                            <li><strong>Smart Profiles</strong> → Share who you are, what you love, and what you're looking for.</li>
-                            <li><strong>Fair Access</strong> → Everyone gets 10 free profiles to view per day.</li>
-                            <li><strong>Affordable Activation</strong> → Unlock unlimited chatting and contact sharing for just Ksh 150.</li>
-                            <li><strong>Safe & Secure</strong> → Verified accounts, report & block options keep your experience safe.</li>
-                        </ul>
-                        
-                        <p>KE MATCH is more than a dating app — it's a place to meet new people, build friendships, and maybe even find love. ❤️</p>
-                        
-                        <h3>KE MATCH Policies & Support</h3>
-                        
-                        <h4>Privacy Policy</h4>
-                        <p>KE MATCH respects your privacy. We only collect basic information such as your name, age, gender, and preferences to help you connect with others.</p>
-                        <ul>
-                            <li>Your personal data will not be sold or shared with third parties.</li>
-                            <li>You can update or delete your profile at any time.</li>
-                            <li>We use secure systems to protect your information.</li>
-                        </ul>
-                        
-                        <h4>Terms of Use</h4>
-                        <p>By using KE MATCH, you agree to the following:</p>
-                        <ul>
-                            <li>You must be 18 years or older to join.</li>
-                            <li>Be honest in your profile and respectful to others.</li>
-                            <li>Do not use fake accounts, spam, or harass other users.</li>
-                            <li>Illegal activities, scams, or abuse will result in account suspension.</li>
-                            <li>KE MATCH is not responsible for relationships or decisions made outside the platform.</li>
-                        </ul>
-                        
-                        <h4>Help & Support</h4>
-                        <p>If you experience issues or need assistance:</p>
-                        <ul>
-                            <li>Check our FAQ/Help section inside the app.</li>
-                            <li>Contact us directly through the channels below.</li>
-                        </ul>
-                        
-                        <h4>Contact</h4>
-                        <p>Email: kemeetup@gmail.com</p>
-                        <p>Phone/WhatsApp: +254 745 682 493</p>
-                    </div>
-                </div>
             </section>
         </div>
     </main>
-
-    <!-- Daily Limit Modal -->
-    <div id="daily-limit-modal" class="modal">
-        <div class="modal-content">
-            <h2>Daily Limit Reached</h2>
-            <p>You've viewed all <span id="limit-count">10</span> profiles available for today. Come back tomorrow to see more potential matches or upgrade to premium for more access.</p>
-            <div class="modal-buttons">
-                <button class="btn btn-outline" id="close-modal">OK</button>
-                <button class="btn btn-pink" id="upgrade-now">Upgrade Now</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sign In Modal -->
-    <div id="signin-modal" class="modal">
-        <div class="modal-content">
-            <h2>Sign In to KE MATCH</h2>
-            <p>Connect with amazing people in Kenya</p>
-            <div style="display: flex; flex-direction: column; gap: 15px; margin: 20px 0;">
-                <button class="btn btn-facebook" id="facebook-login">
-                    <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Continue with Facebook
-                </button>
-                <button class="btn btn-google" id="google-login">
-                    <i class="fab fa-google" style="margin-right: 10px;"></i> Continue with Google
-                </button>
-            </div>
-            <p style="font-size: 14px; color: var(--dark-gray);">By continuing, you agree to our Terms and Privacy Policy</p>
-        </div>
-    </div>
 
     <footer>
         <div class="container">
@@ -1394,151 +715,10 @@
     </footer>
 
     <script>
-        // Sample data for profiles
-        const femaleProfiles = [
-            {
-                id: 1,
-                name: "Sarah M.",
-                age: 25,
-                location: "Nairobi",
-                image: "https://files.catbox.moe/gefnh3.jpeg",
-                hobbies: ["Travel", "Music"],
-                likes: ["Movies", "Art"],
-                dislikes: ["Smoking", "Lateness"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 2,
-                name: "Grace W.",
-                age: 27,
-                location: "Kisumu",
-                image: "https://files.catbox.moe/ayz7eb.jpeg",
-                hobbies: ["Cooking", "Music"],
-                likes: ["Food", "Fitness"],
-                dislikes: ["Arrogance", "Lateness"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 3,
-                name: "Lilian K.",
-                age: 24,
-                location: "Mombasa",
-                image: "https://files.catbox.moe/by8fa3.jpeg",
-                hobbies: ["Dancing", "Photography"],
-                likes: ["Beach", "Coffee"],
-                dislikes: ["Rudeness", "Lies"],
-                premium: true,
-                verified: true
-            }
-        ];
-
-        const maleProfiles = [
-            {
-                id: 11,
-                name: "James K.",
-                age: 30,
-                location: "Mombasa",
-                image: "https://files.catbox.moe/74v8fw.jpeg",
-                hobbies: ["Sports", "Reading"],
-                likes: ["Outdoors", "Food"],
-                dislikes: ["Noise", "Messy"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 12,
-                name: "David O.",
-                age: 32,
-                location: "Nakuru",
-                image: "https://via.placeholder.com/300",
-                hobbies: ["Travel", "Sports"],
-                likes: ["Outdoors", "Movies"],
-                dislikes: ["Smoking", "Noise"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 13,
-                name: "Michael M.",
-                age: 28,
-                location: "Nairobi",
-                image: "https://via.placeholder.com/300",
-                hobbies: ["Music", "Photography"],
-                likes: ["Art", "Coffee"],
-                dislikes: ["Lateness", "Rudeness"],
-                premium: true,
-                verified: true
-            }
-        ];
-
-        // Sample chat data
-        const chats = [
-            {
-                id: 1,
-                name: "Sarah M.",
-                avatar: "https://files.catbox.moe/gefnh3.jpeg",
-                lastMessage: "Hey there! How are you?",
-                messages: [
-                    { text: "Hey there! How are you?", sender: "them", time: "10:30 AM" },
-                    { text: "I'm good, thanks! How about you?", sender: "me", time: "10:32 AM" },
-                    { text: "Doing great! Would you like to meet up sometime?", sender: "them", time: "10:35 AM" }
-                ],
-                verified: true,
-                profile: {
-                    id: 1,
-                    name: "Sarah M.",
-                    age: 25,
-                    location: "Nairobi",
-                    image: "https://files.catbox.moe/gefnh3.jpeg",
-                    hobbies: ["Travel", "Music"],
-                    likes: ["Movies", "Art"],
-                    dislikes: ["Smoking", "Lateness"],
-                    premium: true,
-                    verified: true
-                }
-            }
-        ];
-
-        // App state - Load from localStorage if available
+        // App state
         let currentUser = JSON.parse(localStorage.getItem('kematch_user')) || {
-            name: "",
-            age: 28,
-            gender: "male",
-            location: "nairobi",
-            premium: false,
-            verified: false,
-            plan: "free",
-            loggedIn: false,
-            photos: [],
-            dailyMatches: 10
+            loggedIn: false
         };
-
-        let currentUserGender = "male";
-        let currentProfileIndex = 0;
-        let profilesRemaining = currentUser.dailyMatches;
-        let currentProfiles = [];
-        let currentChatProfile = null;
-        let currentPaymentPlan = "";
-
-        // Save user state to localStorage
-        function saveUserState() {
-            localStorage.setItem('kematch_user', JSON.stringify(currentUser));
-        }
-
-        // Update daily matches based on plan
-        function updateDailyMatches() {
-            if (currentUser.plan === "free") {
-                currentUser.dailyMatches = 10;
-            } else if (currentUser.plan === "standard") {
-                currentUser.dailyMatches = 30; // 10 free + 20 premium
-            } else if (currentUser.plan === "premium") {
-                currentUser.dailyMatches = 50; // 10 free + 40 premium
-            }
-            profilesRemaining = currentUser.dailyMatches;
-            saveUserState();
-        }
 
         // Navigation functionality
         document.querySelectorAll('.nav-link, .footer-link').forEach(link => {
@@ -1571,73 +751,57 @@
 
         // Check if user needs to be logged in for certain sections
         function checkLoginRequirement(sectionId) {
-            if (!currentUser.loggedIn) {
-                if (sectionId === 'chat') {
-                    document.getElementById('chat-login-required').style.display = 'block';
-                    document.getElementById('chat-container').style.display = 'none';
-                } else if (sectionId === 'profile') {
-                    document.getElementById('profile-login-required').style.display = 'block';
-                    document.getElementById('profile-container').style.display = 'none';
-                } else if (sectionId === 'payment') {
-                    document.getElementById('payment-login-required').style.display = 'block';
-                    document.getElementById('payment-container').style.display = 'none';
-                }
-            } else {
-                if (sectionId === 'chat') {
-                    document.getElementById('chat-login-required').style.display = 'none';
-                    document.getElementById('chat-container').style.display = 'flex';
-                } else if (sectionId === 'profile') {
-                    document.getElementById('profile-login-required').style.display = 'none';
-                    document.getElementById('profile-container').style.display = 'flex';
-                    updateProfileDisplay();
-                } else if (sectionId === 'payment') {
-                    document.getElementById('payment-login-required').style.display = 'none';
-                    document.getElementById('payment-container').style.display = 'block';
-                }
+            if (!currentUser.loggedIn && sectionId !== 'auth') {
+                // Redirect to auth section if not logged in
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('auth').classList.add('active');
+                
+                // Update nav links
+                document.querySelectorAll('.nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector('[data-section="auth"]').classList.add('active');
             }
         }
 
-        // Update profile display with current user data
-        function updateProfileDisplay() {
-            document.getElementById('user-name').textContent = currentUser.name;
-            document.getElementById('name').value = currentUser.name;
-            document.getElementById('age').value = currentUser.age;
-            document.getElementById('gender').value = currentUser.gender;
-            document.getElementById('location').value = currentUser.location;
+        // Auth tabs functionality
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.auth-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all forms
+                document.querySelectorAll('.auth-form').forEach(form => {
+                    form.classList.remove('active');
+                });
+                
+                // Show corresponding form
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`${tabId}-form`).classList.add('active');
+            });
+        });
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Update account status
-            const accountStatus = document.getElementById('account-status');
-            if (currentUser.verified) {
-                accountStatus.innerHTML = `${currentUser.plan.charAt(0).toUpperCase() + currentUser.plan.slice(1)} User <span class="verified-badge"><i class="fas fa-check"></i></span>`;
-            } else {
-                accountStatus.textContent = `${currentUser.plan.charAt(0).toUpperCase() + currentUser.plan.slice(1)} User`;
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simple validation
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
             }
             
-            // Update daily matches display
-            document.getElementById('daily-matches').textContent = currentUser.dailyMatches;
-        }
-
-        // Sign In Modal
-        document.getElementById('login-btn').addEventListener('click', function() {
-            document.getElementById('signin-modal').style.display = 'flex';
-        });
-
-        // Facebook Login
-        document.getElementById('facebook-login').addEventListener('click', function() {
-            startLoginProcess('Facebook');
-        });
-
-        // Google Login
-        document.getElementById('google-login').addEventListener('click', function() {
-            startLoginProcess('Google');
-        });
-
-        // Login functionality with animation
-        function startLoginProcess(provider) {
-            // Close sign in modal
-            document.getElementById('signin-modal').style.display = 'none';
-            
-            // Show spinning animation
+            // Show loading animation
             const loginOverlay = document.getElementById('login-overlay');
             loginOverlay.style.display = 'flex';
             
@@ -1664,273 +828,254 @@
                         heart1.remove();
                         heart2.remove();
                         
-                        // Update UI to show logged in state
-                        document.getElementById('login-btn').style.display = 'none';
+                        // Update user state
                         currentUser.loggedIn = true;
-                        currentUser.name = "John Doe";
+                        currentUser.email = email;
+                        localStorage.setItem('kematch_user', JSON.stringify(currentUser));
                         
-                        // Save user state
-                        saveUserState();
+                        // Update UI
+                        document.getElementById('login-btn').style.display = 'none';
                         
-                        // Update profile with user name
-                        updateProfileDisplay();
+                        // Redirect to home section
+                        document.querySelectorAll('.section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        document.getElementById('home').classList.add('active');
                         
-                        // Update sections to show content instead of login required
-                        checkLoginRequirement('profile');
-                        checkLoginRequirement('payment');
+                        // Update nav links
+                        document.querySelectorAll('.nav-link').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        document.querySelector('[data-section="home"]').classList.add('active');
                         
-                        alert(`Successfully logged in with ${provider}! You can now update your profile.`);
+                        alert('Successfully logged in!');
+                    }, 1000);
+                }, 400);
+            }, 2000);
+        });
+
+        // Sign up form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            const gender = document.getElementById('signup-gender').value;
+            const age = document.getElementById('signup-age').value;
+            
+            // Validation
+            if (!name || !email || !password || !confirmPassword || !gender || !age) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (parseInt(age) < 18) {
+                alert('You must be at least 18 years old to join KE MATCH');
+                return;
+            }
+            
+            // Show loading animation
+            const loginOverlay = document.getElementById('login-overlay');
+            loginOverlay.style.display = 'flex';
+            
+            // Simulate sign up process
+            setTimeout(function() {
+                // Hide spinner
+                loginOverlay.style.display = 'none';
+                
+                // Show first heart
+                const heart1 = document.createElement('div');
+                heart1.className = 'heart-popup';
+                heart1.innerHTML = '♥';
+                document.body.appendChild(heart1);
+                
+                // Show second heart after delay
+                setTimeout(function() {
+                    const heart2 = document.createElement('div');
+                    heart2.className = 'heart-popup';
+                    heart2.innerHTML = '♥';
+                    document.body.appendChild(heart2);
+                    
+                    // Remove hearts after animation
+                    setTimeout(function() {
+                        heart1.remove();
+                        heart2.remove();
+                        
+                        // Update user state
+                        currentUser.loggedIn = true;
+                        currentUser.name = name;
+                        currentUser.email = email;
+                        currentUser.gender = gender;
+                        currentUser.age = age;
+                        localStorage.setItem('kematch_user', JSON.stringify(currentUser));
+                        
+                        // Update UI
+                        document.getElementById('login-btn').style.display = 'none';
+                        
+                        // Redirect to home section
+                        document.querySelectorAll('.section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        document.getElementById('home').classList.add('active');
+                        
+                        // Update nav links
+                        document.querySelectorAll('.nav-link').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        document.querySelector('[data-section="home"]').classList.add('active');
+                        
+                        alert('Account created successfully! Welcome to KE MATCH.');
+                    }, 1000);
+                }, 400);
+            }, 2000);
+        });
+
+        // Social login functionality
+        document.getElementById('facebook-login').addEventListener('click', function() {
+            startSocialLogin('Facebook');
+        });
+
+        document.getElementById('google-login').addEventListener('click', function() {
+            startSocialLogin('Google');
+        });
+
+        document.getElementById('facebook-signup').addEventListener('click', function() {
+            startSocialLogin('Facebook');
+        });
+
+        document.getElementById('google-signup').addEventListener('click', function() {
+            startSocialLogin('Google');
+        });
+
+        function startSocialLogin(provider) {
+            // Show loading animation
+            const loginOverlay = document.getElementById('login-overlay');
+            loginOverlay.style.display = 'flex';
+            
+            // Simulate social login process
+            setTimeout(function() {
+                // Hide spinner
+                loginOverlay.style.display = 'none';
+                
+                // Show first heart
+                const heart1 = document.createElement('div');
+                heart1.className = 'heart-popup';
+                heart1.innerHTML = '♥';
+                document.body.appendChild(heart1);
+                
+                // Show second heart after delay
+                setTimeout(function() {
+                    const heart2 = document.createElement('div');
+                    heart2.className = 'heart-popup';
+                    heart2.innerHTML = '♥';
+                    document.body.appendChild(heart2);
+                    
+                    // Remove hearts after animation
+                    setTimeout(function() {
+                        heart1.remove();
+                        heart2.remove();
+                        
+                        // Update user state
+                        currentUser.loggedIn = true;
+                        currentUser.socialProvider = provider;
+                        localStorage.setItem('kematch_user', JSON.stringify(currentUser));
+                        
+                        // Update UI
+                        document.getElementById('login-btn').style.display = 'none';
+                        
+                        // Redirect to home section
+                        document.querySelectorAll('.section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        document.getElementById('home').classList.add('active');
+                        
+                        // Update nav links
+                        document.querySelectorAll('.nav-link').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        document.querySelector('[data-section="home"]').classList.add('active');
+                        
+                        alert(`Successfully logged in with ${provider}!`);
                     }, 1000);
                 }, 400);
             }, 2000);
         }
 
-        // Start matching functionality
-        document.getElementById('start-matching').addEventListener('click', function() {
-            if (!currentUser.loggedIn) {
-                alert('Please sign in first to start matching!');
-                document.getElementById('signin-modal').style.display = 'flex';
-                return;
-            }
-            
-            // Set profiles based on user gender
-            currentProfiles = currentUser.gender === "male" ? femaleProfiles : maleProfiles;
-            
-            // Reset profile index
-            currentProfileIndex = 0;
-            
-            // Set daily limit based on plan
-            profilesRemaining = currentUser.dailyMatches;
-            
-            // Hide welcome and grid view, show single profile view
-            document.querySelector('.welcome-section').style.display = 'none';
-            document.getElementById('grid-view').style.display = 'none';
-            document.getElementById('single-view').style.display = 'block';
-            
-            // Load the first profile
-            loadCurrentProfile();
-        });
-
-        // Load current profile for single view
-        function loadCurrentProfile() {
-            if (currentProfileIndex < currentProfiles.length && profilesRemaining > 0) {
-                const profile = currentProfiles[currentProfileIndex];
-                
-                document.getElementById('current-profile-image').src = profile.image;
-                
-                // Create name with blue tick if verified
-                const nameElement = document.getElementById('current-profile-name');
-                nameElement.innerHTML = profile.name;
-                if (profile.verified) {
-                    nameElement.innerHTML += ' <span class="verified-badge"><i class="fas fa-check"></i></span>';
-                }
-                
-                document.getElementById('current-profile-details').textContent = `${profile.age} • ${profile.location}`;
-                
-                const interestsContainer = document.getElementById('current-profile-interests');
-                interestsContainer.innerHTML = '';
-                
-                // Add hobbies
-                profile.hobbies.forEach(hobby => {
-                    const tag = document.createElement('span');
-                    tag.className = 'interest-tag';
-                    tag.textContent = hobby;
-                    interestsContainer.appendChild(tag);
-                });
-                
-                // Add likes
-                profile.likes.forEach(like => {
-                    const tag = document.createElement('span');
-                    tag.className = 'interest-tag';
-                    tag.textContent = like;
-                    interestsContainer.appendChild(tag);
-                });
-                
-                // Update profiles remaining
-                document.getElementById('profiles-remaining').textContent = profilesRemaining;
-            } else {
-                // Show daily limit modal
-                document.getElementById('limit-count').textContent = currentUser.dailyMatches;
-                document.getElementById('daily-limit-modal').style.display = 'flex';
-            }
-        }
-
-        // Like button functionality
-        document.getElementById('like-btn').addEventListener('click', function() {
-            if (profilesRemaining > 0) {
-                profilesRemaining--;
-                currentProfileIndex++;
-                loadCurrentProfile();
-                // In a real app, this would send a like to the server
-            }
-        });
-
-        // Dislike button functionality
-        document.getElementById('dislike-btn').addEventListener('click', function() {
-            if (profilesRemaining > 0) {
-                profilesRemaining--;
-                currentProfileIndex++;
-                loadCurrentProfile();
-                // In a real app, this would send a dislike to the server
-            }
-        });
-
-        // Modal functionality
-        document.getElementById('close-modal').addEventListener('click', function() {
-            document.getElementById('daily-limit-modal').style.display = 'none';
-            // Return to welcome screen
-            document.querySelector('.welcome-section').style.display = 'block';
-            document.getElementById('single-view').style.display = 'none';
-        });
-
-        document.getElementById('upgrade-now').addEventListener('click', function() {
-            document.getElementById('daily-limit-modal').style.display = 'none';
-            // Navigate to payment section
-            document.querySelectorAll('.nav-link').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector('[data-section="payment"]').classList.add('active');
-            
+        // Sign in buttons from other sections
+        document.getElementById('chat-signin-btn').addEventListener('click', function() {
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
-            document.getElementById('payment').classList.add('active');
+            document.getElementById('auth').classList.add('active');
             
-            // Check login requirement for payment section
-            checkLoginRequirement('payment');
+            document.querySelectorAll('.nav-link').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[data-section="auth"]').classList.add('active');
         });
 
-        // Payment functionality
-        document.getElementById('standard-pay').addEventListener('click', function() {
-            if (!currentUser.loggedIn) {
-                alert('Please sign in first to upgrade your account!');
-                document.getElementById('signin-modal').style.display = 'flex';
-                return;
-            }
+        document.getElementById('profile-signin-btn').addEventListener('click', function() {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('auth').classList.add('active');
             
-            currentPaymentPlan = "standard";
-            document.getElementById('payment-amount').textContent = "150";
-            document.getElementById('mpesa-modal').style.display = 'flex';
+            document.querySelectorAll('.nav-link').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[data-section="auth"]').classList.add('active');
         });
 
-        document.getElementById('premium-pay').addEventListener('click', function() {
-            if (!currentUser.loggedIn) {
-                alert('Please sign in first to upgrade your account!');
-                document.getElementById('signin-modal').style.display = 'flex';
-                return;
-            }
+        document.getElementById('payment-signin-btn').addEventListener('click', function() {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('auth').classList.add('active');
             
-            currentPaymentPlan = "premium";
-            document.getElementById('payment-amount').textContent = "300";
-            document.getElementById('mpesa-modal').style.display = 'flex';
+            document.querySelectorAll('.nav-link').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[data-section="auth"]').classList.add('active');
         });
 
-        // Cancel payment
-        document.getElementById('cancel-payment').addEventListener('click', function() {
-            document.getElementById('mpesa-modal').style.display = 'none';
+        // Header login button
+        document.getElementById('login-btn').addEventListener('click', function() {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('auth').classList.add('active');
+            
+            document.querySelectorAll('.nav-link').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[data-section="auth"]').classList.add('active');
         });
-
-        // Payment verification functionality
-        document.getElementById('verify-payment').addEventListener('click', function() {
-            const transactionCode = document.getElementById('transaction-code').value.trim();
-            const validPaymentCode = "QTY4GFDYU57DZ";
-            
-            if (transactionCode === validPaymentCode) {
-                // Payment successful
-                currentUser.premium = true;
-                currentUser.verified = true;
-                currentUser.plan = currentPaymentPlan;
-                
-                // Update daily matches
-                updateDailyMatches();
-                
-                // Clear the input and close modal
-                document.getElementById('transaction-code').value = '';
-                document.getElementById('mpesa-modal').style.display = 'none';
-                
-                // Update profile display
-                updateProfileDisplay();
-                
-                // Show chat section now that user is upgraded
-                document.getElementById('chat-login-required').style.display = 'none';
-                document.getElementById('chat-container').style.display = 'flex';
-                
-                alert(`Payment verified successfully! Your account has been upgraded to ${currentPaymentPlan}. You now have ${currentUser.dailyMatches} daily matches and can access messages.`);
-            } else {
-                alert('Invalid transaction code. Please check and try again.');
-            }
-        });
-
-        // Manual payment verification
-        document.getElementById('manual-verify-payment').addEventListener('click', function() {
-            const transactionCode = document.getElementById('manual-transaction-code').value.trim();
-            const validPaymentCode = "QTY4GFDYU57DZ";
-            
-            if (transactionCode === validPaymentCode) {
-                // Payment successful
-                currentUser.premium = true;
-                currentUser.verified = true;
-                currentUser.plan = "premium"; // Default to premium for manual verification
-                
-                // Update daily matches
-                updateDailyMatches();
-                
-                // Clear the input
-                document.getElementById('manual-transaction-code').value = '';
-                
-                // Update profile display
-                updateProfileDisplay();
-                
-                // Show chat section now that user is upgraded
-                document.getElementById('chat-login-required').style.display = 'none';
-                document.getElementById('chat-container').style.display = 'flex';
-                
-                alert(`Payment verified successfully! Your account has been upgraded to Premium. You now have ${currentUser.dailyMatches} daily matches and can access messages.`);
-            } else {
-                alert('Invalid transaction code. Please check and try again.');
-            }
-        });
-
-        // Update user profile
-        function updateUserProfile() {
-            if (!currentUser.loggedIn) {
-                alert('Please sign in first to update your profile!');
-                document.getElementById('signin-modal').style.display = 'flex';
-                return;
-            }
-            
-            const name = document.getElementById('name').value;
-            const age = document.getElementById('age').value;
-            const gender = document.getElementById('gender').value;
-            const location = document.getElementById('location').value;
-            
-            currentUser = {
-                ...currentUser,
-                name,
-                age,
-                gender,
-                location
-            };
-            
-            // Save user state
-            saveUserState();
-            
-            // Update profile display
-            updateProfileDisplay();
-            
-            alert('Profile updated successfully!');
-        }
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
             // Check if user is already logged in
             if (currentUser.loggedIn) {
                 document.getElementById('login-btn').style.display = 'none';
-                updateProfileDisplay();
+                
+                // Redirect to home section
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('home').classList.add('active');
+                
+                // Update nav links
+                document.querySelectorAll('.nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector('[data-section="home"]').classList.add('active');
             }
-            
-            // Update daily matches on load
-            updateDailyMatches();
         });
     </script>
 </body>
