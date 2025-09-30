@@ -167,34 +167,310 @@
             color: var(--dark-gray);
         }
         
-        /* Welcome Section */
+        /* Auth Section */
+        .auth-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+        }
+        
+        .auth-container {
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+        }
+        
+        .auth-welcome {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+            color: var(--white);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .auth-welcome h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .auth-welcome p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 300px;
+        }
+        
+        .auth-welcome-features {
+            text-align: left;
+            margin-top: 30px;
+        }
+        
+        .auth-welcome-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .auth-welcome-features i {
+            color: var(--white);
+            font-size: 18px;
+        }
+        
+        .auth-forms {
+            flex: 1;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .auth-tab.active {
+            color: var(--primary-pink);
+            border-bottom: 3px solid var(--primary-pink);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .auth-form h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .auth-form p {
+            margin-bottom: 30px;
+            color: var(--dark-gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 2px rgba(255, 77, 136, 0.2);
+            outline: none;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--primary-pink);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+        }
+        
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #e0e0e0;
+        }
+        
+        .auth-divider span {
+            padding: 0 15px;
+            color: var(--dark-gray);
+            font-size: 14px;
+        }
+        
+        .social-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .terms {
+            font-size: 14px;
+            color: var(--dark-gray);
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .terms a {
+            color: var(--primary-pink);
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Login Animation */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 77, 136, 0.3);
+            border-top: 8px solid var(--primary-pink);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .heart-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 200px;
+            color: var(--primary-pink);
+            z-index: 2001;
+            animation: pop 0.8s forwards;
+        }
+        
+        .heart-popup:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes pop {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            70% { transform: translate(-50%, -50%) scale(1.2); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        /* Hidden Sections */
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        /* Home/Browse Section */
         .welcome-section {
             text-align: center;
             padding: 60px 0;
-            background: linear-gradient(to right, rgba(255, 77, 136, 0.1), rgba(255, 102, 153, 0.1));
-            border-radius: 20px;
-            margin-bottom: 40px;
         }
         
         .welcome-section h1 {
-            font-size: 36px;
+            font-size: 48px;
             margin-bottom: 20px;
             color: var(--dark-gray);
         }
         
         .welcome-section p {
-            font-size: 18px;
+            font-size: 20px;
+            margin-bottom: 40px;
             max-width: 600px;
-            margin: 0 auto 30px;
+            margin-left: auto;
+            margin-right: auto;
             color: var(--dark-gray);
         }
         
-        /* Profile Cards */
-        .profiles-container {
+        /* Browse Section */
+        .browse-section {
+            padding: 20px 0;
+        }
+        
+        .browse-filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            padding: 12px 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: var(--white);
+            min-width: 150px;
+        }
+        
+        .profiles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
-            margin-bottom: 40px;
         }
         
         .profile-card {
@@ -202,17 +478,62 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .profile-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
         .profile-image {
+            height: 300px;
+            background-color: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-image img {
             width: 100%;
-            height: 250px;
+            height: 100%;
             object-fit: cover;
+        }
+        
+        .profile-actions {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--white);
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .like-btn {
+            color: var(--primary-pink);
+        }
+        
+        .dislike-btn {
+            color: var(--dark-gray);
+        }
+        
+        .action-btn:hover {
+            transform: scale(1.1);
         }
         
         .profile-info {
@@ -221,7 +542,7 @@
         
         .profile-name {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: bold;
             margin-bottom: 5px;
             display: flex;
             align-items: center;
@@ -229,146 +550,447 @@
         }
         
         .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            background-color: var(--blue-tick);
-            border-radius: 50%;
-            color: white;
-            font-size: 12px;
+            color: var(--blue-tick);
+            font-size: 16px;
         }
         
         .profile-details {
             color: var(--dark-gray);
             margin-bottom: 15px;
+        }
+        
+        .profile-bio {
+            font-size: 14px;
+            color: var(--dark-gray);
+            line-height: 1.5;
+        }
+        
+        /* Messages Section */
+        .messages-section {
+            padding: 20px 0;
+        }
+        
+        .messages-container {
+            display: flex;
+            height: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .conversations-list {
+            width: 350px;
+            background-color: var(--light-gray);
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+        }
+        
+        .conversations-header {
+            padding: 20px;
+            background-color: var(--white);
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .conversations-header h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .search-conversations {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
             font-size: 14px;
         }
         
-        .profile-interests {
+        .conversation {
             display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 15px;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
         
-        .interest-tag {
-            background-color: var(--light-gray);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        
-        .profile-actions {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        /* Single Profile View (Swipe Interface) */
-        .single-profile-view {
-            max-width: 400px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .single-profile-card {
+        .conversation:hover, .conversation.active {
             background-color: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
-        .single-profile-image {
+        .conversation-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            margin-right: 15px;
+            overflow: hidden;
+        }
+        
+        .conversation-avatar img {
             width: 100%;
-            height: 500px;
+            height: 100%;
             object-fit: cover;
         }
         
-        .single-profile-info {
-            padding: 25px;
+        .conversation-info {
+            flex: 1;
         }
         
-        .swipe-actions {
+        .conversation-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .conversation-preview {
+            font-size: 14px;
+            color: var(--dark-gray);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .conversation-time {
+            font-size: 12px;
+            color: var(--dark-gray);
+        }
+        
+        .chat-area {
+            flex: 1;
             display: flex;
+            flex-direction: column;
+            background-color: var(--white);
+        }
+        
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .chat-header-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            margin-right: 15px;
+            overflow: hidden;
+        }
+        
+        .chat-header-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .chat-header-info {
+            flex: 1;
+        }
+        
+        .chat-header-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .chat-header-status {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message {
+            max-width: 70%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            position: relative;
+        }
+        
+        .message.received {
+            align-self: flex-start;
+            background-color: var(--light-gray);
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message.sent {
+            align-self: flex-end;
+            background-color: var(--primary-pink);
+            color: var(--white);
+            border-bottom-right-radius: 5px;
+        }
+        
+        .message-time {
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: right;
+            opacity: 0.7;
+        }
+        
+        .chat-input {
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 16px;
+        }
+        
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-pink);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            font-size: 18px;
+        }
+        
+        /* Profile Section */
+        .profile-section {
+            padding: 20px 0;
+        }
+        
+        .profile-container {
+            display: flex;
             gap: 30px;
+        }
+        
+        .profile-sidebar {
+            width: 300px;
+        }
+        
+        .profile-main {
+            flex: 1;
+        }
+        
+        .profile-card-large {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .profile-header {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+            position: relative;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--white);
+            background-color: var(--light-gray);
+            position: absolute;
+            bottom: -75px;
+            left: 30px;
+            overflow: hidden;
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-actions-large {
+            position: absolute;
+            right: 30px;
+            bottom: 20px;
+        }
+        
+        .profile-body {
+            padding: 100px 30px 30px;
+        }
+        
+        .profile-name-large {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .profile-details-large {
+            margin-bottom: 20px;
+        }
+        
+        .profile-bio-large {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-tag {
+            background-color: var(--light-gray);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .profile-edit-form {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group-half {
+            flex: 1;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
             margin-top: 30px;
         }
         
-        .swipe-btn {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
+        /* Payment Section */
+        .payment-section {
+            padding: 20px 0;
+        }
+        
+        .plans-container {
             display: flex;
-            align-items: center;
+            gap: 30px;
             justify-content: center;
-            font-size: 28px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            border: none;
+            flex-wrap: wrap;
         }
         
-        .swipe-dislike {
+        .plan-card {
             background-color: var(--white);
-            color: var(--dark-gray);
-            border: 2px solid var(--dark-gray);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            transition: transform 0.3s;
+            position: relative;
         }
         
-        .swipe-like {
+        .plan-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .plan-card.popular {
+            border: 2px solid var(--primary-pink);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
             background-color: var(--primary-pink);
             color: var(--white);
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
         }
         
-        .swipe-btn:hover {
-            transform: scale(1.1);
+        .plan-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
         
-        .daily-limit {
+        .plan-price {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--primary-pink);
+        }
+        
+        .plan-price span {
+            font-size: 16px;
+            color: var(--dark-gray);
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Login Required */
+        .login-required {
             text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background-color: var(--light-gray);
-            border-radius: 10px;
+            padding: 60px 0;
         }
         
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-        
-        .modal h2 {
+        .login-required h2 {
+            font-size: 32px;
             margin-bottom: 20px;
             color: var(--dark-gray);
         }
         
-        .modal p {
-            margin-bottom: 20px;
-        }
-        
-        .modal-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
+        .login-required p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--dark-gray);
         }
         
         /* Footer */
@@ -424,36 +1046,48 @@
                 justify-content: center;
             }
             
-            .profiles-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            .auth-container {
+                flex-direction: column;
             }
             
-            .single-profile-image {
-                height: 400px;
+            .auth-welcome {
+                padding: 40px 20px;
             }
-        }
-        
-        /* Hidden Sections */
-        .section {
-            display: none;
-        }
-        
-        .section.active {
-            display: block;
+            
+            .auth-forms {
+                padding: 40px 20px;
+            }
+            
+            .messages-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .conversations-list {
+                width: 100%;
+                height: 300px;
+            }
+            
+            .profile-container {
+                flex-direction: column;
+            }
+            
+            .profile-sidebar {
+                width: 100%;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Daily Limit Modal -->
-    <div id="daily-limit-modal" class="modal">
-        <div class="modal-content">
-            <h2>Daily Limit Reached</h2>
-            <p>You've viewed all <span id="limit-count">10</span> profiles available for today. Come back tomorrow to see more potential matches or upgrade to premium for more access.</p>
-            <div class="modal-buttons">
-                <button class="btn btn-outline" id="close-modal">OK</button>
-                <button class="btn btn-pink" id="upgrade-now">Upgrade Now</button>
-            </div>
-        </div>
+    <!-- Login Animation Overlay -->
+    <div id="login-overlay" class="login-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>Signing in...</p>
     </div>
 
     <header>
@@ -465,13 +1099,16 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#" class="nav-link active" data-section="home">Browse</a></li>
+                        <li><a href="#" class="nav-link active" data-section="auth">Sign In</a></li>
+                        <li><a href="#" class="nav-link" data-section="home">Browse</a></li>
+                        <li><a href="#" class="nav-link" data-section="chat">Messages</a></li>
                         <li><a href="#" class="nav-link" data-section="profile">My Profile</a></li>
                         <li><a href="#" class="nav-link" data-section="payment">Upgrade</a></li>
                     </ul>
                 </nav>
                 <div class="user-actions">
                     <button class="btn btn-pink" id="login-btn">Sign In</button>
+                    <button class="btn btn-outline" id="logout-btn" style="display: none;">Log Out</button>
                 </div>
             </div>
         </div>
@@ -479,33 +1116,209 @@
 
     <main>
         <div class="container">
-            <!-- Home/Browse Section -->
-            <section id="home" class="section active">
-                <div class="welcome-section">
-                    <h1>Find Your Perfect Match in Kenya</h1>
-                    <p>Connect with amazing people near you. Like, chat, and build meaningful relationships.</p>
-                    <button class="btn btn-pink" id="start-matching">Start Matching</button>
-                </div>
-                
-                <!-- Single Profile View (Hidden initially) -->
-                <div id="single-view" style="display: none;">
-                    <div class="single-profile-view">
-                        <div class="single-profile-card">
-                            <img id="current-profile-image" src="" alt="Profile" class="single-profile-image">
-                            <div class="single-profile-info">
-                                <h2 class="profile-name" id="current-profile-name"></h2>
-                                <p id="current-profile-details" class="profile-details"></p>
-                                <div class="profile-interests" id="current-profile-interests">
-                                    <!-- Interests will be dynamically generated here -->
-                                </div>
+            <!-- Auth Section -->
+            <section id="auth" class="section active">
+                <div class="auth-section">
+                    <div class="auth-container">
+                        <div class="auth-welcome">
+                            <h2>Welcome to KE MATCH</h2>
+                            <p>Find your perfect match in Kenya. Connect with amazing people near you.</p>
+                            <div class="auth-welcome-features">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> <span>Smart matching algorithm</span></li>
+                                    <li><i class="fas fa-check"></i> <span>Secure & verified profiles</span></li>
+                                    <li><i class="fas fa-check"></i> <span>Chat with your matches</span></li>
+                                    <li><i class="fas fa-check"></i> <span>Find people in your area</span></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="swipe-actions">
-                            <button class="swipe-btn swipe-dislike" id="dislike-btn">✕</button>
-                            <button class="swipe-btn swipe-like" id="like-btn">♥</button>
+                        <div class="auth-forms">
+                            <div class="auth-tabs">
+                                <div class="auth-tab active" data-tab="login">Log In</div>
+                                <div class="auth-tab" data-tab="signup">Sign Up</div>
+                            </div>
+                            
+                            <!-- Login Form -->
+                            <div class="auth-form active" id="login-form">
+                                <h3>Welcome Back</h3>
+                                <p>Log in to your KE MATCH account</p>
+                                
+                                <form id="loginForm">
+                                    <div class="form-group">
+                                        <label for="login-email">Email Address</label>
+                                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="login-password">Password</label>
+                                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                                    </div>
+                                    
+                                    <div class="form-options">
+                                        <div class="remember-me">
+                                            <input type="checkbox" id="remember-me">
+                                            <label for="remember-me">Remember me</label>
+                                        </div>
+                                        <a href="#" class="forgot-password">Forgot password?</a>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-pink" style="width: 100%; margin-bottom: 20px;">Log In</button>
+                                </form>
+                                
+                                <div class="auth-divider">
+                                    <span>Or continue with</span>
+                                </div>
+                                
+                                <div class="social-auth">
+                                    <button class="btn btn-facebook" id="facebook-login">
+                                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Continue with Facebook
+                                    </button>
+                                    <button class="btn btn-google" id="google-login">
+                                        <i class="fab fa-google" style="margin-right: 10px;"></i> Continue with Google
+                                    </button>
+                                </div>
+                                
+                                <p class="terms">By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                            </div>
+                            
+                            <!-- Sign Up Form -->
+                            <div class="auth-form" id="signup-form">
+                                <h3>Create Account</h3>
+                                <p>Join KE MATCH to find your perfect match</p>
+                                
+                                <form id="signupForm">
+                                    <div class="form-group">
+                                        <label for="signup-name">Full Name</label>
+                                        <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-email">Email Address</label>
+                                        <input type="email" id="signup-email" placeholder="Enter your email" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-password">Password</label>
+                                        <input type="password" id="signup-password" placeholder="Create a password" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-confirm-password">Confirm Password</label>
+                                        <input type="password" id="signup-confirm-password" placeholder="Confirm your password" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-gender">Gender</label>
+                                        <select id="signup-gender" style="width: 100%; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
+                                            <option value="">Select your gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="signup-age">Age</label>
+                                        <input type="number" id="signup-age" placeholder="Enter your age" min="18" max="100" required>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-pink" style="width: 100%; margin-bottom: 20px;">Create Account</button>
+                                </form>
+                                
+                                <div class="auth-divider">
+                                    <span>Or sign up with</span>
+                                </div>
+                                
+                                <div class="social-auth">
+                                    <button class="btn btn-facebook" id="facebook-signup">
+                                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Sign up with Facebook
+                                    </button>
+                                    <button class="btn btn-google" id="google-signup">
+                                        <i class="fab fa-google" style="margin-right: 10px;"></i> Sign up with Google
+                                    </button>
+                                </div>
+                                
+                                <p class="terms">By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                            </div>
                         </div>
-                        <div class="daily-limit">
-                            <p>Profiles viewed today: <span id="profiles-viewed">0</span>/<span id="daily-limit">10</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Home/Browse Section -->
+            <section id="home" class="section">
+                <div class="browse-section">
+                    <h2 class="section-title">Browse Profiles</h2>
+                    
+                    <div class="browse-filters">
+                        <select class="filter-select" id="gender-filter">
+                            <option value="">All Genders</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        
+                        <select class="filter-select" id="age-filter">
+                            <option value="">All Ages</option>
+                            <option value="18-25">18-25</option>
+                            <option value="26-35">26-35</option>
+                            <option value="36-45">36-45</option>
+                            <option value="46+">46+</option>
+                        </select>
+                        
+                        <select class="filter-select" id="location-filter">
+                            <option value="">All Locations</option>
+                            <option value="nairobi">Nairobi</option>
+                            <option value="mombasa">Mombasa</option>
+                            <option value="kisumu">Kisumu</option>
+                            <option value="nakuru">Nakuru</option>
+                        </select>
+                        
+                        <button class="btn btn-pink" id="apply-filters">Apply Filters</button>
+                    </div>
+                    
+                    <div class="profiles-grid" id="profiles-container">
+                        <!-- Profiles will be dynamically loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chat Section -->
+            <section id="chat" class="section">
+                <div class="messages-section">
+                    <h2 class="section-title">Messages</h2>
+                    
+                    <div class="messages-container">
+                        <div class="conversations-list">
+                            <div class="conversations-header">
+                                <h3>Conversations</h3>
+                                <input type="text" class="search-conversations" placeholder="Search conversations...">
+                            </div>
+                            
+                            <div class="conversations" id="conversations-list">
+                                <!-- Conversations will be dynamically loaded here -->
+                            </div>
+                        </div>
+                        
+                        <div class="chat-area">
+                            <div class="chat-header">
+                                <div class="chat-header-avatar">
+                                    <img src="" alt="Profile" id="chat-partner-avatar">
+                                </div>
+                                <div class="chat-header-info">
+                                    <div class="chat-header-name" id="chat-partner-name">Select a conversation</div>
+                                    <div class="chat-header-status" id="chat-partner-status">Online</div>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-messages" id="chat-messages">
+                                <!-- Messages will be dynamically loaded here -->
+                            </div>
+                            
+                            <div class="chat-input">
+                                <input type="text" id="message-input" placeholder="Type a message..." disabled>
+                                <button class="send-btn" id="send-message" disabled>
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -513,52 +1326,151 @@
 
             <!-- Profile Section -->
             <section id="profile" class="section">
-                <h2 class="section-title">My Profile</h2>
-                <div class="login-required">
-                    <h2>Sign In Required</h2>
-                    <p>You need to sign in to view and edit your profile.</p>
-                    <button class="btn btn-pink" id="profile-signin-btn">Sign In Now</button>
+                <div class="profile-section">
+                    <h2 class="section-title">My Profile</h2>
+                    
+                    <div class="profile-container">
+                        <div class="profile-sidebar">
+                            <div class="profile-card-large">
+                                <div class="profile-header">
+                                    <div class="profile-avatar">
+                                        <img src="" alt="Profile" id="profile-avatar">
+                                    </div>
+                                    <div class="profile-actions-large">
+                                        <button class="btn btn-pink" id="edit-profile-btn">Edit Profile</button>
+                                    </div>
+                                </div>
+                                <div class="profile-body">
+                                    <div class="profile-name-large">
+                                        <span id="profile-full-name">John Doe</span>
+                                        <i class="fas fa-check-circle verified-badge"></i>
+                                    </div>
+                                    <div class="profile-details-large" id="profile-details">28, Nairobi</div>
+                                    <div class="profile-bio-large" id="profile-bio">
+                                        I'm a software developer who loves hiking and trying new restaurants. Looking for someone to share adventures with!
+                                    </div>
+                                    
+                                    <div class="profile-tags" id="profile-tags">
+                                        <div class="profile-tag">Adventure</div>
+                                        <div class="profile-tag">Foodie</div>
+                                        <div class="profile-tag">Tech</div>
+                                        <div class="profile-tag">Travel</div>
+                                    </div>
+                                    
+                                    <div class="profile-stats">
+                                        <div class="stat">
+                                            <div class="stat-value" id="profile-views">245</div>
+                                            <div class="stat-label">Profile Views</div>
+                                        </div>
+                                        <div class="stat">
+                                            <div class="stat-value" id="profile-likes">42</div>
+                                            <div class="stat-label">Likes</div>
+                                        </div>
+                                        <div class="stat">
+                                            <div class="stat-value" id="profile-matches">18</div>
+                                            <div class="stat-label">Matches</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-main">
+                            <div class="profile-edit-form" id="profile-edit-form" style="display: none;">
+                                <h3>Edit Profile</h3>
+                                
+                                <form id="profile-form">
+                                    <div class="form-row">
+                                        <div class="form-group-half">
+                                            <label for="edit-name">Full Name</label>
+                                            <input type="text" id="edit-name" placeholder="Enter your full name" required>
+                                        </div>
+                                        <div class="form-group-half">
+                                            <label for="edit-age">Age</label>
+                                            <input type="number" id="edit-age" placeholder="Enter your age" min="18" max="100" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group-half">
+                                            <label for="edit-gender">Gender</label>
+                                            <select id="edit-gender" required>
+                                                <option value="">Select your gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group-half">
+                                            <label for="edit-location">Location</label>
+                                            <input type="text" id="edit-location" placeholder="Enter your location" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="edit-bio">Bio</label>
+                                        <textarea id="edit-bio" rows="4" placeholder="Tell others about yourself"></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="edit-interests">Interests (comma separated)</label>
+                                        <input type="text" id="edit-interests" placeholder="e.g. hiking, cooking, movies">
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="button" class="btn btn-outline" id="cancel-edit">Cancel</button>
+                                        <button type="submit" class="btn btn-pink">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Payment Section -->
             <section id="payment" class="section">
-                <h2 class="section-title">Upgrade Your Experience</h2>
                 <div class="payment-section">
-                    <h2 class="payment-title">Unlock More Matches on KE MATCH</h2>
-                    <p>Upgrade now to connect with more potential matches every day!</p>
+                    <h2 class="section-title">Upgrade Your Experience</h2>
                     
-                    <div class="payment-options">
-                        <div class="payment-option">
-                            <h3>Free Plan</h3>
-                            <div class="payment-details">
-                                <p><strong>Price:</strong> Free</p>
-                                <p><strong>Daily Matches:</strong> 10</p>
-                                <p><strong>Features:</strong> Basic matching</p>
-                            </div>
-                            <button class="btn btn-outline" disabled>Current Plan</button>
+                    <div class="plans-container">
+                        <div class="plan-card">
+                            <div class="plan-name">Basic</div>
+                            <div class="plan-price">KSh 0<span>/month</span></div>
+                            <ul class="plan-features">
+                                <li>Create a profile</li>
+                                <li>Browse profiles</li>
+                                <li>Send 5 likes per day</li>
+                                <li>Basic matching</li>
+                                <li>Limited messaging</li>
+                            </ul>
+                            <button class="btn btn-outline">Current Plan</button>
                         </div>
                         
-                        <div class="payment-option">
-                            <h3>Standard Plan</h3>
-                            <div class="payment-details">
-                                <p><strong>Price:</strong> Ksh 150</p>
-                                <p><strong>Extra Matches:</strong> +20 matches</p>
-                                <p><strong>Total Matches:</strong> 30 (10 free + 20 premium)</p>
-                                <p><strong>Features:</strong> Blue tick verification</p>
-                            </div>
-                            <button class="btn btn-pink" id="standard-pay">Upgrade to Standard</button>
+                        <div class="plan-card popular">
+                            <div class="popular-badge">MOST POPULAR</div>
+                            <div class="plan-name">Premium</div>
+                            <div class="plan-price">KSh 499<span>/month</span></div>
+                            <ul class="plan-features">
+                                <li>Unlimited likes</li>
+                                <li>See who liked you</li>
+                                <li>Advanced filters</li>
+                                <li>Unlimited messaging</li>
+                                <li>Priority customer support</li>
+                            </ul>
+                            <button class="btn btn-pink">Upgrade Now</button>
                         </div>
                         
-                        <div class="payment-option">
-                            <h3>Premium Plan</h3>
-                            <div class="payment-details">
-                                <p><strong>Price:</strong> Ksh 300</p>
-                                <p><strong>Extra Matches:</strong> +40 matches</p>
-                                <p><strong>Total Matches:</strong> 50 (10 free + 40 premium)</p>
-                                <p><strong>Features:</strong> Blue tick + Priority matching</p>
-                            </div>
-                            <button class="btn btn-gold" id="premium-pay">Upgrade to Premium</button>
+                        <div class="plan-card">
+                            <div class="plan-name">VIP</div>
+                            <div class="plan-price">KSh 999<span>/month</span></div>
+                            <ul class="plan-features">
+                                <li>All Premium features</li>
+                                <li>Profile spotlight</li>
+                                <li>Verified badge</li>
+                                <li>Monthly boost</li>
+                                <li>Dedicated account manager</li>
+                            </ul>
+                            <button class="btn btn-outline">Upgrade Now</button>
                         </div>
                     </div>
                 </div>
@@ -576,7 +1488,7 @@
                     </div>
                 </div>
                 <div class="footer-links">
-                    <a href="#" class="footer-link">About</a>
+                    <a href="#" class="footer-link" data-section="about">About</a>
                     <a href="#">Privacy</a>
                     <a href="#">Terms</a>
                     <a href="#">Help</a>
@@ -588,439 +1500,766 @@
     </footer>
 
     <script>
-        // Sample data for profiles
-        const femaleProfiles = [
+        // App state
+        let currentUser = JSON.parse(localStorage.getItem('kematch_user')) || {
+            loggedIn: false
+        };
+
+        // Sample data for profiles, conversations, and messages
+        const sampleProfiles = [
             {
                 id: 1,
                 name: "Sarah M.",
-                age: 25,
+                age: 26,
                 location: "Nairobi",
-                image: "https://files.catbox.moe/gefnh3.jpeg",
-                hobbies: ["Travel", "Music"],
-                likes: ["Movies", "Art"],
-                dislikes: ["Smoking", "Lateness"],
-                premium: true,
-                verified: true
+                gender: "female",
+                bio: "Marketing professional who loves art galleries and weekend getaways.",
+                verified: true,
+                image: "https://randomuser.me/api/portraits/women/1.jpg"
             },
             {
                 id: 2,
-                name: "Grace W.",
-                age: 27,
-                location: "Kisumu",
-                image: "https://files.catbox.moe/ayz7eb.jpeg",
-                hobbies: ["Cooking", "Music"],
-                likes: ["Food", "Fitness"],
-                dislikes: ["Arrogance", "Lateness"],
-                premium: false,
-                verified: false
+                name: "David K.",
+                age: 30,
+                location: "Mombasa",
+                gender: "male",
+                bio: "Chef and food enthusiast. Looking for someone to share culinary adventures with.",
+                verified: false,
+                image: "https://randomuser.me/api/portraits/men/2.jpg"
             },
             {
                 id: 3,
-                name: "Lilian K.",
+                name: "Grace W.",
                 age: 24,
-                location: "Mombasa",
-                image: "https://files.catbox.moe/by8fa3.jpeg",
-                hobbies: ["Dancing", "Photography"],
-                likes: ["Beach", "Coffee"],
-                dislikes: ["Rudeness", "Lies"],
-                premium: true,
-                verified: true
+                location: "Nairobi",
+                gender: "female",
+                bio: "Medical student with a passion for hiking and photography.",
+                verified: true,
+                image: "https://randomuser.me/api/portraits/women/3.jpg"
             },
             {
                 id: 4,
-                name: "Esther N.",
-                age: 26,
-                location: "Nakuru",
-                image: "https://files.catbox.moe/75urqe.jpeg",
-                hobbies: ["Reading", "Hiking"],
-                likes: ["Outdoors", "Animals"],
-                dislikes: ["Noise", "Messy"],
-                premium: false,
-                verified: false
+                name: "James O.",
+                age: 32,
+                location: "Kisumu",
+                gender: "male",
+                bio: "Engineer who enjoys outdoor activities and trying new restaurants.",
+                verified: false,
+                image: "https://randomuser.me/api/portraits/men/4.jpg"
             },
             {
                 id: 5,
-                name: "Mary A.",
-                age: 23,
-                location: "Eldoret",
-                image: "https://files.catbox.moe/3nqkcq.jpeg",
-                hobbies: ["Sports", "Travel"],
-                likes: ["Fitness", "Movies"],
-                dislikes: ["Smoking", "Laziness"],
-                premium: true,
-                verified: true
+                name: "Linda A.",
+                age: 28,
+                location: "Nairobi",
+                gender: "female",
+                bio: "Graphic designer and art lover. Always up for coffee and good conversation.",
+                verified: true,
+                image: "https://randomuser.me/api/portraits/women/5.jpg"
             },
             {
                 id: 6,
-                name: "Joyce T.",
-                age: 28,
-                location: "Kakamega",
-                image: "https://files.catbox.moe/75yl23.jpeg",
-                hobbies: ["Cooking", "Reading"],
-                likes: ["Food", "Art"],
-                dislikes: ["Lateness", "Arrogance"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 7,
-                name: "Rebecca J.",
+                name: "Peter N.",
                 age: 29,
-                location: "Kisii",
-                image: "https://files.catbox.moe/b3cdqy.jpeg",
-                hobbies: ["Music", "Dancing"],
-                likes: ["Coffee", "Movies"],
-                dislikes: ["Rudeness", "Lies"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 8,
-                name: "Patience O.",
-                age: 26,
-                location: "Meru",
-                image: "https://files.catbox.moe/nnl07r.jpeg",
-                hobbies: ["Photography", "Hiking"],
-                likes: ["Outdoors", "Animals"],
-                dislikes: ["Noise", "Messy"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 9,
-                name: "Faith M.",
-                age: 24,
-                location: "Nyeri",
-                image: "https://files.catbox.moe/511rhc.jpeg",
-                hobbies: ["Travel", "Sports"],
-                likes: ["Beach", "Fitness"],
-                dislikes: ["Smoking", "Laziness"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 10,
-                name: "Hope K.",
-                age: 27,
-                location: "Thika",
-                image: "https://files.catbox.moe/7ts6fo.jpeg",
-                hobbies: ["Reading", "Cooking"],
-                likes: ["Food", "Coffee"],
-                dislikes: ["Arrogance", "Rudeness"],
-                premium: false,
-                verified: false
-            },
-            {
-                id: 11,
-                name: "Mercy W.",
-                age: 25,
-                location: "Nairobi",
-                image: "https://files.catbox.moe/gefnh3.jpeg",
-                hobbies: ["Art", "Photography"],
-                likes: ["Music", "Travel"],
-                dislikes: ["Lies", "Rudeness"],
-                premium: true,
-                verified: true
-            },
-            {
-                id: 12,
-                name: "Cynthia A.",
-                age: 26,
-                location: "Mombasa",
-                image: "https://files.catbox.moe/ayz7eb.jpeg",
-                hobbies: ["Dancing", "Cooking"],
-                likes: ["Movies", "Beach"],
-                dislikes: ["Smoking", "Noise"],
-                premium: false,
-                verified: false
+                location: "Nakuru",
+                gender: "male",
+                bio: "Teacher and nature enthusiast. Love hiking, camping, and stargazing.",
+                verified: false,
+                image: "https://randomuser.me/api/portraits/men/6.jpg"
             }
         ];
 
-        // App state
-        let currentUser = JSON.parse(localStorage.getItem('kematch_user')) || {
-            name: "",
-            age: 28,
-            gender: "male",
-            location: "nairobi",
-            premium: false,
-            verified: false,
-            plan: "free",
-            loggedIn: true, // Set to true for demo
-            photos: [],
-            dailyMatches: 10,
-            profilesViewedToday: 0,
-            lastResetDate: new Date().toDateString()
+        const sampleConversations = [
+            {
+                id: 1,
+                userId: 1,
+                name: "Sarah M.",
+                lastMessage: "Hey! How was your weekend?",
+                time: "2 hours ago",
+                unread: 2,
+                image: "https://randomuser.me/api/portraits/women/1.jpg"
+            },
+            {
+                id: 2,
+                userId: 3,
+                name: "Grace W.",
+                lastMessage: "I'd love to see more of your photos!",
+                time: "1 day ago",
+                unread: 0,
+                image: "https://randomuser.me/api/portraits/women/3.jpg"
+            },
+            {
+                id: 3,
+                userId: 5,
+                name: "Linda A.",
+                lastMessage: "That cafe sounds perfect for our date!",
+                time: "3 days ago",
+                unread: 1,
+                image: "https://randomuser.me/api/portraits/women/5.jpg"
+            }
+        ];
+
+        const sampleMessages = {
+            1: [
+                { id: 1, text: "Hi there! I came across your profile and thought you seemed really interesting.", time: "10:30 AM", sent: false },
+                { id: 2, text: "Hello! Thanks for reaching out. What caught your attention?", time: "10:35 AM", sent: true },
+                { id: 3, text: "I noticed we both love hiking! Have you been to any good trails recently?", time: "10:40 AM", sent: false },
+                { id: 4, text: "Yes! I actually went to Karura Forest last weekend. It was beautiful this time of year.", time: "10:45 AM", sent: true },
+                { id: 5, text: "I love Karura! We should go together sometime.", time: "10:50 AM", sent: false },
+                { id: 6, text: "That would be great! How about next Saturday?", time: "10:55 AM", sent: true },
+                { id: 7, text: "Sounds perfect! I'll check my schedule and confirm.", time: "11:00 AM", sent: false },
+                { id: 8, text: "Looking forward to it! 😊", time: "11:05 AM", sent: true }
+            ],
+            3: [
+                { id: 1, text: "Hi Linda! I saw your artwork on your profile - it's amazing!", time: "2:15 PM", sent: true },
+                { id: 2, text: "Thank you! I don't get to paint as much as I'd like these days, but it's my passion.", time: "2:20 PM", sent: false },
+                { id: 3, text: "I can tell! Do you have a favorite medium?", time: "2:25 PM", sent: true },
+                { id: 4, text: "I mostly work with watercolors, but I've been experimenting with digital art recently.", time: "2:30 PM", sent: false },
+                { id: 5, text: "That's so cool! I'd love to see some of your digital work sometime.", time: "2:35 PM", sent: true }
+            ]
         };
 
-        let currentUserGender = "male";
-        let currentProfileIndex = 0;
-        let currentProfiles = [];
+        // Navigation functionality
+        document.querySelectorAll('.nav-link, .footer-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                if (this.classList.contains('nav-link')) {
+                    this.classList.add('active');
+                }
+                
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show the selected section
+                const sectionId = this.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Check if user needs to be logged in for certain sections
+                checkLoginRequirement(sectionId);
+                
+                // Load section-specific content if user is logged in
+                if (currentUser.loggedIn) {
+                    loadSectionContent(sectionId);
+                }
+            });
+        });
+
+        // Check if user needs to be logged in for certain sections
+        function checkLoginRequirement(sectionId) {
+            if (!currentUser.loggedIn && sectionId !== 'auth') {
+                // Redirect to auth section if not logged in
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('auth').classList.add('active');
+                
+                // Update nav links
+                document.querySelectorAll('.nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector('[data-section="auth"]').classList.add('active');
+            }
+        }
+
+        // Load section-specific content
+        function loadSectionContent(sectionId) {
+            switch(sectionId) {
+                case 'home':
+                    loadBrowseProfiles();
+                    break;
+                case 'chat':
+                    loadConversations();
+                    break;
+                case 'profile':
+                    loadProfileData();
+                    break;
+            }
+        }
+
+        // Load browse profiles
+        function loadBrowseProfiles() {
+            const profilesContainer = document.getElementById('profiles-container');
+            profilesContainer.innerHTML = '';
+            
+            sampleProfiles.forEach(profile => {
+                const profileCard = document.createElement('div');
+                profileCard.className = 'profile-card';
+                profileCard.innerHTML = `
+                    <div class="profile-image">
+                        <img src="${profile.image}" alt="${profile.name}">
+                        <div class="profile-actions">
+                            <button class="action-btn dislike-btn" data-id="${profile.id}">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button class="action-btn like-btn" data-id="${profile.id}">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-name">
+                            ${profile.name}, ${profile.age}
+                            ${profile.verified ? '<i class="fas fa-check-circle verified-badge"></i>' : ''}
+                        </div>
+                        <div class="profile-details">${profile.location}</div>
+                        <div class="profile-bio">${profile.bio}</div>
+                    </div>
+                `;
+                
+                profilesContainer.appendChild(profileCard);
+            });
+            
+            // Add event listeners to like/dislike buttons
+            document.querySelectorAll('.like-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const profileId = this.getAttribute('data-id');
+                    likeProfile(profileId);
+                });
+            });
+            
+            document.querySelectorAll('.dislike-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const profileId = this.getAttribute('data-id');
+                    dislikeProfile(profileId);
+                });
+            });
+        }
+
+        // Like a profile
+        function likeProfile(profileId) {
+            // In a real app, this would send a request to the server
+            alert(`You liked profile ${profileId}!`);
+            
+            // Remove the profile card from view
+            const profileCard = document.querySelector(`.like-btn[data-id="${profileId}"]`).closest('.profile-card');
+            profileCard.style.transform = 'translateX(100%)';
+            profileCard.style.opacity = '0';
+            
+            setTimeout(() => {
+                profileCard.remove();
+            }, 300);
+        }
+
+        // Dislike a profile
+        function dislikeProfile(profileId) {
+            // In a real app, this would send a request to the server
+            alert(`You passed on profile ${profileId}`);
+            
+            // Remove the profile card from view
+            const profileCard = document.querySelector(`.dislike-btn[data-id="${profileId}"]`).closest('.profile-card');
+            profileCard.style.transform = 'translateX(-100%)';
+            profileCard.style.opacity = '0';
+            
+            setTimeout(() => {
+                profileCard.remove();
+            }, 300);
+        }
+
+        // Load conversations
+        function loadConversations() {
+            const conversationsList = document.getElementById('conversations-list');
+            conversationsList.innerHTML = '';
+            
+            sampleConversations.forEach(conversation => {
+                const conversationElement = document.createElement('div');
+                conversationElement.className = 'conversation';
+                conversationElement.setAttribute('data-id', conversation.id);
+                conversationElement.innerHTML = `
+                    <div class="conversation-avatar">
+                        <img src="${conversation.image}" alt="${conversation.name}">
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-name">${conversation.name}</div>
+                        <div class="conversation-preview">${conversation.lastMessage}</div>
+                    </div>
+                    <div class="conversation-time">${conversation.time}</div>
+                `;
+                
+                conversationElement.addEventListener('click', function() {
+                    // Remove active class from all conversations
+                    document.querySelectorAll('.conversation').forEach(conv => {
+                        conv.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked conversation
+                    this.classList.add('active');
+                    
+                    // Load messages for this conversation
+                    loadMessages(conversation.id, conversation.name, conversation.image);
+                });
+                
+                conversationsList.appendChild(conversationElement);
+            });
+        }
+
+        // Load messages for a conversation
+        function loadMessages(conversationId, partnerName, partnerImage) {
+            const chatMessages = document.getElementById('chat-messages');
+            const chatPartnerName = document.getElementById('chat-partner-name');
+            const chatPartnerAvatar = document.getElementById('chat-partner-avatar');
+            const messageInput = document.getElementById('message-input');
+            const sendMessageBtn = document.getElementById('send-message');
+            
+            // Update chat header
+            chatPartnerName.textContent = partnerName;
+            chatPartnerAvatar.src = partnerImage;
+            
+            // Enable message input
+            messageInput.disabled = false;
+            sendMessageBtn.disabled = false;
+            
+            // Clear existing messages
+            chatMessages.innerHTML = '';
+            
+            // Load messages for this conversation
+            const messages = sampleMessages[conversationId] || [];
+            
+            messages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message ${message.sent ? 'sent' : 'received'}`;
+                messageElement.innerHTML = `
+                    <div class="message-text">${message.text}</div>
+                    <div class="message-time">${message.time}</div>
+                `;
+                
+                chatMessages.appendChild(messageElement);
+            });
+            
+            // Scroll to bottom of messages
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Add event listener for sending messages
+            sendMessageBtn.onclick = function() {
+                sendMessage(conversationId, messageInput.value);
+                messageInput.value = '';
+            };
+            
+            // Allow sending message with Enter key
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage(conversationId, messageInput.value);
+                    messageInput.value = '';
+                }
+            });
+        }
+
+        // Send a message
+        function sendMessage(conversationId, text) {
+            if (!text.trim()) return;
+            
+            const chatMessages = document.getElementById('chat-messages');
+            
+            // Create new message element
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message sent';
+            
+            // Format current time
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            messageElement.innerHTML = `
+                <div class="message-text">${text}</div>
+                <div class="message-time">${timeString}</div>
+            `;
+            
+            chatMessages.appendChild(messageElement);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // In a real app, this would send the message to the server
+            console.log(`Sent message to conversation ${conversationId}: ${text}`);
+        }
+
+        // Load profile data
+        function loadProfileData() {
+            if (currentUser.loggedIn) {
+                document.getElementById('profile-full-name').textContent = currentUser.name || 'User';
+                document.getElementById('profile-details').textContent = `${currentUser.age || ''}, ${currentUser.location || ''}`;
+                document.getElementById('profile-bio').textContent = currentUser.bio || 'No bio yet.';
+                document.getElementById('profile-views').textContent = currentUser.views || '0';
+                document.getElementById('profile-likes').textContent = currentUser.likes || '0';
+                document.getElementById('profile-matches').textContent = currentUser.matches || '0';
+                
+                // Load profile tags
+                const tagsContainer = document.getElementById('profile-tags');
+                tagsContainer.innerHTML = '';
+                
+                if (currentUser.interests) {
+                    currentUser.interests.split(',').forEach(interest => {
+                        const tag = document.createElement('div');
+                        tag.className = 'profile-tag';
+                        tag.textContent = interest.trim();
+                        tagsContainer.appendChild(tag);
+                    });
+                }
+            }
+        }
+
+        // Auth tabs functionality
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.auth-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all forms
+                document.querySelectorAll('.auth-form').forEach(form => {
+                    form.classList.remove('active');
+                });
+                
+                // Show corresponding form
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`${tabId}-form`).classList.add('active');
+            });
+        });
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simple validation
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Show loading animation
+            const loginOverlay = document.getElementById('login-overlay');
+            loginOverlay.style.display = 'flex';
+            
+            // Simulate login process
+            setTimeout(function() {
+                // Hide spinner
+                loginOverlay.style.display = 'none';
+                
+                // Show first heart
+                const heart1 = document.createElement('div');
+                heart1.className = 'heart-popup';
+                heart1.innerHTML = '♥';
+                document.body.appendChild(heart1);
+                
+                // Show second heart after delay
+                setTimeout(function() {
+                    const heart2 = document.createElement('div');
+                    heart2.className = 'heart-popup';
+                    heart2.innerHTML = '♥';
+                    document.body.appendChild(heart2);
+                    
+                    // Remove hearts after animation
+                    setTimeout(function() {
+                        heart1.remove();
+                        heart2.remove();
+                        
+                        // Update user state
+                        currentUser.loggedIn = true;
+                        currentUser.email = email;
+                        localStorage.setItem('kematch_user', JSON.stringify(currentUser));
+                        
+                        // Update UI
+                        document.getElementById('login-btn').style.display = 'none';
+                        document.getElementById('logout-btn').style.display = 'block';
+                        
+                        // Redirect to home section
+                        document.querySelectorAll('.section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        document.getElementById('home').classList.add('active');
+                        
+                        // Update nav links
+                        document.querySelectorAll('.nav-link').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        document.querySelector('[data-section="home"]').classList.add('active');
+                        
+                        // Load browse profiles
+                        loadBrowseProfiles();
+                        
+                        alert('Successfully logged in!');
+                    }, 1000);
+                }, 400);
+            }, 2000);
+        });
+
+        // Sign up form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            const gender = document.getElementById('signup-gender').value;
+            const age = document.getElementById('signup-age').value;
+            
+            // Validation
+            if (!name || !email || !password || !confirmPassword || !gender || !age) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (parseInt(age) < 18) {
+                alert('You must be at least 18 years old to join KE MATCH');
+                return;
+            }
+            
+            // Show loading animation
+            const loginOverlay = document.getElementById('login-overlay');
+            loginOverlay.style.display = 'flex';
+            
+            // Simulate sign up process
+            setTimeout(function() {
+                // Hide spinner
+                loginOverlay.style.display = 'none';
+                
+                // Show first heart
+                const heart1 = document.createElement('div');
+                heart1.className = 'heart-popup';
+                heart1.innerHTML = '♥';
+                document.body.appendChild(heart1);
+                
+                // Show second heart after delay
+                setTimeout(function() {
+                    const heart2 = document.createElement('div');
+                    heart2.className = 'heart-popup';
+                    heart2.innerHTML = '♥';
+                    document.body.appendChild(heart2);
+                    
+                    // Remove hearts after animation
+                    setTimeout(function() {
+                        heart1.remove();
+                        heart2.remove();
+                        
+                        // Update user state
+                        currentUser.loggedIn = true;
+                        currentUser.name = name;
+                        currentUser.email = email;
+                        currentUser.gender = gender;
+                        currentUser.age = age;
+                        currentUser.location = "Nairobi"; // Default location
+                        currentUser.bio = "Welcome to my profile!";
+                        currentUser.interests = "Travel, Food, Music";
+                        currentUser.views = 0;
+                        currentUser.likes = 0;
+                        currentUser.matches = 0;
+                        localStorage.setItem('kematch_user', JSON.stringify(currentUser));
+                        
+                        // Update UI
+                        document.getElementById('login-btn').style.display = 'none';
+                        document.getElementById('logout-btn').style.display = 'block';
+                        
+                        // Redirect to home section
+                        document.querySelectorAll('.section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        document.getElementById('home').classList.add('active');
+                        
+                        // Update nav links
+                        document.querySelectorAll('.nav-link').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        document.querySelector('[data-section="home"]').classList.add('active');
+                        
+                        // Load browse profiles
+                        loadBrowseProfiles();
+                        
+                        alert('Account created successfully! Welcome to KE MATCH.');
+                    }, 1000);
+                }, 400);
+            }, 2000);
+        });
+
+        // Social login functionality
+        document.getElementById('facebook-login').addEventListener('click', function() {
+            startSocialLogin('Facebook');
+        });
+
+        document.getElementById('google-login').addEventListener('click', function() {
+            startSocialLogin('Google');
+        });
+
+        document.getElementById('facebook-signup').addEventListener('click', function() {
+            startSocialLogin('Facebook');
+        });
+
+        document.getElementById('google-signup').addEventListener('click', function() {
+            startSocialLogin('Google');
+        });
+
+        function startSocialLogin(provider) {
+            // Show loading animation
+            const loginOverlay = document.getElementById('login-overlay');
+            loginOverlay.style.display = 'flex';
+            
+            // Simulate social login process
+            setTimeout(function() {
+                // Hide spinner
+                loginOverlay.style.display = 'none';
+                
+                // Show first heart
+                const heart1 = document.createElement('div');
+                heart1.className = 'heart-popup';
+                heart1.innerHTML = '♥';
+                document.body.appendChild(heart1);
+                
+                // Show second heart after delay
+                setTimeout(function() {
+                    const heart2 = document.createElement('div');
+                    heart2.className = 'heart-popup';
+                    heart2.innerHTML = '♥';
+                    document.body.appendChild(heart2);
+                    
+                    // Remove hearts after animation
+                    setTimeout(function() {
+                        heart1.remove();
+                        heart2.remove();
+                        
+                        // Update user state
+                        currentUser.loggedIn = true;
+                        currentUser.socialProvider = provider;
+                        currentUser.name = "Social User";
+                        currentUser.age = 25;
+                        currentUser.location = "Nairobi";
+                        currentUser.bio = "I signed up with " + provider;
+                        currentUser.interests = "Socializing, Meeting new people";
+                        currentUser.views = 0;
+                        currentUser.likes = 0;
+                        currentUser.matches = 0;
+                        localStorage.setItem('kematch_user', JSON.stringify(currentUser));
+                        
+                        // Update UI
+                        document.getElementById('login-btn').style.display = 'none';
+                        document.getElementById('logout-btn').style.display = 'block';
+                        
+                        // Redirect to home section
+                        document.querySelectorAll('.section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        document.getElementById('home').classList.add('active');
+                        
+                        // Update nav links
+                        document.querySelectorAll('.nav-link').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        document.querySelector('[data-section="home"]').classList.add('active');
+                        
+                        // Load browse profiles
+                        loadBrowseProfiles();
+                        
+                        alert(`Successfully logged in with ${provider}!`);
+                    }, 1000);
+                }, 400);
+            }, 2000);
+        }
+
+        // Profile edit functionality
+        document.getElementById('edit-profile-btn').addEventListener('click', function() {
+            document.getElementById('profile-edit-form').style.display = 'block';
+            
+            // Populate form with current user data
+            document.getElementById('edit-name').value = currentUser.name || '';
+            document.getElementById('edit-age').value = currentUser.age || '';
+            document.getElementById('edit-gender').value = currentUser.gender || '';
+            document.getElementById('edit-location').value = currentUser.location || '';
+            document.getElementById('edit-bio').value = currentUser.bio || '';
+            document.getElementById('edit-interests').value = currentUser.interests || '';
+        });
+
+        document.getElementById('cancel-edit').addEventListener('click', function() {
+            document.getElementById('profile-edit-form').style.display = 'none';
+        });
+
+        document.getElementById('profile-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Update user data
+            currentUser.name = document.getElementById('edit-name').value;
+            currentUser.age = document.getElementById('edit-age').value;
+            currentUser.gender = document.getElementById('edit-gender').value;
+            currentUser.location = document.getElementById('edit-location').value;
+            currentUser.bio = document.getElementById('edit-bio').value;
+            currentUser.interests = document.getElementById('edit-interests').value;
+            
+            // Save to localStorage
+            localStorage.setItem('kematch_user', JSON.stringify(currentUser));
+            
+            // Update profile display
+            loadProfileData();
+            
+            // Hide edit form
+            document.getElementById('profile-edit-form').style.display = 'none';
+            
+            alert('Profile updated successfully!');
+        });
+
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            currentUser = { loggedIn: false };
+            localStorage.setItem('kematch_user', JSON.stringify(currentUser));
+            
+            // Update UI
+            document.getElementById('login-btn').style.display = 'block';
+            document.getElementById('logout-btn').style.display = 'none';
+            
+            // Redirect to auth section
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('auth').classList.add('active');
+            
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector('[data-section="auth"]').classList.add('active');
+            
+            alert('You have been logged out.');
+        });
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
-            // Check if we need to reset daily views
-            checkDailyReset();
-            
-            // Update the display
-            updateDailyLimitDisplay();
-            
-            // Set up event listeners
-            setupEventListeners();
+            // Check if user is already logged in
+            if (currentUser.loggedIn) {
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('logout-btn').style.display = 'block';
+                
+                // Redirect to home section
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('home').classList.add('active');
+                
+                // Update nav links
+                document.querySelectorAll('.nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector('[data-section="home"]').classList.add('active');
+                
+                // Load browse profiles
+                loadBrowseProfiles();
+            }
         });
-
-        // Check if we need to reset daily view count
-        function checkDailyReset() {
-            const today = new Date().toDateString();
-            if (currentUser.lastResetDate !== today) {
-                currentUser.profilesViewedToday = 0;
-                currentUser.lastResetDate = today;
-                saveUserState();
-            }
-        }
-
-        // Save user state to localStorage
-        function saveUserState() {
-            localStorage.setItem('kematch_user', JSON.stringify(currentUser));
-        }
-
-        // Update daily matches based on plan
-        function updateDailyMatches() {
-            if (currentUser.plan === "free") {
-                currentUser.dailyMatches = 10;
-            } else if (currentUser.plan === "standard") {
-                currentUser.dailyMatches = 30; // 10 free + 20 premium
-            } else if (currentUser.plan === "premium") {
-                currentUser.dailyMatches = 50; // 10 free + 40 premium
-            }
-            saveUserState();
-        }
-
-        // Update the daily limit display
-        function updateDailyLimitDisplay() {
-            document.getElementById('profiles-viewed').textContent = currentUser.profilesViewedToday;
-            document.getElementById('daily-limit').textContent = currentUser.dailyMatches;
-        }
-
-        // Set up event listeners
-        function setupEventListeners() {
-            // Start matching functionality
-            document.getElementById('start-matching').addEventListener('click', startMatching);
-            
-            // Like button functionality
-            document.getElementById('like-btn').addEventListener('click', handleLike);
-            
-            // Dislike button functionality
-            document.getElementById('dislike-btn').addEventListener('click', handleDislike);
-            
-            // Modal functionality
-            document.getElementById('close-modal').addEventListener('click', closeModal);
-            document.getElementById('upgrade-now').addEventListener('click', upgradeNow);
-            
-            // Payment functionality
-            document.getElementById('standard-pay').addEventListener('click', function() {
-                handlePayment("standard");
-            });
-            
-            document.getElementById('premium-pay').addEventListener('click', function() {
-                handlePayment("premium");
-            });
-            
-            // Navigation
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    handleNavigation(this);
-                });
-            });
-        }
-
-        // Start matching functionality
-        function startMatching() {
-            // Set profiles based on user gender
-            currentProfiles = currentUser.gender === "male" ? femaleProfiles : [];
-            
-            // Reset profile index
-            currentProfileIndex = 0;
-            
-            // Hide welcome and show single profile view
-            document.querySelector('.welcome-section').style.display = 'none';
-            document.getElementById('single-view').style.display = 'block';
-            
-            // Load the first profile
-            loadCurrentProfile();
-        }
-
-        // Load current profile for single view
-        function loadCurrentProfile() {
-            // Check if user has reached daily limit
-            if (currentUser.profilesViewedToday >= currentUser.dailyMatches) {
-                showDailyLimitModal();
-                return;
-            }
-            
-            if (currentProfileIndex < currentProfiles.length) {
-                const profile = currentProfiles[currentProfileIndex];
-                
-                document.getElementById('current-profile-image').src = profile.image;
-                
-                // Create name with blue tick if verified
-                const nameElement = document.getElementById('current-profile-name');
-                nameElement.innerHTML = profile.name;
-                if (profile.verified) {
-                    nameElement.innerHTML += ' <span class="verified-badge"><i class="fas fa-check"></i></span>';
-                }
-                
-                document.getElementById('current-profile-details').textContent = `${profile.age} • ${profile.location}`;
-                
-                const interestsContainer = document.getElementById('current-profile-interests');
-                interestsContainer.innerHTML = '';
-                
-                // Add hobbies
-                profile.hobbies.forEach(hobby => {
-                    const tag = document.createElement('span');
-                    tag.className = 'interest-tag';
-                    tag.textContent = hobby;
-                    interestsContainer.appendChild(tag);
-                });
-                
-                // Add likes
-                profile.likes.forEach(like => {
-                    const tag = document.createElement('span');
-                    tag.className = 'interest-tag';
-                    tag.textContent = like;
-                    interestsContainer.appendChild(tag);
-                });
-                
-                // Update profiles viewed display
-                updateDailyLimitDisplay();
-            } else {
-                // No more profiles to show
-                showDailyLimitModal();
-            }
-        }
-
-        // Handle like action
-        function handleLike() {
-            if (currentUser.profilesViewedToday >= currentUser.dailyMatches) {
-                showDailyLimitModal();
-                return;
-            }
-            
-            // Increment profiles viewed
-            currentUser.profilesViewedToday++;
-            saveUserState();
-            
-            // Move to next profile
-            currentProfileIndex++;
-            loadCurrentProfile();
-            
-            // In a real app, this would send a like to the server
-            console.log(`Liked profile ${currentProfiles[currentProfileIndex - 1]?.id}`);
-        }
-
-        // Handle dislike action
-        function handleDislike() {
-            if (currentUser.profilesViewedToday >= currentUser.dailyMatches) {
-                showDailyLimitModal();
-                return;
-            }
-            
-            // Increment profiles viewed
-            currentUser.profilesViewedToday++;
-            saveUserState();
-            
-            // Move to next profile
-            currentProfileIndex++;
-            loadCurrentProfile();
-            
-            // In a real app, this would send a dislike to the server
-            console.log(`Disliked profile ${currentProfiles[currentProfileIndex - 1]?.id}`);
-        }
-
-        // Show daily limit modal
-        function showDailyLimitModal() {
-            document.getElementById('limit-count').textContent = currentUser.dailyMatches;
-            document.getElementById('daily-limit-modal').style.display = 'flex';
-        }
-
-        // Close modal
-        function closeModal() {
-            document.getElementById('daily-limit-modal').style.display = 'none';
-            
-            // Return to welcome screen
-            document.querySelector('.welcome-section').style.display = 'block';
-            document.getElementById('single-view').style.display = 'none';
-        }
-
-        // Upgrade now functionality
-        function upgradeNow() {
-            document.getElementById('daily-limit-modal').style.display = 'none';
-            
-            // Navigate to payment section
-            document.querySelectorAll('.nav-link').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector('[data-section="payment"]').classList.add('active');
-            
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById('payment').classList.add('active');
-        }
-
-        // Handle payment
-        function handlePayment(plan) {
-            currentUser.plan = plan;
-            currentUser.premium = true;
-            currentUser.verified = true;
-            
-            // Update daily matches
-            updateDailyMatches();
-            
-            // Show success message
-            alert(`Successfully upgraded to ${plan} plan! You now have ${currentUser.dailyMatches} daily matches.`);
-            
-            // Return to matching with new limit
-            document.querySelectorAll('.nav-link').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector('[data-section="home"]').classList.add('active');
-            
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById('home').classList.add('active');
-            
-            // Reset and show matching interface
-            document.querySelector('.welcome-section').style.display = 'none';
-            document.getElementById('single-view').style.display = 'block';
-            
-            // Update the display
-            updateDailyLimitDisplay();
-            
-            // Continue from where we left off
-            loadCurrentProfile();
-        }
-
-        // Handle navigation
-        function handleNavigation(link) {
-            // Remove active class from all links
-            document.querySelectorAll('.nav-link').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Add active class to clicked link
-            link.classList.add('active');
-            
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show the selected section
-            const sectionId = link.getAttribute('data-section');
-            document.getElementById(sectionId).classList.add('active');
-        }
     </script>
 </body>
 </html>
