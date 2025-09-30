@@ -1,175 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KE MATCH</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <div class="logo-icon">KE</div>
-      <div class="logo-text">KE <span>MATCH</span></div>
-    </div>
-    <nav>
-      <a href="about.html">About</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <button id="login-btn">Sign Up / Login</button>
-  </header>
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <!-- Welcome Section -->
-  <main class="container">
-    <h1>Welcome to KE MATCH</h1>
-    <p>Find your perfect match in Kenya ❤️</p>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #fff, #ffe6f0); /* white + pink */
+  color: #111;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    <!-- First-timer images -->
-    <section id="teaser-section">
-      <h2>Meet Singles</h2>
-      <div id="teaser-container"></div>
-      <button id="start-matching" class="btn-pink">Start Matching</button>
-    </section>
+/* Header */
+header {
+  background: #000; /* black layout */
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+}
 
-    <!-- Matching Section -->
-    <section id="match-section" style="display: none;">
-      <div id="profile-card">
-        <img id="profile-image" src="" alt="Profile">
-        <h3 id="profile-name"></h3>
-        <p id="profile-details"></p>
-        <div>
-          <button id="decline-btn">❌ Decline</button>
-          <button id="like-btn">❤️ Like</button>
-        </div>
-      </div>
-    </section>
+header .logo {
+  display: flex;
+  align-items: center;
+}
 
-    <!-- Chat Section (hidden until match) -->
-    <section id="chat-section" style="display: none;">
-      <h2>Chat</h2>
-      <div id="chat-box"></div>
-      <input type="text" id="chat-input" placeholder="Type a message..." />
-      <button id="send-btn">Send</button>
-    </section>
-  </main>
+header .logo-icon {
+  background: #ff4da6; /* hot pink */
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 8px;
+  border-radius: 8px;
+  margin-right: 8px;
+}
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 KE MATCH. All rights reserved.</p>
-  </footer>
+header .logo-text {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
 
-  <!-- Login Modal -->
-  <div id="login-modal" style="display: none;">
-    <div class="modal-content">
-      <h2>Sign Up / Login</h2>
-      <input type="email" id="login-email" placeholder="Enter your email" />
-      <button id="send-otp">Send OTP</button>
-      <div id="otp-area" style="display: none;">
-        <input type="text" id="otp" maxlength="6" placeholder="Enter OTP" />
-        <button id="verify-otp">Verify</button>
-      </div>
-    </div>
-  </div>
+header nav a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+}
 
-  <script>
-    // Female profiles (for teaser + matching)
-    const femaleProfiles = [
-      { name: "Sarah M.", age: 25, location: "Nairobi", image: "https://files.catbox.moe/gefnh3.jpeg" },
-      { name: "Grace W.", age: 27, location: "Kisumu", image: "https://files.catbox.moe/ayz7eb.jpeg" },
-      { name: "Lilian K.", age: 24, location: "Mombasa", image: "https://files.catbox.moe/by8fa3.jpeg" }
-    ];
+header nav a:hover {
+  color: #ff4da6;
+}
 
-    let currentProfileIndex = 0;
-    let loggedIn = false;
-    let hasMatch = false;
+#login-btn {
+  background: #ff4da6;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#login-btn:hover {
+  background: #e60073;
+}
 
-    // Show teaser images for first timers
-    const teaserContainer = document.getElementById("teaser-container");
-    femaleProfiles.forEach(p => {
-      const img = document.createElement("img");
-      img.src = p.image;
-      img.alt = p.name;
-      img.style.width = "100px";
-      img.style.margin = "5px";
-      teaserContainer.appendChild(img);
-    });
+/* Main Container */
+.container {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
 
-    // Start matching
-    document.getElementById("start-matching").addEventListener("click", () => {
-      if (!loggedIn) {
-        document.getElementById("login-modal").style.display = "block";
-        return;
-      }
-      document.getElementById("teaser-section").style.display = "none";
-      document.getElementById("match-section").style.display = "block";
-      loadProfile();
-    });
+h1, h2, h3 {
+  color: #000;
+  margin-bottom: 10px;
+}
 
-    function loadProfile() {
-      if (currentProfileIndex < femaleProfiles.length) {
-        const p = femaleProfiles[currentProfileIndex];
-        document.getElementById("profile-image").src = p.image;
-        document.getElementById("profile-name").textContent = p.name;
-        document.getElementById("profile-details").textContent = p.age + " • " + p.location;
-      } else {
-        alert("No more profiles today!");
-      }
-    }
+/* Teaser Images */
+#teaser-container img {
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
 
-    document.getElementById("like-btn").addEventListener("click", () => {
-      hasMatch = true; // simulate a match
-      alert("You matched with " + femaleProfiles[currentProfileIndex].name + " 🎉");
-      document.getElementById("chat-section").style.display = "block";
-      currentProfileIndex++;
-      loadProfile();
-    });
+/* Buttons */
+button {
+  cursor: pointer;
+}
 
-    document.getElementById("decline-btn").addEventListener("click", () => {
-      currentProfileIndex++;
-      loadProfile();
-    });
+.btn-pink {
+  background: #ff4da6;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+.btn-pink:hover {
+  background: #e60073;
+}
 
-    // Chat system
-    document.getElementById("send-btn").addEventListener("click", () => {
-      if (!hasMatch) {
-        alert("You can only chat after matching!");
-        return;
-      }
-      const msg = document.getElementById("chat-input").value;
-      if (msg) {
-        const div = document.createElement("div");
-        div.textContent = "You: " + msg;
-        document.getElementById("chat-box").appendChild(div);
-        document.getElementById("chat-input").value = "";
-      }
-    });
+/* Match Card */
+#profile-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  max-width: 300px;
+  margin: 20px auto;
+}
+#profile-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
 
-    // Login modal
-    document.getElementById("login-btn").addEventListener("click", () => {
-      document.getElementById("login-modal").style.display = "block";
-    });
+/* Chat Section */
+#chat-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+#chat-box {
+  border: 1px solid #ddd;
+  padding: 10px;
+  height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
 
-    document.getElementById("send-otp").addEventListener("click", () => {
-      const email = document.getElementById("login-email").value;
-      if (!email) return alert("Enter email!");
-      sessionStorage.setItem("otp", "123456"); // demo OTP
-      document.getElementById("otp-area").style.display = "block";
-      alert("Demo OTP: 123456 (this would be sent to email in real app)");
-    });
+/* Footer */
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+}
 
-    document.getElementById("verify-otp").addEventListener("click", () => {
-      const otp = document.getElementById("otp").value;
-      if (otp === sessionStorage.getItem("otp")) {
-        loggedIn = true;
-        alert("Login successful 🎉");
-        document.getElementById("login-modal").style.display = "none";
-      } else {
-        alert("Invalid OTP");
-      }
-    });
-  </script>
-</body>
-</html>
+/* Modal */
+#login-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+.modal-content input {
+  padding: 8px;
+  margin: 8px 0;
+  width: 80%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.modal-content button {
+  margin-top: 10px;
+}
