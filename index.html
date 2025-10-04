@@ -615,6 +615,21 @@
             font-size: 16px;
         }
         
+        /* NEW: Search bar for single view */
+        .single-view-search {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .single-view-search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
         /* Payment Section */
         .payment-section {
             background-color: var(--light-gray);
@@ -1194,6 +1209,12 @@
                 
                 <!-- Single Profile View (Hidden initially) -->
                 <div id="single-view" style="display: none;">
+                    <!-- NEW: Search bar for single view -->
+                    <div class="single-view-search">
+                        <input type="text" class="single-view-search-input" id="single-profile-search" placeholder="Search profiles...">
+                        <button class="btn btn-pink" id="single-search-btn">Search</button>
+                    </div>
+                    
                     <div class="single-profile-view">
                         <div class="single-profile-card">
                             <img id="current-profile-image" src="" alt="Profile" class="single-profile-image">
@@ -1264,7 +1285,7 @@
                     <div class="profile-details-section">
                         <div class="profile-field">
                             <label for="name">Name</label>
-                            <input type="text" id="name" value="John Doe">
+                            <input type="text" id="name" placeholder="Enter your name">
                         </div>
                         <div class="profile-field">
                             <label for="age">Age</label>
@@ -1872,6 +1893,7 @@
         let currentProfiles = [];
         let activeChatId = null;
         let likedProfiles = [];
+        let dislikedProfiles = []; // NEW: Track disliked profiles
         let selectedPlan = null;
         let selectedPrice = null;
         let userProfilePictures = [];
@@ -2011,8 +2033,12 @@
                     return;
                 }
                 
-                // Set profiles based on user gender
-                currentProfiles = currentUserGender === "male" ? femaleProfiles : maleProfiles;
+                // Set profiles based on user gender and filter out already interacted profiles
+                const allProfiles = currentUserGender === "male" ? femaleProfiles : maleProfiles;
+                currentProfiles = allProfiles.filter(profile => 
+                    !likedProfiles.some(liked => liked.id === profile.id) && 
+                    !dislikedProfiles.some(disliked => disliked.id === profile.id)
+                );
                 
                 // Reset profile index
                 currentProfileIndex = 0;
@@ -2052,6 +2078,9 @@
             // Dislike button functionality
             document.getElementById('dislike-btn').addEventListener('click', function() {
                 if (profilesRemaining > 0) {
+                    const profile = currentProfiles[currentProfileIndex];
+                    dislikedProfiles.push(profile);
+                    
                     profilesRemaining--;
                     currentProfileIndex++;
                     loadCurrentProfile();
@@ -2227,6 +2256,35 @@
             // Close success modal
             document.getElementById('close-success-modal').addEventListener('click', function() {
                 document.getElementById('payment-success-modal').style.display = 'none';
+                
+                // NEW: After payment, automatically redirect to browsing
+                document.querySelectorAll('.nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector('[data-section="home"]').classList.add('active');
+                
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('home').classList.add('active');
+                
+                // Set profiles based on user gender and filter out already interacted profiles
+                const allProfiles = currentUserGender === "male" ? femaleProfiles : maleProfiles;
+                currentProfiles = allProfiles.filter(profile => 
+                    !likedProfiles.some(liked => liked.id === profile.id) && 
+                    !dislikedProfiles.some(disliked => disliked.id === profile.id)
+                );
+                
+                // Reset profile index
+                currentProfileIndex = 0;
+                
+                // Hide welcome and grid view, show single profile view
+                document.getElementById('welcome-section').style.display = 'none';
+                document.getElementById('grid-view').style.display = 'none';
+                document.getElementById('single-view').style.display = 'block';
+                
+                // Load the first profile
+                loadCurrentProfile();
             });
 
             // Logout functionality
@@ -2267,6 +2325,38 @@
                 }
             });
 
+            // NEW: Search functionality for single view
+            document.getElementById('single-search-btn').addEventListener('click', function() {
+                const searchTerm = document.getElementById('single-profile-search').value.toLowerCase();
+                if (searchTerm) {
+                    // Filter current profiles based on search term
+                    const filteredProfiles = currentProfiles.filter(profile => 
+                        profile.name.toLowerCase().includes(searchTerm) ||
+                        profile.location.toLowerCase().includes(searchTerm) ||
+                        profile.hobbies.some(hobby => hobby.toLowerCase().includes(searchTerm)) ||
+                        profile.likes.some(like => like.toLowerCase().includes(searchTerm))
+                    );
+                    
+                    if (filteredProfiles.length > 0) {
+                        // Update current profiles and reset index
+                        currentProfiles = filteredProfiles;
+                        currentProfileIndex = 0;
+                        loadCurrentProfile();
+                    } else {
+                        alert('No profiles found matching your search criteria.');
+                    }
+                } else {
+                    // Reset to all available profiles
+                    const allProfiles = currentUserGender === "male" ? femaleProfiles : maleProfiles;
+                    currentProfiles = allProfiles.filter(profile => 
+                        !likedProfiles.some(liked => liked.id === profile.id) && 
+                        !dislikedProfiles.some(disliked => disliked.id === profile.id)
+                    );
+                    currentProfileIndex = 0;
+                    loadCurrentProfile();
+                }
+            });
+
             // Chat search functionality
             document.getElementById('chat-search').addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
@@ -2297,7 +2387,7 @@
                 // In a real app, this would integrate with Google OAuth
                 // For demo, we'll simulate a successful login
                 currentUser = {
-                    name: `User ${Math.floor(1000 + Math.random() * 9000)}`,
+                    name: '', // REMOVED: No default name
                     email: `user${Math.floor(1000 + Math.random() * 9000)}@gmail.com`,
                     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
                     provider: 'Google'
@@ -2331,7 +2421,7 @@
                 // In a real app, this would integrate with Facebook OAuth
                 // For demo, we'll simulate a successful login
                 currentUser = {
-                    name: `User ${Math.floor(1000 + Math.random() * 9000)}`,
+                    name: '', // REMOVED: No default name
                     email: `user${Math.floor(1000 + Math.random() * 9000)}@facebook.com`,
                     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
                     provider: 'Facebook'
@@ -2375,7 +2465,7 @@
             // In a real app, this would validate credentials with a backend
             // For demo, we'll simulate a successful login
             currentUser = {
-                name: email.split('@')[0],
+                name: '', // REMOVED: No default name
                 email: email,
                 avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80'
             };
@@ -2459,7 +2549,7 @@
             if (enteredOtp === storedOtp) {
                 // Successful login
                 currentUser = {
-                    name: `User ${Math.floor(1000 + Math.random() * 9000)}`,
+                    name: '', // REMOVED: No default name
                     phone: phoneNumber,
                     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
                     provider: 'Phone'
@@ -2493,7 +2583,7 @@
 
         // Update UI after login
         function updateUIAfterLogin() {
-            document.getElementById('user-name').textContent = currentUser.name;
+            document.getElementById('user-name').textContent = currentUser.name || 'Set Your Name'; // Updated: Show placeholder if no name
             document.getElementById('user-avatar').src = currentUser.avatar;
             document.getElementById('user-profile').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
@@ -2503,7 +2593,7 @@
             document.getElementById('home').classList.add('active');
             
             // Update profile with user info
-            document.getElementById('name').value = currentUser.name;
+            document.getElementById('name').value = currentUser.name || '';
             
             // Save user to localStorage
             localStorage.setItem('keMatchUser', JSON.stringify(currentUser));
