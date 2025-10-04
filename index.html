@@ -945,6 +945,7 @@
             text-align: center;
             cursor: pointer;
             transition: background-color 0.3s;
+            border: 2px dashed #ccc;
         }
         
         .image-upload-label:hover {
@@ -956,6 +957,30 @@
             border-radius: 10px;
             margin-top: 10px;
             display: none;
+        }
+        
+        /* NEW: Blank profile picture styles */
+        .blank-avatar {
+            width: 100%;
+            height: 150px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-gray);
+            font-size: 14px;
+            border: 2px dashed #ccc;
+        }
+        
+        .blank-avatar i {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+        
+        .blank-avatar-text {
+            text-align: center;
         }
         
         /* Responsive Design */
@@ -1030,6 +1055,11 @@
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
         }
         
         /* Match Notification */
@@ -1169,7 +1199,9 @@
                 </nav>
                 <div class="user-actions">
                     <div class="user-profile" id="user-profile" style="display: none;">
-                        <img src="" alt="User" class="user-avatar" id="user-avatar">
+                        <div class="user-avatar" id="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
                         <span id="user-name"></span>
                         <button class="btn btn-outline" id="logout-btn" style="margin-left: 10px;">Log Out</button>
                     </div>
@@ -1252,7 +1284,9 @@
                     </div>
                     <div class="chat-main">
                         <div class="chat-header">
-                            <img src="" alt="User" class="chat-avatar" id="active-chat-avatar">
+                            <div class="chat-avatar" id="active-chat-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
                             <div class="chat-info">
                                 <div class="chat-name" id="active-chat-name"></div>
                             </div>
@@ -1275,9 +1309,17 @@
                     <div class="profile-picture-section">
                         <div class="profile-pictures-grid" id="profile-pictures-grid">
                             <!-- Profile pictures will be dynamically generated here -->
+                            <div class="blank-avatar">
+                                <div class="blank-avatar-text">
+                                    <i class="fas fa-camera"></i>
+                                    <p>Add Profile Picture</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="image-upload-container">
-                            <label for="image-upload" class="image-upload-label">Add Profile Picture</label>
+                            <label for="image-upload" class="image-upload-label">
+                                <i class="fas fa-plus"></i> Upload Photo
+                            </label>
                             <input type="file" id="image-upload" accept="image/*" style="display: none;">
                         </div>
                         <p style="text-align: center; font-size: 14px; color: var(--dark-gray);">You can add up to 2 photos</p>
@@ -1289,11 +1331,12 @@
                         </div>
                         <div class="profile-field">
                             <label for="age">Age</label>
-                            <input type="number" id="age" value="28">
+                            <input type="number" id="age" placeholder="Enter your age">
                         </div>
                         <div class="profile-field">
                             <label for="gender">Gender</label>
                             <select id="gender">
+                                <option value="">Select your gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
@@ -1301,6 +1344,7 @@
                         <div class="profile-field">
                             <label for="location">Location (County)</label>
                             <select id="location">
+                                <option value="">Select your county</option>
                                 <option value="nairobi">Nairobi</option>
                                 <option value="mombasa">Mombasa</option>
                                 <option value="kisumu">Kisumu</option>
@@ -1354,7 +1398,7 @@
                         </div>
                         <div class="profile-field">
                             <label for="bio">Bio</label>
-                            <textarea id="bio">Adventure seeker and coffee lover. Looking for someone to explore Kenya with.</textarea>
+                            <textarea id="bio" placeholder="Tell others about yourself...">Adventure seeker and coffee lover. Looking for someone to explore Kenya with.</textarea>
                         </div>
                         <button class="btn btn-pink" id="save-profile">Save Profile</button>
                     </div>
@@ -2127,7 +2171,10 @@
                         
                         // Also update user avatar in header
                         if (currentUser) {
-                            document.getElementById('user-avatar').src = event.target.result;
+                            const userAvatar = document.getElementById('user-avatar');
+                            userAvatar.innerHTML = '';
+                            userAvatar.style.backgroundImage = `url(${event.target.result})`;
+                            userAvatar.style.backgroundSize = 'cover';
                             currentUser.avatar = event.target.result;
                             localStorage.setItem('keMatchUser', JSON.stringify(currentUser));
                         }
@@ -2389,7 +2436,7 @@
                 currentUser = {
                     name: '', // REMOVED: No default name
                     email: `user${Math.floor(1000 + Math.random() * 9000)}@gmail.com`,
-                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+                    avatar: null, // NEW: Blank avatar
                     provider: 'Google'
                 };
                 
@@ -2423,7 +2470,7 @@
                 currentUser = {
                     name: '', // REMOVED: No default name
                     email: `user${Math.floor(1000 + Math.random() * 9000)}@facebook.com`,
-                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+                    avatar: null, // NEW: Blank avatar
                     provider: 'Facebook'
                 };
                 
@@ -2467,7 +2514,7 @@
             currentUser = {
                 name: '', // REMOVED: No default name
                 email: email,
-                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80'
+                avatar: null // NEW: Blank avatar
             };
             
             // Update UI and save to localStorage
@@ -2501,7 +2548,7 @@
             currentUser = {
                 name: name,
                 email: email,
-                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80'
+                avatar: null // NEW: Blank avatar
             };
             
             // Update UI and save to localStorage
@@ -2551,7 +2598,7 @@
                 currentUser = {
                     name: '', // REMOVED: No default name
                     phone: phoneNumber,
-                    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80',
+                    avatar: null, // NEW: Blank avatar
                     provider: 'Phone'
                 };
                 
@@ -2584,7 +2631,18 @@
         // Update UI after login
         function updateUIAfterLogin() {
             document.getElementById('user-name').textContent = currentUser.name || 'Set Your Name'; // Updated: Show placeholder if no name
-            document.getElementById('user-avatar').src = currentUser.avatar;
+            
+            // Update user avatar - show blank if no avatar
+            const userAvatar = document.getElementById('user-avatar');
+            if (currentUser.avatar) {
+                userAvatar.innerHTML = '';
+                userAvatar.style.backgroundImage = `url(${currentUser.avatar})`;
+                userAvatar.style.backgroundSize = 'cover';
+            } else {
+                userAvatar.innerHTML = '<i class="fas fa-user"></i>';
+                userAvatar.style.backgroundImage = 'none';
+            }
+            
             document.getElementById('user-profile').style.display = 'flex';
             document.getElementById('login-btn').style.display = 'none';
             document.getElementById('main-nav').style.display = 'block';
@@ -2781,7 +2839,9 @@
                     ${match.verified ? '<i class="fas fa-check-circle verified-badge"></i>' : ''}
                     ${match.premium ? '<span class="premium-badge">PREMIUM</span>' : ''}
                 `;
-                chatAvatar.src = match.image;
+                chatAvatar.innerHTML = '';
+                chatAvatar.style.backgroundImage = `url(${match.image})`;
+                chatAvatar.style.backgroundSize = 'cover';
                 
                 messagesContainer.innerHTML = '';
                 
@@ -2856,17 +2916,30 @@
             const container = document.getElementById('profile-pictures-grid');
             container.innerHTML = '';
             
-            userProfilePictures.forEach((picture, index) => {
-                const pictureItem = document.createElement('div');
-                pictureItem.className = 'profile-picture-item';
-                
-                pictureItem.innerHTML = `
-                    <img src="${picture}" alt="Profile Picture ${index + 1}">
-                    <button class="remove-picture" data-index="${index}">×</button>
+            if (userProfilePictures.length === 0) {
+                // Show blank avatar
+                const blankAvatar = document.createElement('div');
+                blankAvatar.className = 'blank-avatar';
+                blankAvatar.innerHTML = `
+                    <div class="blank-avatar-text">
+                        <i class="fas fa-camera"></i>
+                        <p>Add Profile Picture</p>
+                    </div>
                 `;
-                
-                container.appendChild(pictureItem);
-            });
+                container.appendChild(blankAvatar);
+            } else {
+                userProfilePictures.forEach((picture, index) => {
+                    const pictureItem = document.createElement('div');
+                    pictureItem.className = 'profile-picture-item';
+                    
+                    pictureItem.innerHTML = `
+                        <img src="${picture}" alt="Profile Picture ${index + 1}">
+                        <button class="remove-picture" data-index="${index}">×</button>
+                    `;
+                    
+                    container.appendChild(pictureItem);
+                });
+            }
             
             // Add event listeners to remove buttons
             document.querySelectorAll('.remove-picture').forEach(button => {
